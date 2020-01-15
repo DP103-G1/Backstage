@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_grapg"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/mainTableFragment"
+        android:name="com.example.g1.main.MainTableFragment"
+        android:label="fragment_main_table"
+        tools:layout="@layout/fragment_main_table" >
+        <action
+            android:id="@+id/action_mainTableFragment_to_insertFragment"
+            app:destination="@id/insertFragment" />
+        <action
+            android:id="@+id/action_mainTableFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
+        <action
+            android:id="@+id/action_mainTableFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/insertFragment"
+        android:name="com.example.g1.main.InsertFragment"
+        android:label="fragment_insert"
+        tools:layout="@layout/fragment_insert" />
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.example.g1.main.UpdateFragment"
+        android:label="fragment_update"
+        tools:layout="@layout/fragment_update" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.g1.main.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" />
+    <fragment
+        android:id="@+id/dateFragment"
+        android:name="com.example.ezeats.DateFragment"
+        android:label="DateFragment" />
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.example.ezeats.MenuFragment"
+        android:label="MenuFragment" >
+        <action
+            android:id="@+id/action_menuFragment_to_menuInsertFragment"
+            app:destination="@id/menuInsertFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_menuUpdateFragment"
+            app:destination="@id/menuUpdateFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_dateFragment"
+            app:destination="@id/dateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuInsertFragment"
+        android:name="com.example.ezeats.MenuInsertFragment"
+        android:label="MenuInsertFragment" />
+    <fragment
+        android:id="@+id/menuUpdateFragment"
+        android:name="com.example.ezeats.MenuUpdateFragment"
+        android:label="MenuUpdateFragment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.g1.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_mainTableFragment"
+            app:destination="@id/mainTableFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
+</navigation>
