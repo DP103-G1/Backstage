@@ -3,7 +3,7 @@ package com.example.ezeats;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Build;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -53,6 +52,7 @@ public class MenuFragment extends Fragment {
     private List<Menu> menus;
 
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,9 +73,11 @@ public class MenuFragment extends Fragment {
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         rvMenu = view.findViewById(R.id.rvMenu);
 
+
         rvMenu.setLayoutManager(new LinearLayoutManager(activity));
         menus = getMenu();
         showMenu(menus);
+
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -174,7 +176,8 @@ public class MenuFragment extends Fragment {
 
         class MyViewHolder extends RecyclerView.ViewHolder {
             ImageView imageView;
-            TextView tvMenuId, tvName, tvPrice, tvContent;
+            TextView tvMenuId, tvName, tvPrice, tvContent, tvStatus;
+
 
             MyViewHolder(View itemView) {
                 super(itemView);
@@ -183,7 +186,10 @@ public class MenuFragment extends Fragment {
                 tvName = itemView.findViewById(R.id.tvName);
                 tvPrice = itemView.findViewById(R.id.tvPrice);
                 tvContent = itemView.findViewById(R.id.tvContent);
+                tvStatus = itemView.findViewById(R.id.tvStatus);
+
             }
+
         }
 
         @Override
@@ -207,37 +213,42 @@ public class MenuFragment extends Fragment {
             menuImageTask.execute();
             holder.tvName.setText(menu.getFOOD_NAME());
             holder.tvPrice.setText(String.valueOf(menu.getFOOD_PRICE()));
-            holder.tvContent.setText(menu.getFOOD_CONTENT());
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
+            if(menu.getFOOD_STATUS() == 0){
+                holder.tvStatus.setText("已下架");
+                holder.tvStatus.setBackgroundColor(Color.RED);
+            } else if(menu.getFOOD_STATUS() == 1){
+                holder.tvStatus.setText("上架中");
+                holder.tvStatus.setTextColor(Color.WHITE);
+                holder.tvStatus.setBackgroundColor(getResources().getColor(R.color.ShelvesOn));
+            }
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
-                public void onClick(View v) {
+                public boolean onLongClick(View v) {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("menu", menu);
                     Navigation.findNavController(v)
                             .navigate(R.id.action_menuFragment_to_dateFragment, bundle);
+                    return true;
                 }
             });
-
-            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onLongClick(final View view) {
-                    PopupMenu foodmenu = new PopupMenu(activity, view, Gravity.END);
+                public void onClick(final View v) {
+                    PopupMenu foodmenu = new PopupMenu(activity, v, Gravity.END);
                     foodmenu.inflate(R.menu.foodmenu);
                     foodmenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
                             if(item.getItemId() == R.id.update) {
-                                    Bundle bundle = new Bundle();
-                                    bundle.putSerializable("menu", menu);
-                                    Navigation.findNavController(view)
-                                            .navigate(R.id.action_menuFragment_to_menuUpdateFragment, bundle);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("menu", menu);
+                                Navigation.findNavController(v)
+                                        .navigate(R.id.action_menuFragment_to_menuUpdateFragment, bundle);
                             }
                             return true;
                         }
                     });
                     foodmenu.show();
-                    return true;
                 }
             });
         }

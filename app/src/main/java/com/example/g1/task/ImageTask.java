@@ -40,7 +40,7 @@ public class ImageTask extends AsyncTask<Object, Integer, Bitmap> {
         this.imageSize = imageSize;
         this.imageViewWeakReference = new WeakReference<>(imageView);
     }
-
+//修改
     public ImageTask(String url, String id) {
         this(url, id, 0, null);
     }

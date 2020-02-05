@@ -1,6 +1,8 @@
 package com.example.ezeats;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,6 +27,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.g1.Common;
@@ -46,6 +49,7 @@ public class MenuInsertFragment extends Fragment {
     private FragmentActivity activity;
     private ImageView ivMenu;
     private EditText etId, etName, etPrice, etContent;
+    private Switch swStatus;
     private byte[] image;
     private static final int REQ_TAKE_PICTURE = 0;
     private static final int REQ_PICK_PICTURE = 1;
@@ -75,6 +79,58 @@ public class MenuInsertFragment extends Fragment {
         etName = view.findViewById(R.id.etName);
         etPrice = view.findViewById(R.id.etPrice);
         etContent = view.findViewById(R.id.etContent);
+        swStatus = view.findViewById(R.id.swStatus);
+
+        swStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isChecked = swStatus.isChecked();
+                if (isChecked) {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("確定!!")
+                            .setMessage("確定將此產品上架？")
+                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    swStatus.setChecked(false);
+                                }
+                            })
+                            .setNegativeButton("確定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    swStatus.setChecked(true);
+                                }
+                            }).setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                @Override
+                                public void onCancel(DialogInterface dialog) {
+                                    swStatus.setChecked(false);
+                                }
+                            }).show();
+                } else {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("確定!!")
+                            .setMessage("確定將此產品下架？")
+                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    swStatus.setChecked(true);
+                                }
+                            })
+                            .setNegativeButton("確定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    swStatus.setChecked(false);
+                                }
+                            }).setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                @Override
+                                public void onCancel(DialogInterface dialog) {
+                                    swStatus.setChecked(true);
+                                }
+                            }).show();
+                }
+            }
+        });
+
 
         Button btTakePicture = view.findViewById(R.id.btTakePicture);
         btTakePicture.setOnClickListener(new View.OnClickListener() {
@@ -125,14 +181,13 @@ public class MenuInsertFragment extends Fragment {
                     return;
                 }
 
-                String Id = etId.getText().toString().trim();
-                String Name = etName.getText().toString().trim();
-                int Price = Integer.parseInt(etPrice.getText().toString().trim());
-                String Content = etContent.getText().toString().trim();
+                int pricest = Integer.parseInt(etPrice.getText().toString().trim());
+                int status = swStatus.isChecked() ? 1 : 0;
+                String content = etContent.getText().toString().trim();
 
                 if (Common.networkConnected(activity)) {
                     String url = Common.URL_SERVER + "MenuServlet";
-                    Menu menu = new Menu(Id, Name, Price, Content);
+                    Menu menu = new Menu(id, name, pricest, status, content);
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action", "add");
                     jsonObject.addProperty("menu", new Gson().toJson(menu));
