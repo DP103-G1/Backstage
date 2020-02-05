@@ -1,6 +1,8 @@
 package com.example.ezeats;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,8 +25,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +44,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 
-
 import static android.app.Activity.RESULT_OK;
 
 
@@ -50,6 +53,7 @@ public class MenuUpdateFragment extends Fragment {
     private ImageView ivMenu;
     private EditText etName, etPrice, etContent;
     private TextView tvId;
+    private Switch isStatus;
     private Menu menu;
     private String id;
     private byte[] image;
@@ -57,6 +61,7 @@ public class MenuUpdateFragment extends Fragment {
     private static final int REQ_PICK_PICTURE = 1;
     private static final int REQ_CROP_PICTURE = 2;
     private Uri contentUri, croppedImageUri;
+
 
 
     @Override
@@ -74,13 +79,6 @@ public class MenuUpdateFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        ivMenu = view.findViewById(R.id.ivMenu);
-        tvId = view.findViewById(R.id.tvId);
-        etName = view.findViewById(R.id.etName);
-        etPrice = view.findViewById(R.id.etPrice);
-        etContent = view.findViewById(R.id.etContent);
-
         final NavController navController = Navigation.findNavController(view);
         Bundle bundle = getArguments();
         if (bundle == null || bundle.getSerializable("menu") == null) {
@@ -88,8 +86,65 @@ public class MenuUpdateFragment extends Fragment {
             navController.popBackStack();
             return;
         }
+
         menu = (Menu) bundle.getSerializable("menu");
+        ivMenu = view.findViewById(R.id.ivMenu);
+        tvId = view.findViewById(R.id.tvId);
+        etName = view.findViewById(R.id.etName);
+        etPrice = view.findViewById(R.id.etPrice);
+        etContent = view.findViewById(R.id.etContent);
+        isStatus = view.findViewById(R.id.isStatus);
         showMenu();
+
+        isStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isChecked = isStatus.isChecked();
+                if (isChecked) {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("確定!!")
+                            .setMessage("確定要把 [" + menu.getFOOD_NAME() + "] 上架嗎？")
+                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    isStatus.setChecked(false);
+                                }
+                            })
+                            .setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    menu.setFOOD_STATUS(1);
+                                }
+                            }).setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                @Override
+                                public void onCancel(DialogInterface dialog) {
+                                    isStatus.setChecked(false);
+                                }
+                            }).show();
+                } else {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("確定!!")
+                            .setMessage("確定要把 [" + menu.getFOOD_NAME() + "] 下架嗎？")
+                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    isStatus.setChecked(true);
+                                }
+                            })
+                            .setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    menu.setFOOD_STATUS(0);
+                                }
+                            }).setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                @Override
+                                public void onCancel(DialogInterface dialog) {
+                                    isStatus.setChecked(true);
+                                }
+                            }).show();
+                }
+            }
+        });
 
         Button btTakePicture = view.findViewById(R.id.btTakePicture);
         btTakePicture.setOnClickListener(new View.OnClickListener() {
@@ -119,8 +174,9 @@ public class MenuUpdateFragment extends Fragment {
                 startActivityForResult(intent, REQ_PICK_PICTURE);
             }
         });
-        Button btFinishInsert = view.findViewById(R.id.btFinishInsert);
-        btFinishInsert.setOnClickListener(new View.OnClickListener() {
+
+        Button btFinishUpdate = view.findViewById(R.id.btFinishUpdate);
+        btFinishUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name = etName.getText().toString().trim();
@@ -128,19 +184,18 @@ public class MenuUpdateFragment extends Fragment {
                     etName.setError(getString(R.string.textnameIsInvalid));
                     return;
                 }
-                String price = etPrice.getText().toString().trim();
-                if (price.length() == 0) {
+                String priceStr = etPrice.getText().toString().trim();
+                if (priceStr.length() == 0) {
                     etPrice.setError(getString(R.string.textpriceIsInvalid));
                     return;
                 }
-
-                String Name = etName.getText().toString().trim();
-                int Price = Integer.parseInt(etPrice.getText().toString().trim());
+                int price = Integer.parseInt(etPrice.getText().toString().trim());
                 String Content = etContent.getText().toString().trim();
+                int status = isStatus.isChecked() ? 1 : 0;
 
                 if (Common.networkConnected(activity)) {
                     String url = Common.URL_SERVER + "MenuServlet";
-                    Menu menu = new Menu(id, Name, Price, Content);
+                    Menu menu = new Menu(id, name, price, status, Content);
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action", "update");
                     jsonObject.addProperty("menu", new Gson().toJson(menu));
@@ -177,23 +232,28 @@ public class MenuUpdateFragment extends Fragment {
 
     private void showMenu() {
         String url = Common.URL_SERVER + "MenuServlet";
-         id = menu.getMENU_ID();
+        id = menu.getMENU_ID();
         int imageSize = getResources().getDisplayMetrics().widthPixels / 3;
         Bitmap bitmap = null;
         try {
             bitmap = new ImageTask(url, id, imageSize).execute().get();
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.e(TAG, e.toString());
         }
-        if (bitmap != null){
+        if (bitmap != null) {
             ivMenu.setImageBitmap(bitmap);
-        }else {
+        } else {
             ivMenu.setImageResource(R.drawable.no_image);
         }
         tvId.setText(String.valueOf(menu.getMENU_ID()));
         etName.setText(menu.getFOOD_NAME());
         etPrice.setText(String.valueOf(menu.getFOOD_PRICE()));
         etContent.setText(menu.getFOOD_CONTENT());
+        if (menu.getFOOD_STATUS() == 0) {
+            isStatus.setChecked(false);
+        } else {
+            isStatus.setChecked(true);
+        }
     }
 
     @Override

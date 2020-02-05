@@ -1,19 +1,19 @@
 <resources>
-    <string name="app_name">g1</string>
+    <string name="app_name">EZeats 簡單點</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="textNoNetWork">no network</string>
-    <string name="textNoTablesFound">no Tables</string>
+    <string name="textNoNetWork">沒有網路</string>
+    <string name="textNoTablesFound">沒有桌位</string>
 
-    <string name="textDelete">Delete</string>
-    <string name="textDeleteFail">DeleteFail</string>
-    <string name="textDeleteSuccess">DeleteSuccess</string>
+    <string name="textDelete">刪除</string>
+    <string name="textDeleteFail">刪除失敗</string>
+    <string name="textDeleteSuccess">刪除成功</string>
 
-    <string name="textTableIdIsInvalid">Invalid</string>
-    <string name="textPeopleInvalid">PeopleInvalid</string>
+    <string name="textTableIdIsInvalid">桌位號碼無效</string>
+    <string name="textPeopleInvalid">人數無效</string>
 
-    <string name="textPeople">People</string>
-    <string name="textNoTableFound">no table found</string>
+    <string name="textPeople">人數</string>
+    <string name="textNoTableFound">找不到表格</string>
 
     <string name="textTableNo">TableNo</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -24,19 +24,19 @@
     <string name="textContent">餐點內容</string>
     <string name="textInsert">確定新增</string>
     <string name="textCancel">取消</string>
-    <string name="textid">Menu Id</string>
+    <string name="textid">菜單編號</string>
     <string name="textMenuId">餐點編號</string>
     <string name="textUpdate">修改</string>
-    <string name="textNoNetwork">no network connection available</string>
-    <string name="textNOMenu">no Menu</string>
+    <string name="textNoNetwork">沒有連結到網路</string>
+    <string name="textNOMenu">沒有菜單</string>
     <string name="textidIsInvalid">請輸入菜單編號</string>
     <string name="textnameIsInvalid">請輸入菜單名稱</string>
     <string name="textpriceIsInvalid">請輸入菜單價格</string>
     <string name="textInsertFail">新增失敗</string>
     <string name="textInsertSuccess">新增成功</string>
     <string name="textTakePicture">拍照</string>
-    <string name="textNoCameraApp">no camera app found</string>
-    <string name="textNoImageCropAppFound">no image crop app found</string>
+    <string name="textNoCameraApp">找不到相機</string>
+    <string name="textNoImageCropAppFound">裁切失敗</string>
     <string name="textUpdateFail">修改失敗</string>
     <string name="textUpdateSuccess">修改成功</string>
 </resources>

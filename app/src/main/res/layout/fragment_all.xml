@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AllFragment">
+
+    <Button
+        android:id="@+id/btWaiter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="187dp"
+        android:text="服務員"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btKitchen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="71dp"
+        android:layout_marginEnd="1dp"
+        android:text="廚房"
+        app:layout_constraintEnd_toEndOf="@+id/btWaiter"
+        app:layout_constraintTop_toBottomOf="@+id/btWaiter" />
+
+    <Button
+        android:id="@+id/btBoss"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:text="經理"
+        app:layout_constraintStart_toStartOf="@+id/btKitchen"
+        app:layout_constraintTop_toBottomOf="@+id/btKitchen" />
+</androidx.constraintlayout.widget.ConstraintLayout>

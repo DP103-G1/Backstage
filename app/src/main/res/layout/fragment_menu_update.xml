@@ -12,8 +12,8 @@
 
         <ImageView
             android:id="@+id/ivMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="8dp"
@@ -56,10 +56,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="179dp"
             android:text="@string/textid"
             android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/ivStatus"
+            app:layout_constraintHorizontal_bias="0.195"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
@@ -68,11 +70,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
             android:text="123"
             android:textColor="#0000FF"
             app:layout_constraintStart_toEndOf="@+id/text"
             app:layout_constraintTop_toTopOf="@+id/text" />
+
+        <Switch
+            android:id="@+id/isStatus"
+            style="@android:style/Widget.Material.CompoundButton.Switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="4dp"
+            android:text="上下架"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+        <ImageView
+            android:id="@+id/ivStatus"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="205dp"
+            android:layout_marginEnd="113dp"
+            android:layout_marginBottom="344dp"
+            app:layout_constraintBottom_toTopOf="@+id/btFinishInsert"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/isStatus"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/etName"
@@ -94,7 +118,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="16dp"
             android:layout_marginTop="48dp"
             android:text="餐點名稱"
             android:textSize="20sp"
@@ -120,7 +143,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
             android:text="餐點價格"
             android:textSize="20sp"
@@ -145,7 +167,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginBottom="20dp"
             android:text="餐點內容"
             android:textSize="20sp"
@@ -153,14 +174,15 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/btFinishInsert"
+            android:id="@+id/btFinishUpdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="28dp"
-            android:layout_marginRight="28dp"
+            android:layout_marginEnd="32dp"
             android:text="餐點修改"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btCancel"
-            app:layout_constraintTop_toTopOf="@+id/btCancel" />
+            app:layout_constraintTop_toBottomOf="@+id/ivStatus"
+            app:layout_constraintVertical_bias="1.0" />
 
         <Button
             android:id="@+id/btCancel"

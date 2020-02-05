@@ -38,10 +38,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:background="@color/btAddcolor"
         android:src="@drawable/ic_add"
+        app:backgroundTint="@color/btAddcolor"
         app:elevation="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:rippleColor="#FFFFFF" />
+        app:rippleColor="@android:color/holo_blue_light" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
