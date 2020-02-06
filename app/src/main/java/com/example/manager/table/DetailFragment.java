@@ -1,4 +1,4 @@
-package com.example.g1.main;
+package com.example.manager.table;
 
 
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.g1.Common;
+import com.example.Common;
 import com.example.g1.R;
 
 

@@ -6,7 +6,7 @@
     android:layout_margin="8dp"
     android:orientation="vertical"
     android:padding="8dp"
-    tools:context=".main.UpdateFragment">
+    tools:context="com.example.manager.table.UpdateFragment">
 
     <TextView
         android:id="@+id/tvTableNotv"

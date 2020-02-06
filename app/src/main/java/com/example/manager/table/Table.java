@@ -1,4 +1,4 @@
-package com.example.g1.main;
+package com.example.manager.table;
 
 
 import java.io.Serializable;

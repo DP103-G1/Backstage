@@ -1,4 +1,4 @@
-package com.example.ezeats;
+package com.example.manager.menu;
 
 
 import android.app.AlertDialog;
@@ -28,11 +28,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.g1.Common;
+import com.example.Common;
 import com.example.g1.R;
-import com.example.g1.task.CommonTask;
+import com.example.task.CommonTask;
+import com.example.task.ImageTask;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -44,17 +46,22 @@ import java.io.FileNotFoundException;
 import static android.app.Activity.RESULT_OK;
 
 
-public class MenuInsertFragment extends Fragment {
-    private static final String TAG = "TAG_InsertFragment";
+public class MenuUpdateFragment extends Fragment {
+    private final static String TAG = "TAG_Update";
     private FragmentActivity activity;
     private ImageView ivMenu;
-    private EditText etId, etName, etPrice, etContent;
-    private Switch swStatus;
+    private EditText etName, etPrice, etContent;
+    private TextView tvId;
+    private Switch isStatus;
+    private Menu menu;
+    private String id;
     private byte[] image;
     private static final int REQ_TAKE_PICTURE = 0;
     private static final int REQ_PICK_PICTURE = 1;
     private static final int REQ_CROP_PICTURE = 2;
-    private Uri contentUri;
+    private Uri contentUri, croppedImageUri;
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,75 +69,81 @@ public class MenuInsertFragment extends Fragment {
         activity = getActivity();
     }
 
-    @NonNull
+    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container, @NonNull Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_menu_insert, container, false);
+        return inflater.inflate(R.layout.fragment_menu_update, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         final NavController navController = Navigation.findNavController(view);
+        Bundle bundle = getArguments();
+        if (bundle == null || bundle.getSerializable("menu") == null) {
+            Common.showToast(activity, R.string.textNOMenu);
+            navController.popBackStack();
+            return;
+        }
 
+        menu = (Menu) bundle.getSerializable("menu");
         ivMenu = view.findViewById(R.id.ivMenu);
-        etId = view.findViewById(R.id.etId);
+        tvId = view.findViewById(R.id.tvId);
         etName = view.findViewById(R.id.etName);
         etPrice = view.findViewById(R.id.etPrice);
         etContent = view.findViewById(R.id.etContent);
-        swStatus = view.findViewById(R.id.swStatus);
+        isStatus = view.findViewById(R.id.isStatus);
+        showMenu();
 
-        swStatus.setOnClickListener(new View.OnClickListener() {
+        isStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isChecked = swStatus.isChecked();
+                boolean isChecked = isStatus.isChecked();
                 if (isChecked) {
                     new AlertDialog.Builder(getActivity())
                             .setTitle("確定!!")
-                            .setMessage("確定將此產品上架？")
+                            .setMessage("確定要把 [" + menu.getFOOD_NAME() + "] 上架嗎？")
                             .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    swStatus.setChecked(false);
+                                    isStatus.setChecked(false);
                                 }
                             })
-                            .setNegativeButton("確定", new DialogInterface.OnClickListener() {
+                            .setPositiveButton("確定", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    swStatus.setChecked(true);
+                                    menu.setFOOD_STATUS(1);
                                 }
                             }).setOnCancelListener(new DialogInterface.OnCancelListener() {
                                 @Override
                                 public void onCancel(DialogInterface dialog) {
-                                    swStatus.setChecked(false);
+                                    isStatus.setChecked(false);
                                 }
                             }).show();
                 } else {
                     new AlertDialog.Builder(getActivity())
                             .setTitle("確定!!")
-                            .setMessage("確定將此產品下架？")
+                            .setMessage("確定要把 [" + menu.getFOOD_NAME() + "] 下架嗎？")
                             .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    swStatus.setChecked(true);
+                                    isStatus.setChecked(true);
                                 }
                             })
-                            .setNegativeButton("確定", new DialogInterface.OnClickListener() {
+                            .setPositiveButton("確定", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    swStatus.setChecked(false);
+                                    menu.setFOOD_STATUS(0);
                                 }
                             }).setOnCancelListener(new DialogInterface.OnCancelListener() {
                                 @Override
                                 public void onCancel(DialogInterface dialog) {
-                                    swStatus.setChecked(true);
+                                    isStatus.setChecked(true);
                                 }
                             }).show();
                 }
             }
         });
-
 
         Button btTakePicture = view.findViewById(R.id.btTakePicture);
         btTakePicture.setOnClickListener(new View.OnClickListener() {
@@ -161,35 +174,29 @@ public class MenuInsertFragment extends Fragment {
             }
         });
 
-        Button btFinishInsert = view.findViewById(R.id.btFinishInsert);
-        btFinishInsert.setOnClickListener(new View.OnClickListener() {
+        Button btFinishUpdate = view.findViewById(R.id.btFinishUpdate);
+        btFinishUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String id = etId.getText().toString().trim();
-                if (id.length() == 0) {
-                    etId.setError(getString(R.string.textidIsInvalid));
-                    return;
-                }
                 String name = etName.getText().toString().trim();
                 if (name.length() == 0) {
                     etName.setError(getString(R.string.textnameIsInvalid));
                     return;
                 }
-                String price = etPrice.getText().toString().trim();
-                if (price.length() == 0) {
+                String priceStr = etPrice.getText().toString().trim();
+                if (priceStr.length() == 0) {
                     etPrice.setError(getString(R.string.textpriceIsInvalid));
                     return;
                 }
-
-                int pricest = Integer.parseInt(etPrice.getText().toString().trim());
-                int status = swStatus.isChecked() ? 1 : 0;
-                String content = etContent.getText().toString().trim();
+                int price = Integer.parseInt(etPrice.getText().toString().trim());
+                String Content = etContent.getText().toString().trim();
+                int status = isStatus.isChecked() ? 1 : 0;
 
                 if (Common.networkConnected(activity)) {
                     String url = Common.URL_SERVER + "MenuServlet";
-                    Menu menu = new Menu(id, name, pricest, status, content);
+                    Menu menu = new Menu(id, name, price, status, Content);
                     JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("action", "add");
+                    jsonObject.addProperty("action", "update");
                     jsonObject.addProperty("menu", new Gson().toJson(menu));
                     if (image != null) {
                         jsonObject.addProperty("imageBase64", Base64.encodeToString(image, Base64.DEFAULT));
@@ -202,9 +209,9 @@ public class MenuInsertFragment extends Fragment {
                         Log.e(TAG, e.toString());
                     }
                     if (count == 0) {
-                        Common.showToast(getActivity(), R.string.textInsertFail);
+                        Common.showToast(getActivity(), R.string.textUpdateFail);
                     } else {
-                        Common.showToast(getActivity(), R.string.textInsertSuccess);
+                        Common.showToast(getActivity(), R.string.textUpdateSuccess);
                     }
                 } else {
                     Common.showToast(getActivity(), R.string.textNoNetwork);
@@ -222,6 +229,32 @@ public class MenuInsertFragment extends Fragment {
         });
     }
 
+    private void showMenu() {
+        String url = Common.URL_SERVER + "MenuServlet";
+        id = menu.getMENU_ID();
+        int imageSize = getResources().getDisplayMetrics().widthPixels / 3;
+        Bitmap bitmap = null;
+        try {
+            bitmap = new ImageTask(url, id, imageSize).execute().get();
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
+        }
+        if (bitmap != null) {
+            ivMenu.setImageBitmap(bitmap);
+        } else {
+            ivMenu.setImageResource(R.drawable.no_image);
+        }
+        tvId.setText(String.valueOf(menu.getMENU_ID()));
+        etName.setText(menu.getFOOD_NAME());
+        etPrice.setText(String.valueOf(menu.getFOOD_PRICE()));
+        etContent.setText(menu.getFOOD_CONTENT());
+        if (menu.getFOOD_STATUS() == 0) {
+            isStatus.setChecked(false);
+        } else {
+            isStatus.setChecked(true);
+        }
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
@@ -234,24 +267,16 @@ public class MenuInsertFragment extends Fragment {
                     crop(intent.getData());
                     break;
                 case REQ_CROP_PICTURE:
-                    Uri uri = intent.getData();
-                    Bitmap bitmap = null;
-                    if (uri != null) {
-                        try {
-                            bitmap = BitmapFactory.decodeStream(
-                                    activity.getContentResolver().openInputStream(uri));
-                            ivMenu.setImageBitmap(bitmap);
-                            ByteArrayOutputStream out = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-                            image = out.toByteArray();
-                        } catch (FileNotFoundException e) {
-                            Log.e(TAG, e.toString());
-                        }
-                    }
-                    if (bitmap != null) {
-                        ivMenu.setImageBitmap(bitmap);
-                    } else {
-                        ivMenu.setImageResource(R.drawable.no_image);
+                    Log.d(TAG, "REQ_CROP_PICTURE: " + croppedImageUri.toString());
+                    try {
+                        Bitmap picture = BitmapFactory.decodeStream(
+                                activity.getContentResolver().openInputStream(croppedImageUri));
+                        ivMenu.setImageBitmap(picture);
+                        ByteArrayOutputStream out = new ByteArrayOutputStream();
+                        picture.compress(Bitmap.CompressFormat.JPEG, 100, out);
+                        image = out.toByteArray();
+                    } catch (FileNotFoundException e) {
+                        Log.e(TAG, e.toString());
                     }
                     break;
             }
@@ -262,6 +287,7 @@ public class MenuInsertFragment extends Fragment {
         File file = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         file = new File(file, "picture_cropped.jpg");
         Uri uri = Uri.fromFile(file);
+        croppedImageUri = Uri.fromFile(file);
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.setDataAndType(sourceImageUri, "image/*");
@@ -281,4 +307,3 @@ public class MenuInsertFragment extends Fragment {
         }
     }
 }
-

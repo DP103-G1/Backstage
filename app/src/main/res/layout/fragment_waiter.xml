@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WaiterFragment">
+    tools:context="com.example.waiter.WaiterFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

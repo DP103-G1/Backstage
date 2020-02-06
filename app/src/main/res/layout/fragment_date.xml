@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ezeats.DateFragment">
+    tools:context="com.example.manager.menu.DateFragment">
 
     <ImageView
         android:id="@+id/ivMenu"

@@ -1,7 +1,6 @@
-package com.example.g1.main;
+package com.example.manager.table;
 
 
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,9 +18,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.g1.Common;
+import com.example.Common;
 import com.example.g1.R;
-import com.example.g1.task.CommonTask;
+import com.example.task.CommonTask;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
