@@ -6,7 +6,7 @@
     android:layout_margin="8dp"
     android:orientation="vertical"
     android:padding="8dp"
-    tools:context=".main.InsertFragment">
+    tools:context="com.example.manager.table.InsertFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"

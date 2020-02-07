@@ -1,4 +1,4 @@
-package com.example.ezeats;
+package com.example.manager.menu;
 
 
 import android.graphics.Bitmap;
@@ -18,9 +18,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.g1.Common;
+import com.example.Common;
 import com.example.g1.R;
-import com.example.g1.task.ImageTask;
+import com.example.task.ImageTask;
 
 
 public class DateFragment extends Fragment {

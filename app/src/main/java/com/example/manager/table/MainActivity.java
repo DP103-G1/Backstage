@@ -1,9 +1,6 @@
-package com.example.g1.main;
+package com.example.manager.table;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 

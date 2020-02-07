@@ -1,4 +1,4 @@
-package com.example.g1.main;
+package com.example.manager.table;
 
 
 
@@ -18,9 +18,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.example.g1.Common;
+import com.example.Common;
 import com.example.g1.R;
-import com.example.g1.task.CommonTask;
+import com.example.task.CommonTask;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 

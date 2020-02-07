@@ -1,4 +1,4 @@
-package com.example.g1;
+package com.example;
 
 import android.app.Activity;
 import android.content.Context;

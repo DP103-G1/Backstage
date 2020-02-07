@@ -27,7 +27,7 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".main.MainActivity">
+        <activity android:name="com.example.manager.table.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

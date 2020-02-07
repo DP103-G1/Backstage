@@ -1,4 +1,4 @@
-package com.example.ezeats;
+package com.example.manager.menu;
 
 import java.io.Serializable;
 

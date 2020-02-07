@@ -1,4 +1,4 @@
-package com.example.g1.main;
+package com.example.manager.table;
 
 
 import android.app.Activity;
@@ -22,16 +22,14 @@ import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.example.g1.Common;
+import com.example.Common;
 import com.example.g1.R;
-import com.example.g1.task.CommonTask;
-import com.example.g1.task.ImageTask;
+import com.example.task.CommonTask;
+import com.example.task.ImageTask;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.List;

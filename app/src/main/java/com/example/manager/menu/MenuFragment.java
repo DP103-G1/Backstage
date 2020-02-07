@@ -1,4 +1,4 @@
-package com.example.ezeats;
+package com.example.manager.menu;
 
 
 import android.app.Activity;
@@ -24,10 +24,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.g1.Common;
+import com.example.Common;
 import com.example.g1.R;
-import com.example.g1.task.CommonTask;
-import com.example.g1.task.ImageTask;
+import com.example.task.CommonTask;
+import com.example.task.ImageTask;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

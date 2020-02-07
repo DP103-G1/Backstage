@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainTableFragment"
-        android:name="com.example.g1.main.MainTableFragment"
+        android:name="com.example.manager.table.MainTableFragment"
         android:label="fragment_main_table"
         tools:layout="@layout/fragment_main_table" >
         <action
@@ -22,26 +22,26 @@
     </fragment>
     <fragment
         android:id="@+id/insertFragment"
-        android:name="com.example.g1.main.InsertFragment"
+        android:name="com.example.manager.table.InsertFragment"
         android:label="fragment_insert"
         tools:layout="@layout/fragment_insert" />
     <fragment
         android:id="@+id/updateFragment"
-        android:name="com.example.g1.main.UpdateFragment"
+        android:name="com.example.manager.table.UpdateFragment"
         android:label="fragment_update"
         tools:layout="@layout/fragment_update" />
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.g1.main.DetailFragment"
+        android:name="com.example.manager.table.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" />
     <fragment
         android:id="@+id/dateFragment"
-        android:name="com.example.ezeats.DateFragment"
+        android:name="com.example.manager.menu.DateFragment"
         android:label="DateFragment" />
     <fragment
         android:id="@+id/menuFragment"
-        android:name="com.example.ezeats.MenuFragment"
+        android:name="com.example.manager.menu.MenuFragment"
         android:label="MenuFragment" >
         <action
             android:id="@+id/action_menuFragment_to_menuInsertFragment"
@@ -55,15 +55,15 @@
     </fragment>
     <fragment
         android:id="@+id/menuInsertFragment"
-        android:name="com.example.ezeats.MenuInsertFragment"
+        android:name="com.example.manager.menu.MenuInsertFragment"
         android:label="MenuInsertFragment" />
     <fragment
         android:id="@+id/menuUpdateFragment"
-        android:name="com.example.ezeats.MenuUpdateFragment"
+        android:name="com.example.manager.menu.MenuUpdateFragment"
         android:label="MenuUpdateFragment" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.g1.HomeFragment"
+        android:name="com.example.manager.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -75,7 +75,7 @@
     </fragment>
     <fragment
         android:id="@+id/allFragment"
-        android:name="com.example.g1.AllFragment"
+        android:name="com.example.AllFragment"
         android:label="fragment_all"
         tools:layout="@layout/fragment_all" >
         <action
@@ -90,17 +90,17 @@
     </fragment>
     <fragment
         android:id="@+id/waiterFragment"
-        android:name="com.example.g1.WaiterFragment"
+        android:name="com.example.waiter.WaiterFragment"
         android:label="fragment_waiter"
         tools:layout="@layout/fragment_waiter" />
     <fragment
         android:id="@+id/kitchenFragment"
-        android:name="com.example.g1.KitchenFragment"
+        android:name="com.example.kitchen.KitchenFragment"
         android:label="fragment_kitchen"
         tools:layout="@layout/fragment_kitchen" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.g1.LoginFragment"
+        android:name="com.example.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -115,12 +115,12 @@
     </fragment>
     <fragment
         android:id="@+id/registeredFragment"
-        android:name="com.example.g1.RegisteredFragment"
+        android:name="com.example.login.RegisteredFragment"
         android:label="fragment_registered"
         tools:layout="@layout/fragment_registered" />
     <fragment
         android:id="@+id/forgetFragment"
-        android:name="com.example.g1.ForgetFragment"
+        android:name="com.example.login.ForgetFragment"
         android:label="fragment_forget"
         tools:layout="@layout/fragment_forget" />
 </navigation>
