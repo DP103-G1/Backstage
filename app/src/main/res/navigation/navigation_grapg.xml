@@ -92,7 +92,11 @@
         android:id="@+id/waiterFragment"
         android:name="com.example.waiter.WaiterFragment"
         android:label="fragment_waiter"
-        tools:layout="@layout/fragment_waiter" />
+        tools:layout="@layout/fragment_waiter" >
+        <action
+            android:id="@+id/action_waiterFragment_to_waiterSelectFragment"
+            app:destination="@id/waiterSelectFragment" />
+    </fragment>
     <fragment
         android:id="@+id/kitchenFragment"
         android:name="com.example.kitchen.KitchenFragment"
@@ -123,4 +127,22 @@
         android:name="com.example.login.ForgetFragment"
         android:label="fragment_forget"
         tools:layout="@layout/fragment_forget" />
+    <fragment
+        android:id="@+id/waiterSelectFragment"
+        android:name="com.example.waiter.WaiterSelectFragment"
+        android:label="fragment_waiter_select"
+        tools:layout="@layout/fragment_waiter_select" >
+        <action
+            android:id="@+id/action_waiterSelectFragment_to_waiterSelectDetailFragment"
+            app:destination="@id/waiterSelectDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/waiterSelectDetailFragment"
+        android:name="com.example.waiter.WaiterSelectDetailFragment"
+        android:label="fragment_waiter_select_detail"
+        tools:layout="@layout/fragment_waiter_select_detail" >
+        <action
+            android:id="@+id/action_waiterSelectDetailFragment_to_waiterSelectFragment"
+            app:destination="@id/waiterSelectFragment" />
+    </fragment>
 </navigation>

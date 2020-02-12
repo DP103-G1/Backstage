@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.waiter.WaiterSelectDetailFragment" >
+
+    <TextView
+        android:id="@+id/tvBkId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/textBkId"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvBkIdGet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:scrollbarSize="4dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvBkId"
+        app:layout_constraintTop_toTopOf="@+id/tvBkId"
+        tools:text="1" />
+
+    <TextView
+        android:id="@+id/tvTableId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/textTable"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvBkId" />
+
+    <TextView
+        android:id="@+id/tvTime2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/textTime"
+        app:layout_constraintStart_toStartOf="@+id/tvTableId"
+        app:layout_constraintTop_toBottomOf="@+id/tvTableId" />
+
+    <TextView
+        android:id="@+id/tvTimeGet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/tvBkIdGet"
+        app:layout_constraintStart_toStartOf="@+id/tvBkIdGet"
+        app:layout_constraintTop_toBottomOf="@+id/tvTableGet"
+        tools:text="0900" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/textDate"
+        app:layout_constraintStart_toStartOf="@+id/tvTime2"
+        app:layout_constraintTop_toBottomOf="@+id/tvTime2" />
+
+    <TextView
+        android:id="@+id/tvDateGet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/tvBkIdGet"
+        app:layout_constraintStart_toStartOf="@+id/tvBkIdGet"
+        app:layout_constraintTop_toBottomOf="@+id/tvTimeGet"
+        tools:text="2020-11-04" />
+
+    <TextView
+        android:id="@+id/tvChild"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/textChild"
+        app:layout_constraintStart_toStartOf="@+id/tvDate"
+        app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+
+    <TextView
+        android:id="@+id/tvChildGet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/tvBkIdGet"
+        app:layout_constraintStart_toStartOf="@+id/tvBkIdGet"
+        app:layout_constraintTop_toBottomOf="@+id/tvDateGet"
+        tools:text="4" />
+
+    <TextView
+        android:id="@+id/tvTableGet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/tvBkIdGet"
+        app:layout_constraintStart_toStartOf="@+id/tvBkIdGet"
+        app:layout_constraintTop_toBottomOf="@+id/tvBkIdGet"
+        tools:text="0" />
+
+    <TextView
+        android:id="@+id/tvAdult2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/textAdult"
+        app:layout_constraintStart_toStartOf="@+id/tvChild"
+        app:layout_constraintTop_toBottomOf="@+id/tvChild" />
+
+    <TextView
+        android:id="@+id/tvAdultGet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/tvBkIdGet"
+        app:layout_constraintStart_toStartOf="@+id/tvBkIdGet"
+        app:layout_constraintTop_toBottomOf="@+id/tvChildGet"
+        tools:text="1" />
+
+    <TextView
+        android:id="@+id/tvPhone2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/textPhone"
+        app:layout_constraintStart_toStartOf="@+id/tvAdult2"
+        app:layout_constraintTop_toBottomOf="@+id/tvAdult2" />
+
+    <TextView
+        android:id="@+id/tvPhoneGet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/tvBkIdGet"
+        app:layout_constraintStart_toStartOf="@+id/tvBkIdGet"
+        app:layout_constraintTop_toBottomOf="@+id/tvAdultGet"
+        tools:text="098765321" />
+
+    <Button
+        android:id="@+id/btBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/textBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPhoneGet" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,8 +6,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 public class Common {
     public static String URL_SERVER = "http://10.0.2.2:8080/Thematic_G1/";
+    public static final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 
     // check if the device connect to the network
     public static boolean networkConnected(Activity activity) {

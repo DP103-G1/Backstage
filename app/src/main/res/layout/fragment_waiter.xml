@@ -1,14 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.waiter.WaiterFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ImageView
+        android:id="@+id/ivBooking"
+        android:layout_width="143dp"
+        android:layout_height="143dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="244dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/add"
+        tools:src="@tools:sample/avatars" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/ivOrderMenu"
+        android:layout_width="143dp"
+        android:layout_height="143dp"
+        android:layout_marginTop="244dp"
+        android:layout_marginEnd="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/add"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tvOrderMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/textOrder"
+        app:layout_constraintEnd_toEndOf="@+id/ivOrderMenu"
+        app:layout_constraintStart_toStartOf="@+id/ivOrderMenu"
+        app:layout_constraintTop_toBottomOf="@+id/ivOrderMenu" />
+
+    <TextView
+        android:id="@+id/tvBooking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/textBooking"
+        app:layout_constraintEnd_toEndOf="@+id/ivBooking"
+        app:layout_constraintStart_toStartOf="@+id/ivBooking"
+        app:layout_constraintTop_toBottomOf="@+id/ivBooking" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
