@@ -50,5 +50,6 @@
     <string name="textPhone">電話</string>
     <string name="textBack">返回</string>
     <string name="textNoSelectBookingFound">未找到訂位</string>
-    string
-</resources>
+    <string name="trueStatus" type="id">正確</string>
+    <string name="falseStatus" type="id">錯誤</string>
+    string</resources>
