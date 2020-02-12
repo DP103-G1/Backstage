@@ -1,5 +1,7 @@
 package com.example.kitchen;
 
+import com.example.manager.menu.Menu;
+
 public class MenuDetail {
 
 	private int ORD_ID;
@@ -17,6 +19,14 @@ public class MenuDetail {
 		this.MENU_ID = MENU_ID;
 		this.FOOD_AMOUNT = FOOD_AMOUNT;
 		this.FOOD_ARRIVAL = FOOD_ARRIVAL;
+		this.TOTAL = TOTAL;
+		this.FOOD_STATUS = FOOD_STATUS;
+	}
+
+	public MenuDetail(int ORD_ID, String MENU_ID, int FOOD_AMOUNT, int TOTAL, boolean FOOD_STATUS) {
+		this.ORD_ID = ORD_ID;
+		this.MENU_ID = MENU_ID;
+		this.FOOD_AMOUNT = FOOD_AMOUNT;
 		this.TOTAL = TOTAL;
 		this.FOOD_STATUS = FOOD_STATUS;
 	}

@@ -39,4 +39,6 @@
     <string name="textNoImageCropAppFound">裁切失敗</string>
     <string name="textUpdateFail">修改失敗</string>
     <string name="textUpdateSuccess">修改成功</string>
+    <string name="trueStatus" type="id">正確</string>
+    <string name="falseStatus" type="id">錯誤</string>
     string</resources>
