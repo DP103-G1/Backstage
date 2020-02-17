@@ -63,7 +63,6 @@ public class MainTableFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         rvTable = view.findViewById(R.id.rvTable);
-
         rvTable.setLayoutManager(new LinearLayoutManager(activity));
         tables = getTables();
         showTables(tables);

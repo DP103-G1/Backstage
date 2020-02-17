@@ -52,4 +52,6 @@
     <string name="textNoSelectBookingFound">未找到訂位</string>
     <string name="trueStatus" type="id">正確</string>
     <string name="falseStatus" type="id">錯誤</string>
-    string</resources>
+    <string name="textMemberNoFound">未找到會員</string>
+    string
+</resources>

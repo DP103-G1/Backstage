@@ -12,15 +12,11 @@ import android.view.ViewGroup;
 import com.example.g1.R;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class ForgetFragment extends Fragment {
 
 
-    public ForgetFragment() {
-        // Required empty public constructor
-    }
+
 
 
     @Override

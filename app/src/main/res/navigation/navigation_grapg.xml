@@ -72,6 +72,9 @@
         <action
             android:id="@+id/action_homeFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_memberFragment"
+            app:destination="@id/memberFragment" />
     </fragment>
     <fragment
         android:id="@+id/allFragment"
@@ -145,4 +148,23 @@
             android:id="@+id/action_waiterSelectDetailFragment_to_waiterSelectFragment"
             app:destination="@id/waiterSelectFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/employeeFragment"
+        android:name="com.example.Employee.EmployeeFragment"
+        android:label="fragment_employee"
+        tools:layout="@layout/fragment_employee" />
+    <fragment
+        android:id="@+id/memberFragment"
+        android:name="com.example.manager.member.MemberFragment"
+        android:label="fragment_member"
+        tools:layout="@layout/fragment_member" >
+        <action
+            android:id="@+id/action_memberFragment_to_memberDetailFragment"
+            app:destination="@id/memberDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/memberDetailFragment"
+        android:name="com.example.g1.MemberDetailFragment"
+        android:label="fragment_member_detail"
+        tools:layout="@layout/fragment_member_detail" />
 </navigation>
