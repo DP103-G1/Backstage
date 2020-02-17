@@ -62,7 +62,7 @@ public class WaiterSelectFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         SearchView searchView = view.findViewById(R.id.seachView);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
-        rvWaiterSelectBooking = view.findViewById(R.id.rvWaiterSelectBooking);
+        rvWaiterSelectBooking = view.findViewById(R.id.rvWaiterSelect);
         rvWaiterSelectBooking.setLayoutManager(new LinearLayoutManager(activity));
         waiterSelectBookings = getWaiterSelectBooking();
         showWaiterSelectBooking(waiterSelectBookings);
@@ -84,12 +84,12 @@ public class WaiterSelectFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                // 如果搜尋條件為空字串，就顯示原始資料；否則就顯示搜尋後結果
+
                 if (newText.isEmpty()) {
                     showWaiterSelectBooking(waiterSelectBookings);
                 } else {
                     List<Booking> searchBookings = new ArrayList<>();
-                    // 搜尋原始資料內有無包含關鍵字(不區別大小寫)
+
                     for (Booking searchBooking : waiterSelectBookings) {
                         if (searchBooking.getBkId().contains(newText)) {
                             searchBookings.add(searchBooking);
@@ -125,8 +125,8 @@ public class WaiterSelectFragment extends Fragment {
 
            WaiterSelectBookingHolder(@NonNull View view) {
                 super(view);
-                tvBkDate = view.findViewById(R.id.tvBkDate);
-                tvBkId = view.findViewById(R.id.tvBkId);
+                tvBkDate = view.findViewById(R.id.tvMemberName);
+                tvBkId = view.findViewById(R.id.tvMemberId);
             }
         }
 

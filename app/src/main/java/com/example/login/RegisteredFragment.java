@@ -18,9 +18,6 @@ import com.example.g1.R;
 public class RegisteredFragment extends Fragment {
 
 
-    public RegisteredFragment() {
-        // Required empty public constructor
-    }
 
 
     @Override

@@ -46,5 +46,12 @@ public class HomeFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_menuFragment);
             }
         });
+        Button btMember = view.findViewById(R.id.btMember);
+        btMember.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_memberFragment);
+            }
+        });
     }
 }

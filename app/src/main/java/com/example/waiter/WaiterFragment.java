@@ -16,12 +16,7 @@ import android.widget.ImageView;
 
 import com.example.g1.R;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class WaiterFragment extends Fragment {
-
     private static final String TAG = "TAG_SelectFragment";
     private Activity activity;
     private ImageView ivBooking,ivOrderMenu;
@@ -48,6 +43,13 @@ public class WaiterFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(v).navigate(R.id.action_waiterFragment_to_waiterSelectFragment);
+            }
+        });
+
+        ivOrderMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Navigation.findNavController(v).navigate();
             }
         });
     }
