@@ -11,7 +11,9 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="40dp">
+        android:textColorHint="@color/colortext"
+        android:layout_margin="40dp"
+        app:hintTextAppearance="@style/TextLabel">
 
         <EditText
             android:id="@+id/etTableId"
@@ -19,14 +21,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="20"
-            android:hint="@string/textTableNo"
+            android:textColor="@color/colortext"
+            android:theme="@style/MyEditText"
+            android:hint="桌位"
             android:inputType="phone" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="40dp">
+        android:textColorHint="@color/colortext"
+        android:layout_margin="40dp"
+        app:hintTextAppearance="@style/TextLabel">
 
         <EditText
             android:id="@+id/etPeople"
@@ -34,7 +40,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="20"
-            android:hint="@string/textPeople"
+            android:textColor="@color/colortext"
+            android:theme="@style/MyEditText"
+            android:hint="人數"
             android:inputType="phone" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -49,7 +57,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:text="新增" />
+            android:text="新增"
+            android:textColor="@color/colortext"
+            android:background="@color/colortitle"
+             />
 
         <Button
             android:id="@+id/btCancel"
@@ -57,6 +68,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
+            android:textColor="@color/colortext"
+            android:background="@color/colortitle"
             android:text="取消" />
     </LinearLayout>
 </LinearLayout>
