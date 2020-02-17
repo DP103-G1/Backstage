@@ -49,8 +49,8 @@ public class DetailFragment extends Fragment {
 
     private void showTable() {
         String url = Common.URL_SERVER + "TableServlet";
-        String id = table.getTableId();
-        tvaTableNo.setText(table.getTableId());
+        int id = table.getTableId();
+        tvaTableNo.setText(String.valueOf(table.getTableId()));
         tvaPeople.setText(table.getTablePeople());
 
     }

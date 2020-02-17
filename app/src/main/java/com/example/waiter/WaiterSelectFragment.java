@@ -41,7 +41,7 @@ public class WaiterSelectFragment extends Fragment {
     private List<Booking> waiterSelectBookings;
     private CommonTask waiterSelectBookingGetAllTask;
     private ImageTask waiterSelectBookingTask;
-    private String bkId;
+
 
 
     @Override
@@ -91,7 +91,7 @@ public class WaiterSelectFragment extends Fragment {
                     List<Booking> searchBookings = new ArrayList<>();
 
                     for (Booking searchBooking : waiterSelectBookings) {
-                        if (searchBooking.getBkId().contains(newText)) {
+                        if (searchBooking.getBkId() == 0) {
                             searchBookings.add(searchBooking);
                         }
                     }
@@ -125,8 +125,8 @@ public class WaiterSelectFragment extends Fragment {
 
            WaiterSelectBookingHolder(@NonNull View view) {
                 super(view);
-                tvBkDate = view.findViewById(R.id.tvMemberName);
-                tvBkId = view.findViewById(R.id.tvMemberId);
+                tvBkDate = view.findViewById(R.id.tvDate);
+                tvBkId = view.findViewById(R.id.tvBkId);
             }
         }
 
@@ -147,10 +147,10 @@ public class WaiterSelectFragment extends Fragment {
         public void onBindViewHolder(@NonNull WaiterSelectBookingHolder holder, int position) {
             final Booking booking = waiterSelectBooking.get(position);
             String url = Common.URL_SERVER + "/BookingServlet";
-            String bkId = booking.getBkId();
-            waiterSelectBookingTask = new ImageTask(url,bkId);
+            int bkId = booking.getBkId();
+            waiterSelectBookingTask = new ImageTask(url,String.valueOf(bkId));
             waiterSelectBookingTask.execute();
-            holder.tvBkId.setText(booking.getBkId());
+            holder.tvBkId.setText(String.valueOf(booking.getBkId()));
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             holder.tvBkDate.setText(simpleDateFormat.format(booking.getBkDate()));
             holder.itemView.setOnClickListener(new View.OnClickListener() {

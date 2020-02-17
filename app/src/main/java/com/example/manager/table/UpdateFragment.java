@@ -71,8 +71,8 @@ public class UpdateFragment extends Fragment {
                     Common.showToast(activity,R.string.textPeopleInvalid);
                     return;
                 }
-                String tableId = etTableNo.getText().toString().trim();
-                if (tableId.length()<=0){
+                int tableId = Integer.parseInt(etTableNo.getText().toString().trim());
+                if (tableId==0){
                     Common.showToast(activity,R.string.textTableIdIsInvalid);
                     return;
                 }
@@ -112,7 +112,7 @@ public class UpdateFragment extends Fragment {
 
     private void showTable() {
         String url = Common.URL_SERVER + "TableServlet";
-        String id = table.getTableId();
+        int id = table.getTableId();
         etPeople.setText(table.getTablePeople());
         etTableNo.setText(table.getTableId());
 

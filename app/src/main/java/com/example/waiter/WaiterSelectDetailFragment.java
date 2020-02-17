@@ -57,33 +57,27 @@ public class WaiterSelectDetailFragment extends Fragment {
         tvChildGet = view.findViewById(R.id.tvChildGet);
         tvAdultGet = view.findViewById(R.id.tvAdultGet);
         tvPhoneGet = view.findViewById(R.id.tvPhoneGet);
-        btBack = view.findViewById(R.id.btBack);
+
         Bundle bundle = getArguments();
         if (bundle != null){
             waiterSelectBookingDetail = (Booking)bundle.getSerializable("booking");
             showWaiterSelectBookinDetail();
         }
-        btBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_waiterSelectDetailFragment_to_waiterSelectFragment);
 
-            }
-        });
     }
 
     private void showWaiterSelectBookinDetail() {
         String url = Common.URL_SERVER + "BookingServlet";
-        String memId = waiterSelectBookingDetail .getBkId();
+        int memId = waiterSelectBookingDetail .getBkId();
         Bitmap bitmap = null;
         try {
-            bitmap = new ImageTask(url,memId).execute().get();
+            bitmap = new ImageTask(url,String.valueOf(memId)).execute().get();
         }catch (Exception e){
             Log.e(TAG,e.toString());
         }
 
-        tvBkIdGet.setText(waiterSelectBookingDetail.getBkId());
-        tvTableGet.setText(waiterSelectBookingDetail.getTableId());
+        tvBkIdGet.setText(String.valueOf(waiterSelectBookingDetail.getBkId()));
+        tvTableGet.setText(String.valueOf(waiterSelectBookingDetail.getTableId()));
         tvTimeGet.setText(waiterSelectBookingDetail.getBkTime());
         String date = new SimpleDateFormat("yyyy-MM-dd").format(waiterSelectBookingDetail.getBkDate());
         tvDateGet.setText(date);

@@ -144,14 +144,4 @@
         app:layout_constraintTop_toBottomOf="@+id/tvAdultGet"
         tools:text="098765321" />
 
-    <Button
-        android:id="@+id/btBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
-        android:text="@string/textBack"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPhoneGet" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

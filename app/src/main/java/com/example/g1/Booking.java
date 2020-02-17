@@ -4,16 +4,16 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Booking implements Serializable {
-	private String bkId;
-	private String memberId;
-	private String tableId;
+	private int bkId;
+	private int memberId;
+	private int tableId;
 	private String bkTime;
 	private Date bkDate;
 	private String bkChild;
 	private String bkAdult;
 	private String bkPhone;
 
-	public Booking(String bkId, String tableId,
+	public Booking(int bkId, int tableId,
                    String bkTime, Date bkDate, String bkChild, String bkAdult,
                    String bkPhone) {
 		super();
@@ -30,7 +30,7 @@ public class Booking implements Serializable {
 
 
 
-	public Booking(String tableId, String bkTime, Date bkDate, String bkChild, String bkAdult,
+	public Booking(int tableId, String bkTime, Date bkDate, String bkChild, String bkAdult,
                    String bkPhone) {
 		super();
 		this.tableId = tableId;
@@ -51,27 +51,27 @@ public class Booking implements Serializable {
 
 
 
-	public String getBkId() {
+	public int getBkId() {
 		return bkId;
 	}
 
-	public void setBkId(String bkId) {
+	public void setBkId(int bkId) {
 		this.bkId = bkId;
 	}
 
-	public String getMemberId() {
+	public int getMemberId() {
 		return memberId;
 	}
 
-	public void setMemberId(String memberId) {
+	public void setMemberId(int memberId) {
 		this.memberId = memberId;
 	}
 
-	public String getTableId() {
+	public int getTableId() {
 		return tableId;
 	}
 
-	public void setTableId(String tableId) {
+	public void setTableId(int tableId) {
 		this.tableId = tableId;
 	}
 

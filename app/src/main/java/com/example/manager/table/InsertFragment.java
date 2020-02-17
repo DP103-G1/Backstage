@@ -57,8 +57,8 @@ public class InsertFragment extends Fragment {
         btInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String tableId = etTableId.getText().toString().trim();
-                if (tableId.length()<=0){
+                int tableId = Integer.parseInt(etTableId.getText().toString().trim());
+                if (tableId == 0){
                     Common.showToast(getActivity(),R.string.textTableIdIsInvalid);
                     return;
                 }
@@ -68,7 +68,7 @@ public class InsertFragment extends Fragment {
                 }
                 if (Common.networkConnected(activity)){
                     String url = Common.URL_SERVER + "TableServlet";
-                    Table table = new Table(tableId,people,0,false);
+                    Table table = new Table(tableId,people,0);
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action","tableInsert");
                     jsonObject.addProperty("table",new Gson().toJson(table));

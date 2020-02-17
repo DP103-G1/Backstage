@@ -160,10 +160,10 @@ public class MainTableFragment extends Fragment {
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
                 final Table table = tables.get(position);
                 String url = Common.URL_SERVER + "TableServlet";
-                String id = table.getTableId();
-                tableImageTask = new ImageTask(url, id);
+                int id = table.getTableId();
+                tableImageTask = new ImageTask(url, String.valueOf(id));
                 tableImageTask.execute();
-                holder.tvTableNo.setText(table.getTableId());
+                holder.tvTableNo.setText(String.valueOf(table.getTableId()));
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
