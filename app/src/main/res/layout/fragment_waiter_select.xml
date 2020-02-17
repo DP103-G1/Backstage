@@ -10,6 +10,8 @@
         android:id="@+id/seachView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colortext"
+        android:theme="@style/MyEditText"
         android:iconifiedByDefault="false"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

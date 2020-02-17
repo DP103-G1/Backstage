@@ -31,6 +31,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="@color/colortext"
                 android:text="帳號:" />
 
             <EditText
@@ -39,6 +40,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:textColor="@color/colortext"
+                android:textColorHint="@color/colortext"
+                android:theme="@style/MyEditText"
                 android:inputType="textEmailAddress" />
         </LinearLayout>
 
@@ -53,6 +57,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="@color/colortext"
                 android:text="密碼:" />
 
             <EditText
@@ -61,6 +66,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:textColor="@color/colortext"
+                android:textColorHint="@color/colortext"
+                android:theme="@style/MyEditText"
                 android:inputType="textEmailAddress" />
         </LinearLayout>
 
@@ -75,6 +83,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="@color/colortext"
                 android:text="密碼確認:" />
 
             <EditText
@@ -83,6 +92,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:textColor="@color/colortext"
+                android:textColorHint="@color/colortext"
+                android:theme="@style/MyEditText"
                 android:inputType="textEmailAddress" />
         </LinearLayout>
 
@@ -97,6 +109,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="@color/colortext"
                 android:text="姓名:" />
 
             <EditText
@@ -105,6 +118,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:textColor="@color/colortext"
+                android:textColorHint="@color/colortext"
+                android:theme="@style/MyEditText"
                 android:inputType="textEmailAddress" />
         </LinearLayout>
 
@@ -119,6 +135,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="@color/colortext"
                 android:text="身分證字號:" />
 
             <EditText
@@ -127,6 +144,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:textColor="@color/colortext"
+                android:textColorHint="@color/colortext"
+                android:theme="@style/MyEditText"
                 android:inputType="textEmailAddress" />
         </LinearLayout>
 
@@ -141,6 +161,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="@color/colortext"
                 android:text="電話:" />
 
             <EditText
@@ -149,6 +170,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:textColor="@color/colortext"
+                android:textColorHint="@color/colortext"
+                android:theme="@style/MyEditText"
                 android:inputType="phone" />
         </LinearLayout>
 
@@ -163,6 +187,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="@color/colortext"
                 android:text="性別:" />
 
             <EditText
@@ -171,6 +196,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:textColor="@color/colortext"
+                android:textColorHint="@color/colortext"
+                android:theme="@style/MyEditText"
                 android:inputType="textEmailAddress" />
         </LinearLayout>
 
@@ -185,6 +213,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="@color/colortext"
                 android:text="出生年月日:" />
 
             <EditText
@@ -193,6 +222,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:textColor="@color/colortext"
+                android:textColorHint="@color/colortext"
+                android:theme="@style/MyEditText"
                 android:inputType="textEmailAddress" />
         </LinearLayout>
 
@@ -207,6 +239,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="@color/colortext"
                 android:text="地址:" />
 
             <EditText
@@ -215,6 +248,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:textColor="@color/colortext"
+                android:textColorHint="@color/colortext"
+                android:theme="@style/MyEditText"
                 android:inputType="textEmailAddress" />
         </LinearLayout>
 
@@ -229,6 +265,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="@color/colortext"
                 android:text="電子郵件:" />
 
             <EditText
@@ -237,6 +274,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:textColor="@color/colortext"
+                android:textColorHint="@color/colortext"
+                android:theme="@style/MyEditText"
                 android:inputType="textEmailAddress" />
         </LinearLayout>
 
@@ -251,6 +291,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="@color/colortext"
                 android:text="學歷:" />
 
             <EditText
@@ -259,6 +300,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:textColor="@color/colortext"
+                android:textColorHint="@color/colortext"
+                android:theme="@style/MyEditText"
                 android:inputType="textEmailAddress" />
         </LinearLayout>
 
@@ -273,6 +317,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="@color/colortext"
                 android:text="到職日:" />
 
             <EditText
@@ -281,6 +326,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
+                android:textColor="@color/colortext"
+                android:textColorHint="@color/colortext"
+                android:theme="@style/MyEditText"
                 android:inputType="textEmailAddress" />
         </LinearLayout>
 
@@ -292,6 +340,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="77dp"
         android:layout_marginTop="15dp"
+        android:textColor="@color/colortext"
+        android:background="@color/colortitle"
         android:text="確定"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -304,6 +354,8 @@
         android:layout_marginStart="85dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="77dp"
+        android:textColor="@color/colortext"
+        android:background="@color/colortitle"
         android:text="取消"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
