@@ -53,5 +53,19 @@ public class HomeFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_memberFragment);
             }
         });
+        Button btBox = view.findViewById(R.id.btBox);
+        btBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_mainFragment);
+            }
+        });
+        Button btRevenue = view.findViewById(R.id.btRevenue);
+        btRevenue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_searchFragment);
+            }
+        });
     }
 }

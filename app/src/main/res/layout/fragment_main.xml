@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frontPage"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="com.example.manager.SUG_manger.MainFragment">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:text="@string/tvSUG"
+        android:textColor="@color/colorAccent"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/tvMailBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:gravity="start"
+        android:text="@string/tvMailBox"
+        android:textColor="@color/colorAccent"
+        android:textSize="30sp" />
+
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="409dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="3dp">
+
+    </SearchView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvReact"
+        android:layout_width="409dp"
+        android:layout_height="540dp"
+        android:layout_marginTop="5dp" />
+
+</LinearLayout>

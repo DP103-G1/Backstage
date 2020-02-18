@@ -53,5 +53,35 @@
     <string name="trueStatus" type="id">正確</string>
     <string name="falseStatus" type="id">錯誤</string>
     <string name="textMemberNoFound">未找到會員</string>
+    <string name="tvSub">輸入標題</string>
+    <string name="tvContent">輸入內容</string>
+    <string name="tvMailBox">收件匣</string>
+    <string name="tvSUG">意見管理</string>
+    <string name="tvSomebody">Name</string>
+    <string name="tvTime">Date</string>
+    <string name="btReply">回覆</string>
+    <string name="tvReply1">請輸入文字</string>
+    <string name="btSent">寄出</string>
+    <string name="tvTopic">Title</string>
+    <string name="tvGuide">導覽</string>
+    <string name="btOperate">操作導引</string>
+    <string name="btQA"><![CDATA[Q&A]]></string>
+    <string name="btGame">小遊戲</string>
+    <string name="btBox">意見箱</string>
+    <string name="tvSummary">簡介</string>
+    <string name="tvIncome">營收統計</string>
+    <string name="tvAD">西元年</string>
+    <string name="btDay">日營收統計</string>
+    <string name="btMonth">月營收統計</string>
+    <string name="btYear">年營收統計</string>
+    <string name="tvTitle">標題</string>
+    <string name="tvNumber">No.1</string>
+    <string name="tvUserNumber">內容</string>
+    <string name="tvUser">會員編號</string>
+    <string name="tvReply">請輸入文字</string>
+    <string name="etMemberName">姓名：</string>
+    <string name="etTopic">標題：</string>
+    <string name="tvCheckM" translatable="false">查看留言</string>
+    <string name="tvLeaveM">我要留言</string>
     string
 </resources>

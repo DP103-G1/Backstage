@@ -6,6 +6,66 @@
     app:startDestination="@id/loginFragment">
 
     <fragment
+        android:id="@+id/incomeFragment"
+        android:name="com.example.manager.Cauculator.IncomeFragment"
+        android:label="fragment_income"
+        tools:layout="@layout/fragment_income" />
+    <fragment
+        android:id="@+id/replyFragment"
+        android:name="com.example.manager.SUG_manger.ReplyFragment"
+        android:label="fragment_reply"
+        tools:layout="@layout/fragment_reply" />
+    <fragment
+        android:id="@+id/monthIncomeFragment"
+        android:name="com.example.manager.Cauculator.MonthIncomeFragment"
+        android:label="fragment_month_income"
+        tools:layout="@layout/fragment_month_income" />
+    <fragment
+        android:id="@+id/yearIncomeFragment"
+        android:name="com.example.manager.Cauculator.YearIncomeFragment"
+        android:label="fragment_year_income"
+        tools:layout="@layout/fragment_year_income" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.manager.Cauculator.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_incomeFragment"
+            app:destination="@id/incomeFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_searchFragment_to_monthIncomeFragment"
+            app:destination="@id/monthIncomeFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_searchFragment_to_yearIncomeFragment"
+            app:destination="@id/yearIncomeFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.manager.SUG_manger.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_replyFragment"
+            app:destination="@id/replyFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
         android:id="@+id/mainTableFragment"
         android:name="com.example.manager.table.MainTableFragment"
         android:label="fragment_main_table"
@@ -75,6 +135,12 @@
         <action
             android:id="@+id/action_homeFragment_to_memberFragment"
             app:destination="@id/memberFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/allFragment"
@@ -157,14 +223,5 @@
         android:id="@+id/memberFragment"
         android:name="com.example.manager.member.MemberFragment"
         android:label="fragment_member"
-        tools:layout="@layout/fragment_member" >
-        <action
-            android:id="@+id/action_memberFragment_to_memberDetailFragment"
-            app:destination="@id/memberDetailFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/memberDetailFragment"
-        android:name="com.example.g1.MemberDetailFragment"
-        android:label="fragment_member_detail"
-        tools:layout="@layout/fragment_member_detail" />
+        tools:layout="@layout/fragment_member" />
 </navigation>
