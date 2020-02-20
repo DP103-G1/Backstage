@@ -28,6 +28,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -65,7 +66,7 @@ public class MainFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 if (query.isEmpty()){
-//                    showBoxes();
+                    showBoxes(new ArrayList<Box>());//list是interface，要實作list的物件
                 }
                 return false;
             }
