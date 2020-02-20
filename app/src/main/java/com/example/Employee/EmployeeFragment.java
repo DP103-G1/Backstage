@@ -7,23 +7,32 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.Button;
+import android.widget.EditText;
+import com.example.Common;
 import com.example.g1.R;
-
+import com.example.task.CommonTask;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
+import java.util.List;
 
 
 public class EmployeeFragment extends Fragment {
     private final static String TAG = "TAG_EmployeeFragment";
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private RecyclerView rvEmployee;
-    private Activity activity;
+    private Activity  activity;
+    private Employee employee;
+    private EditText[] etPasswords = new EditText[3];
+    private Button[] btUpdates = new Button[3];
+    private CommonTask employeeGetAllTask;
+    private List<Employee> employeeList;
+    private View employeeFragmentView;
+    private int[] editTextsId = {R.id.etManagerPassWord, R.id.etKitchenPassWord, R.id.etWaiterPassWord};
+    private int[] buttonsId = {R.id.btUpdate1, R.id.btUpdate2, R.id.btUpdate3};
 
 
     @Override
@@ -31,7 +40,9 @@ public class EmployeeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         activity = getActivity();
 
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,12 +52,87 @@ public class EmployeeFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        employeeFragmentView = view;
+        employeeList = getEmployees();
+        for (int i = 0; i < etPasswords.length; i++) {
+            btUpdates[i] = view.findViewById(buttonsId[i]);
+            btUpdates[i].setOnClickListener(this::update);
+            etPasswords[i] = view.findViewById(editTextsId[i]);
+            etPasswords[i].setText(employeeList.get(i).getPassword());
+        }
+    }
 
-        swipeRefreshLayout =view.findViewById(R.id.swipeRefreshLayout);
-        rvEmployee = view.findViewById(R.id.rvWaiterSelect);
-        rvEmployee.setLayoutManager(new LinearLayoutManager(activity));
+    private void update(View v) {
+        for (int index = 0; index < btUpdates.length; index++) {
+            if (v.getId() == buttonsId[index]) {
+                Button bt = (Button) v;
+                EditText et = employeeFragmentView.findViewById(editTextsId[index]);
+                if (bt.getText().equals("修改")) {
+                    bt.setText("確定");
+                    et.setFocusableInTouchMode(true);
+                    et.setFocusable(true);
+                } else {
+                    bt.setText("修改");
+                    et.setFocusableInTouchMode(false);
+                    et.setFocusable(false);
+                    String password = et.getText().toString().trim();
+                    updatePassword(index, password);
+                }
+                break;
+            }
+        }
+    }
 
+    private List<Employee> getEmployees(){
+       List<Employee> employees = null;
+        if (Common.networkConnected(activity)){
+            String url = Common.URL_SERVER + "/EmployeeServlet";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action","getAll");
+            String jsonOut = jsonObject.toString();
+            employeeGetAllTask = new CommonTask(url,jsonOut);
+            try {
+                String jsonIn = employeeGetAllTask.execute().get();
+                Type listType = new TypeToken<List<Employee>>(){
+
+                }.getType();
+                employees = Common.gson.fromJson(jsonIn,listType);
+            }catch (Exception e){
+                Log.e(TAG,e.toString());
+            }
+        }else {
+            Common.showToast(activity,R.string.textNoNetwork);
+        }
+        return employees;
+    }
+
+
+
+    private Employee updatePassword(int id, String password){
+        Employee employees = null;
+        if (Common.networkConnected(activity)){
+            String url = Common.URL_SERVER + "/EmployeeServlet";
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("action","updatePassword");
+            jsonObject.addProperty("employee_Id",id);
+            jsonObject.addProperty("password", password);
+            String jsonOut = jsonObject.toString();
+            employeeGetAllTask = new CommonTask(url,jsonOut);
+            try {
+                String jsonIn = employeeGetAllTask.execute().get();
+                Type listType = new TypeToken<List<Employee>>(){
+
+                }.getType();
+                employees = Common.gson.fromJson(jsonIn,listType);
+            }catch (Exception e){
+                Log.e(TAG,e.toString());
+            }
+        }else {
+            Common.showToast(activity,R.string.textNoNetwork);
+        }
+        return employees;
 
     }
+
+
 }

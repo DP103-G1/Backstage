@@ -34,13 +34,13 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Button btReg = view.findViewById(R.id.btReg);
-        btReg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_registeredFragment);
-            }
-        });
+//        Button btReg = view.findViewById(R.id.btReg);
+//        btReg.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_registeredFragment);
+//            }
+//        });
         Button btLogin = view.findViewById(R.id.btLogin);
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,12 +48,12 @@ public class LoginFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_allFragment);
             }
         });
-        Button btForget = view.findViewById(R.id.btForget);
-        btForget.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_forgetFragment);
-            }
-        });
+//        Button btForget = view.findViewById(R.id.btForget);
+//        btForget.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_forgetFragment);
+//            }
+//        });
     }
 }

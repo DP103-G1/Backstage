@@ -151,6 +151,7 @@ public class WaiterSelectFragment extends Fragment {
             waiterSelectBookingTask = new ImageTask(url,String.valueOf(bkId));
             waiterSelectBookingTask.execute();
             holder.tvBkId.setText(String.valueOf(booking.getBkId()));
+            Log.e(TAG,"2222222222"+ "  "+ bkId);
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             holder.tvBkDate.setText(simpleDateFormat.format(booking.getBkDate()));
             holder.itemView.setOnClickListener(new View.OnClickListener() {
