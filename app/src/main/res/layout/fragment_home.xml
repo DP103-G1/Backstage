@@ -22,15 +22,6 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btMember"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/colortitle"
-                android:text="會員"
-                android:textColor="@color/colortext" />
-
-            <Button
                 android:id="@+id/btEmployee"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

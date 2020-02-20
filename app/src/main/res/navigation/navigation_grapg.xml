@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_grapg"
-    app:startDestination="@id/employeeFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/incomeFragment"
@@ -141,6 +141,9 @@
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_employeeFragment"
+            app:destination="@id/employeeFragment" />
     </fragment>
     <fragment
         android:id="@+id/allFragment"
