@@ -91,8 +91,11 @@ public class WaiterSelectFragment extends Fragment {
                     List<Booking> searchBookings = new ArrayList<>();
 
                     for (Booking searchBooking : waiterSelectBookings) {
-                        if (searchBooking.getBkId() == 0) {
+                        if (String.valueOf(searchBooking.getBkId()).contains(newText)) {
                             searchBookings.add(searchBooking);
+
+                        }else {
+                            Common.showToast(activity,R.string.textNoSelectBookingFound);
                         }
                     }
                     showWaiterSelectBooking(searchBookings);
@@ -151,6 +154,7 @@ public class WaiterSelectFragment extends Fragment {
             waiterSelectBookingTask = new ImageTask(url,String.valueOf(bkId));
             waiterSelectBookingTask.execute();
             holder.tvBkId.setText(String.valueOf(booking.getBkId()));
+
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             holder.tvBkDate.setText(simpleDateFormat.format(booking.getBkDate()));
             holder.itemView.setOnClickListener(new View.OnClickListener() {

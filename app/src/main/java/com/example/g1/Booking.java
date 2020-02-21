@@ -13,11 +13,11 @@ public class Booking implements Serializable {
 	private String bkAdult;
 	private String bkPhone;
 
-	public Booking(int bkId, int tableId,
+	public Booking(int memberId, int tableId,
                    String bkTime, Date bkDate, String bkChild, String bkAdult,
                    String bkPhone) {
 		super();
-		this.bkId = bkId;
+		this.memberId = memberId;
 		this.tableId = tableId;
 		this.bkTime = bkTime;
 		this.bkDate = bkDate;
@@ -30,16 +30,16 @@ public class Booking implements Serializable {
 
 
 
-	public Booking(int tableId, String bkTime, Date bkDate, String bkChild, String bkAdult,
-                   String bkPhone) {
-		super();
-		this.tableId = tableId;
-		this.bkTime = bkTime;
-		this.bkDate = bkDate;
-		this.bkChild = bkChild;
-		this.bkAdult = bkAdult;
-		this.bkPhone = bkPhone;
-	}
+//	public Booking(int tableId, String bkTime, Date bkDate, String bkChild, String bkAdult,
+//                   String bkPhone) {
+//		super();
+//		this.tableId = tableId;
+//		this.bkTime = bkTime;
+//		this.bkDate = bkDate;
+//		this.bkChild = bkChild;
+//		this.bkAdult = bkAdult;
+//		this.bkPhone = bkPhone;
+//	}
 
 
 

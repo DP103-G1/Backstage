@@ -46,13 +46,13 @@ public class HomeFragment extends Fragment {
                 Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_menuFragment);
             }
         });
-        Button btMember = view.findViewById(R.id.btMember);
-        btMember.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_memberFragment);
-            }
-        });
+       Button btEmployee = view.findViewById(R.id.btEmployee);
+       btEmployee.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Navigation.findNavController(v).navigate(R.id.action_homeFragment_to_employeeFragment);
+           }
+       });
         Button btBox = view.findViewById(R.id.btBox);
         btBox.setOnClickListener(new View.OnClickListener() {
             @Override

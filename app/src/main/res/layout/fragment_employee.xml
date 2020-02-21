@@ -1,7 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.Employee.EmployeeFragment" />
+    tools:context="com.example.Employee.EmployeeFragment" >
+
+    <Button
+        android:id="@+id/btUpdate2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/colortext"
+        android:background="@color/colortitle"
+        android:text="@string/textUpdate"
+        app:layout_constraintEnd_toEndOf="@+id/btUpdate1"
+        app:layout_constraintStart_toStartOf="@+id/btUpdate1"
+        app:layout_constraintTop_toBottomOf="@+id/btUpdate1" />
+
+    <TextView
+        android:id="@+id/tvManager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/colortext"
+        android:text="@string/textManager"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etManagerPassWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:focusableInTouchMode="false"
+        android:inputType="numberPassword"
+        android:textColor="@color/colortext"
+        android:theme="@style/MyEditText"
+        app:layout_constraintStart_toEndOf="@+id/tvManager"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btUpdate1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/colortitle"
+        android:text="@string/textUpdate"
+        android:textColor="@color/colortext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/etManagerPassWord"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvKitchen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:textColor="@color/colortext"
+        android:text="@string/textKitch"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvManager"
+        app:layout_constraintStart_toStartOf="@+id/tvManager"
+        app:layout_constraintTop_toBottomOf="@+id/tvManager" />
+
+    <EditText
+        android:id="@+id/etKitchenPassWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:focusableInTouchMode="false"
+        android:inputType="numberPassword"
+        android:textColor="@color/colortext"
+        android:theme="@style/MyEditText"
+        app:layout_constraintEnd_toEndOf="@+id/etManagerPassWord"
+        app:layout_constraintStart_toEndOf="@+id/tvManager"
+        app:layout_constraintTop_toBottomOf="@+id/etManagerPassWord" />
+
+    <TextView
+        android:id="@+id/tvWaiter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:textColor="@color/colortext"
+        android:text="@string/textWaiter"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvKitchen"
+        app:layout_constraintStart_toStartOf="@+id/tvKitchen"
+        app:layout_constraintTop_toBottomOf="@+id/tvKitchen" />
+
+    <EditText
+        android:id="@+id/etWaiterPassWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:focusableInTouchMode="false"
+        android:inputType="numberPassword"
+        android:textColor="@color/colortext"
+        android:theme="@style/MyEditText"
+        app:layout_constraintEnd_toEndOf="@+id/etKitchenPassWord"
+        app:layout_constraintStart_toStartOf="@+id/etKitchenPassWord"
+        app:layout_constraintTop_toBottomOf="@+id/etKitchenPassWord" />
+
+    <Button
+        android:id="@+id/btUpdate3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:textColor="@color/colortext"
+        android:background="@color/colortitle"
+        android:text="@string/textUpdate"
+        app:layout_constraintEnd_toEndOf="@+id/btUpdate2"
+        app:layout_constraintStart_toStartOf="@+id/btUpdate2"
+        app:layout_constraintTop_toBottomOf="@+id/btUpdate2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

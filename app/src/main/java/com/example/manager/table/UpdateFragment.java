@@ -25,8 +25,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 
-
-
 public class UpdateFragment extends Fragment {
 
     private final static String TAG = "TAG_UpdateFragment";
