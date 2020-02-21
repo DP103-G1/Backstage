@@ -16,12 +16,12 @@
 
             <TextView
                 android:id="@+id/tvNumber"
-                android:layout_width="64dp"
+                android:layout_width="wrap_content"
                 android:layout_height="49dp"
                 android:padding="16dp"
                 android:text="@string/tvNumber"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="49dp" />
 
             <TextView
                 android:id="@+id/tvQuestion"
@@ -51,23 +51,23 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="8dp"
-                    android:text="@string/tvUserNumber"
                     android:textColor="@color/colorAccent"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/tvUser"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/tvUserNumber" />
 
                 <TextView
                     android:id="@+id/tvUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="@string/tvUser"
                     android:textColor="@color/colorAccent"
                     android:textSize="13dp"
                     app:layout_constraintBottom_toTopOf="@+id/tvContent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/tvUser" />
 
                 <TextView
                     android:id="@+id/tvContent"
@@ -76,7 +76,6 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    android:hint="@string/tvReply"
                     android:textSize="28sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -96,6 +95,16 @@
                     app:layout_constraintTop_toBottomOf="@+id/tvContent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tvNo"
+                android:layout_width="wrap_content"
+                android:layout_height="49dp"
+                android:gravity="center"
+                android:text="@string/tvNo"
+                app:layout_constraintEnd_toStartOf="@+id/tvNumber"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

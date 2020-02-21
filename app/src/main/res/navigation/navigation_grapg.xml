@@ -14,7 +14,11 @@
         android:id="@+id/replyFragment"
         android:name="com.example.manager.SUG_manger.ReplyFragment"
         android:label="fragment_reply"
-        tools:layout="@layout/fragment_reply" />
+        tools:layout="@layout/fragment_reply" >
+        <action
+            android:id="@+id/action_replyFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
     <fragment
         android:id="@+id/monthIncomeFragment"
         android:name="com.example.manager.Cauculator.MonthIncomeFragment"
@@ -64,6 +68,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_mainFragment_to_listFragment"
+            app:destination="@id/listFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainTableFragment"
@@ -227,4 +234,9 @@
         android:name="com.example.manager.member.MemberFragment"
         android:label="fragment_member"
         tools:layout="@layout/fragment_member" />
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.manager.SUG_manger.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" />
 </navigation>

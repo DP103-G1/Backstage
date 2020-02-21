@@ -27,6 +27,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,7 @@ public class MainFragment extends Fragment {
     private Button btReply;
     private Activity activity;
     private CommonTask boxMangerGetAllTask;
+    private CommonTask commonTask;
     private List<Box> boxes;
     private SearchView searchView;
 
@@ -58,7 +60,7 @@ public class MainFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         rvReact = view.findViewById(R.id.rvReact);
         rvReact.setLayoutManager(new LinearLayoutManager(activity));
-        SearchView searchView = view.findViewById(R.id.searchView);
+        searchView = view.findViewById(R.id.searchView);
 
         boxes = getBoxes();
         showBoxes(boxes);
@@ -149,22 +151,6 @@ public class MainFragment extends Fragment {
                 tvContent = itemView.findViewById(R.id.tvContent);
                 expandedLayout = itemView.findViewById(R.id.ExpandedLayout);
                 btReply = itemView.findViewById(R.id.btReply);
-                btReply.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Bundle bundle = getArguments();
-                        if (bundle != null && bundle.getSerializable("box")!= null){
-                            Box box = (Box)bundle.getSerializable("box");
-                            int memberName = box.getMember();
-                            String topic = box.getTopic();
-                            String url = Common.URL_SERVER +"/BoxServlet";
-                           // tvUser.setText(memberName);
-                            // 寫在listFragment tvQuestion.setText(topic);
-                        }
-
-                        Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_replyFragment);
-                    }
-                });
 
                 tvQuestion.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -189,10 +175,20 @@ public class MainFragment extends Fragment {
             final Box box = boxes.get(position);
             String url = Common.URL_SERVER + "/BoxServlet";
             int id = box.getId();
+            commonTask = new CommonTask(url, String.valueOf(id));
+            commonTask.execute();
             holder.tvNumber.setText(String.valueOf(box.getId()));
             holder.tvQuestion.setText(box.getTopic());
             holder.tvUserNumber.setText(String.valueOf(box.getMember()));
             holder.tvContent.setText(box.getFeed_back());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("box", box);
+                    Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_replyFragment,bundle);
+                }
+            });
 
             boolean isExpanded = boxes.get(position).isExpanded();
             holder.expandedLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
