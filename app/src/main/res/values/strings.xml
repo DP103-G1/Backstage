@@ -83,9 +83,6 @@
     <string name="etTopic">標題：</string>
     <string name="tvCheckM" translatable="false">查看留言</string>
     <string name="tvLeaveM">我要留言</string>
-    <string name="textManager">經理</string>
-    <string name="textKitch">廚房</string>
-    <string name="textWaiter">服務員</string>
     <string name="textInputEmail">請輸入E-mail</string>
     <string name="textEmailFormateError">格式錯誤</string>
     <string name="textInputPassword">請輸入密碼</string>
