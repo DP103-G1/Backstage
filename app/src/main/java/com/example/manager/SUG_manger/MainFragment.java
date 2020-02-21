@@ -39,6 +39,7 @@ public class MainFragment extends Fragment {
     private Activity activity;
     private CommonTask boxMangerGetAllTask;
     private List<Box> boxes;
+    private SearchView searchView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,15 +65,23 @@ public class MainFragment extends Fragment {
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                if (query.isEmpty()){
+            public boolean onQueryTextSubmit(String newText) {
+                if (newText.isEmpty()){
                     showBoxes(new ArrayList<Box>());//list是interface，要實作list的物件
+                }else{
+                    List<Box> searchBox = new ArrayList<>();
+                    for (Box box : boxes){
+                        if (box.getTopic().toUpperCase().contains(newText.toUpperCase())){
+                            searchBox.add(box);
+                        }
+                    }
+                    showBoxes(searchBox);
                 }
-                return false;
+                return true;
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
+            public boolean onQueryTextChange(String query) {
                 return false;
             }
         });

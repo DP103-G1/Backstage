@@ -33,7 +33,6 @@ public class ReplyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        activity.setTitle("ReplyFragment");
         return inflater.inflate(R.layout.fragment_reply, container, false);
     }
 
