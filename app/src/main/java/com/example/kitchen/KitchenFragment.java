@@ -4,8 +4,10 @@ package com.example.kitchen;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.view.menu.MenuAdapter;
@@ -152,6 +154,8 @@ public class KitchenFragment extends Fragment {
                                 }
                                 if (count == 0){
                                     Common.showToast(getActivity(), R.string.textUpdateSuccess);
+                                    btStatus.setBackgroundColor(Color.WHITE);
+                                    btStatus.setText("已出餐");
                                 } else {
                                     Common.showToast(getActivity(), R.string.textUpdateFail);
                                 }

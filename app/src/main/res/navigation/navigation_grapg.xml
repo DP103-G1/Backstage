@@ -146,21 +146,6 @@
             app:destination="@id/employeeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/allFragment"
-        android:name="com.example.AllFragment"
-        android:label="fragment_all"
-        tools:layout="@layout/fragment_all" >
-        <action
-            android:id="@+id/action_allFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_allFragment_to_waiterFragment"
-            app:destination="@id/waiterFragment" />
-        <action
-            android:id="@+id/action_allFragment_to_kitchenFragment"
-            app:destination="@id/kitchenFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/waiterFragment"
         android:name="com.example.waiter.WaiterFragment"
         android:label="fragment_waiter"
@@ -180,25 +165,15 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_allFragment"
-            app:destination="@id/allFragment" />
+            android:id="@+id/action_loginFragment_to_waiterFragment"
+            app:destination="@id/waiterFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_registeredFragment"
-            app:destination="@id/registeredFragment" />
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_forgetFragment"
-            app:destination="@id/forgetFragment" />
+            android:id="@+id/action_loginFragment_to_kitchenFragment"
+            app:destination="@id/kitchenFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/registeredFragment"
-        android:name="com.example.login.RegisteredFragment"
-        android:label="fragment_registered"
-        tools:layout="@layout/fragment_registered" />
-    <fragment
-        android:id="@+id/forgetFragment"
-        android:name="com.example.login.ForgetFragment"
-        android:label="fragment_forget"
-        tools:layout="@layout/fragment_forget" />
     <fragment
         android:id="@+id/waiterSelectFragment"
         android:name="com.example.waiter.WaiterSelectFragment"
