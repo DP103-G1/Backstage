@@ -86,9 +86,13 @@
     <string name="textWaiter">服務生</string>
     <string name="textKitch">廚房</string>
     <string name="textManager">經理</string>
-    <string name="tvNumberID" />
     <string name="tvMemberID">意見編號</string>
     <string name="tvNo">NO.</string>
     <string name="textNoTitle">無標題</string>
+    <string name="textInputEmail">請輸入E-mail</string>
+    <string name="textEmailFormateError">格式錯誤</string>
+    <string name="textInputPassword">請輸入密碼</string>
+    <string name="textLoginSuccess">登入成功</string>
+    <string name="textLoginfail">登入失敗</string>
     string
 </resources>
