@@ -146,21 +146,6 @@
             app:destination="@id/employeeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/allFragment"
-        android:name="com.example.AllFragment"
-        android:label="fragment_all"
-        tools:layout="@layout/fragment_all" >
-        <action
-            android:id="@+id/action_allFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_allFragment_to_waiterFragment"
-            app:destination="@id/waiterFragment" />
-        <action
-            android:id="@+id/action_allFragment_to_kitchenFragment"
-            app:destination="@id/kitchenFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/waiterFragment"
         android:name="com.example.waiter.WaiterFragment"
         android:label="fragment_waiter"
@@ -179,9 +164,6 @@
         android:name="com.example.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_allFragment"
-            app:destination="@id/allFragment" />
     </fragment>
     <fragment
         android:id="@+id/waiterSelectFragment"
