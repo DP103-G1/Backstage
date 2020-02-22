@@ -8,5 +8,6 @@
     <color name="colorred">#D00000</color>
     <color name="colorBackground">#333238</color>
     <color name="colortitle">#222222</color>
-    <color name="colortext">#EDD04F</color>
+    <color name="colortext">#D1BD67</color>
+    <color name="cardBackground">#424242</color>
 </resources>

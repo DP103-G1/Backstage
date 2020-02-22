@@ -182,23 +182,7 @@
         <action
             android:id="@+id/action_loginFragment_to_allFragment"
             app:destination="@id/allFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_registeredFragment"
-            app:destination="@id/registeredFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_forgetFragment"
-            app:destination="@id/forgetFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/registeredFragment"
-        android:name="com.example.login.RegisteredFragment"
-        android:label="fragment_registered"
-        tools:layout="@layout/fragment_registered" />
-    <fragment
-        android:id="@+id/forgetFragment"
-        android:name="com.example.login.ForgetFragment"
-        android:label="fragment_forget"
-        tools:layout="@layout/fragment_forget" />
     <fragment
         android:id="@+id/waiterSelectFragment"
         android:name="com.example.waiter.WaiterSelectFragment"
