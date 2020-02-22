@@ -60,30 +60,39 @@ public class MainFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         rvReact = view.findViewById(R.id.rvReact);
         rvReact.setLayoutManager(new LinearLayoutManager(activity));
+        rvReact.setAdapter(new BoxAdapter(activity,boxes));
         searchView = view.findViewById(R.id.searchView);
 
         boxes = getBoxes();
         showBoxes(boxes);
 
+        //依照輸入變化
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String newText) {
-                if (newText.isEmpty()){
-                    showBoxes(new ArrayList<Box>());//list是interface，要實作list的物件
-                }else{
-                    List<Box> searchBox = new ArrayList<>();
-                    for (Box box : boxes){
-                        if (box.getTopic().toUpperCase().contains(newText.toUpperCase())){
-                            searchBox.add(box);
+            public boolean onQueryTextChange(String newText) {
+                BoxAdapter adapter = (BoxAdapter) rvReact.getAdapter();
+                if (adapter != null) {
+                    if (newText.isEmpty()){
+                       adapter.setBoxes(boxes);
+                    }else{
+                        List<Box> searchBox = new ArrayList<>();
+                        for (Box box : boxes){
+                            if (box.getTopic().toUpperCase().contains(newText.toUpperCase())){
+                                searchBox.add(box);
+                            }
                         }
+                        adapter.setBoxes(searchBox);
                     }
-                    showBoxes(searchBox);
+                    adapter.notifyDataSetChanged();
+                    return true;
                 }
-                return true;
+                return false;
             }
 
+
+            //確定後不會抓取資料
             @Override
-            public boolean onQueryTextChange(String query) {
+            public boolean onQueryTextSubmit(String query) {
                 return false;
             }
         });
@@ -181,11 +190,13 @@ public class MainFragment extends Fragment {
             holder.tvQuestion.setText(box.getTopic());
             holder.tvUserNumber.setText(String.valueOf(box.getMember()));
             holder.tvContent.setText(box.getFeed_back());
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+            //按下回覆將main資料帶入reply頁面
+            btReply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("box", box);
+                    bundle.putSerializable("box",box);
                     Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_replyFragment,bundle);
                 }
             });

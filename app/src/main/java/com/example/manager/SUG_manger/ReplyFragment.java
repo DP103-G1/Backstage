@@ -57,7 +57,7 @@ public class ReplyFragment extends Fragment {
             return;
         }
         box = (Box)bundle.getSerializable("box");
-        showBox();
+        showBox();//bundle整個box資訊抓進reply頁面
 
         btSent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +66,7 @@ public class ReplyFragment extends Fragment {
 
                 if (Common.networkConnected(activity)){
                     String url = Common.URL_SERVER + "/BoxServlet";
-                    Box box = new Box(id,member,topic,purpose,info,date,satisfed,feed_back,reply);
+                    box.setReply(reply);//get reply轉jason
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action","boxUpdate");
                     jsonObject.addProperty("box",new Gson().toJson(box));
@@ -78,6 +78,7 @@ public class ReplyFragment extends Fragment {
     private  void  showBox(){
         String url = Common.URL_SERVER + "/BoxServlet";
         etReply.setText(box.getReply());
+        tvTopic.setText(box.getTopic());
     }
 
 }

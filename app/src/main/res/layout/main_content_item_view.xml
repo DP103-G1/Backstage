@@ -20,8 +20,8 @@
                 android:layout_height="49dp"
                 android:padding="16dp"
                 android:text="@string/tvNumber"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="49dp" />
+                app:layout_constraintStart_toEndOf="@+id/tvNo"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvQuestion"
@@ -61,7 +61,7 @@
                     android:id="@+id/tvUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="5dp"
                     android:textColor="@color/colorAccent"
                     android:textSize="13dp"
                     app:layout_constraintBottom_toTopOf="@+id/tvContent"
@@ -100,6 +100,7 @@
                 android:id="@+id/tvNo"
                 android:layout_width="wrap_content"
                 android:layout_height="49dp"
+                android:layout_marginStart="26dp"
                 android:gravity="center"
                 android:text="@string/tvNo"
                 app:layout_constraintEnd_toStartOf="@+id/tvNumber"
