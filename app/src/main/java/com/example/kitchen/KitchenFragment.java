@@ -4,13 +4,10 @@ package com.example.kitchen;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.view.menu.MenuAdapter;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -22,7 +19,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.Common;
@@ -36,7 +32,6 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 
 public class KitchenFragment extends Fragment {
@@ -154,7 +149,7 @@ public class KitchenFragment extends Fragment {
                                 }
                                 if (count == 0){
                                     Common.showToast(getActivity(), R.string.textUpdateSuccess);
-                                    btStatus.setBackgroundColor(Color.WHITE);
+                                    btStatus.setBackgroundColor(Color.parseColor("#424242"));
                                     btStatus.setText("已出餐");
                                 } else {
                                     Common.showToast(getActivity(), R.string.textUpdateFail);
@@ -175,11 +170,9 @@ public class KitchenFragment extends Fragment {
             public void SetStatus(boolean status) {
                 this.status = status;
             }
-
             public void setAmount(int foodamount) {
                 this.foodamount = foodamount;
             }
-
             public void setTotal(int total) {
                 this.total = total;
             }
@@ -214,10 +207,10 @@ public class KitchenFragment extends Fragment {
             holder.SetStatus(menuDetail.isFOOD_STATUS());
             if (menuDetail.isFOOD_STATUS()) {
                 holder.btStatus.setText("已出餐");
-                holder.btStatus.setBackgroundColor(Color.WHITE);
+                holder.btStatus.setBackgroundColor(Color.parseColor("#424242"));
             } else {
                 holder.btStatus.setText("未出餐");
-                holder.btStatus.setBackgroundColor(Color.RED);
+                holder.btStatus.setBackgroundColor(Color.parseColor("#222222"));
             }
         }
     }
