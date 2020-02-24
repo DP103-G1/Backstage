@@ -14,11 +14,7 @@
         android:id="@+id/replyFragment"
         android:name="com.example.manager.SUG_manger.ReplyFragment"
         android:label="fragment_reply"
-        tools:layout="@layout/fragment_reply" >
-        <action
-            android:id="@+id/action_replyFragment_to_listFragment"
-            app:destination="@id/listFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_reply" />
     <fragment
         android:id="@+id/monthIncomeFragment"
         android:name="com.example.manager.Cauculator.MonthIncomeFragment"
@@ -171,6 +167,15 @@
         android:name="com.example.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_waiterFragment"
+            app:destination="@id/waiterFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_kitchenFragment"
+            app:destination="@id/kitchenFragment" />
     </fragment>
     <fragment
         android:id="@+id/waiterSelectFragment"

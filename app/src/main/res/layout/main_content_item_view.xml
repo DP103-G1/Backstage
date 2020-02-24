@@ -18,6 +18,7 @@
                 android:id="@+id/tvNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="49dp"
+                android:layout_marginStart="11dp"
                 android:padding="16dp"
                 android:text="@string/tvNumber"
                 app:layout_constraintStart_toEndOf="@+id/tvNo"
@@ -38,72 +39,114 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ExpandedLayout"
                 android:layout_width="0dp"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvQuestion">
-
-                <TextView
-                    android:id="@+id/tvUserNumber"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toEndOf="@+id/tvUser"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@string/tvUserNumber" />
-
-                <TextView
-                    android:id="@+id/tvUser"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="13dp"
-                    app:layout_constraintBottom_toTopOf="@+id/tvContent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@string/tvUser" />
-
-                <TextView
-                    android:id="@+id/tvContent"
-                    android:layout_width="0dp"
-                    android:layout_height="170dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:textSize="28sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvUserNumber" />
+                app:layout_constraintTop_toBottomOf="@+id/tvQuestion"
+                app:layout_constraintVertical_bias="0.0">
 
                 <Button
                     android:id="@+id/btReply"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="1dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="8dp"
                     android:text="@string/btReply"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="@+id/tvContent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvContent" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/contentLayout" />
+
+                <LinearLayout
+                    android:id="@+id/contentLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvUser"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="13dp"
+                            tools:text="@string/tvUser" />
+
+                        <TextView
+                            android:id="@+id/tvUserNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="16sp"
+                            tools:text="@string/tvUserNumber" />
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/tvTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="@string/tvTime" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="28sp"
+                        tools:text="@string/tvMainContent" />
+
+                    <LinearLayout
+                        android:id="@+id/reMessageLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvIsReply"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tvIsReply"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tvReplyContent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="28sp"
+                            tools:text="@string/tvReplyContent" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/tvNo"
                 android:layout_width="wrap_content"
-                android:layout_height="49dp"
-                android:layout_marginStart="26dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
                 android:gravity="center"
                 android:text="@string/tvNo"
-                app:layout_constraintEnd_toStartOf="@+id/tvNumber"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

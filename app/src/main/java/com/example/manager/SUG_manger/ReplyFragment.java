@@ -2,6 +2,7 @@ package com.example.manager.SUG_manger;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
@@ -18,8 +20,11 @@ import androidx.navigation.Navigation;
 
 import com.example.Common;
 import com.example.g1.R;
+import com.example.task.CommonTask;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+
+import java.util.List;
 
 
 public class ReplyFragment extends Fragment {
@@ -29,6 +34,8 @@ public class ReplyFragment extends Fragment {
     private TextView tvTopic;
     private EditText etReply;
     private Button btSent;
+    private CommonTask commonTask;
+    private List<Box>boxes;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,16 +76,41 @@ public class ReplyFragment extends Fragment {
                     box.setReply(reply);//get reply轉jason
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action","boxUpdate");
+                    jsonObject.addProperty("id",String.valueOf(box.getId()));
                     jsonObject.addProperty("box",new Gson().toJson(box));
+//                    Bundle bundle = new Bundle();
+//                    bundle.putSerializable("box",box);//送出
+//
+//                   Navigation.findNavController(v).navigate(R.id.action_replyFragment_to_listFragment,bundle);
+                    commonTask = new CommonTask(url,jsonObject.toString());
+                    int count = 0;
+                    try {
+                        String result = commonTask.execute().get();
+                        count = Integer.valueOf(result);
+                    }catch (Exception e){
+                        Log.e(TAG,e.toString());
+                    }
+                    if (count == 0){
+                        Common.showToast(activity,R.string.textDeleteFail);
+                    }else {
+                        Common.showToast(activity,R.string.textReplySuccess);
+                    }
+                }else {
+                    Common.showToast(activity,R.string.textNoNetWork);
                 }
+                navController.popBackStack();
             }
         });
+
+
     }
 
     private  void  showBox(){
         String url = Common.URL_SERVER + "/BoxServlet";
         etReply.setText(box.getReply());
         tvTopic.setText(box.getTopic());
+
+
     }
 
 }

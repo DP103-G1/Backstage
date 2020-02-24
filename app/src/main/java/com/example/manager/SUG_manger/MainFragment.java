@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -23,11 +24,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.Common;
 import com.example.g1.R;
 import com.example.task.CommonTask;
-import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,6 @@ public class MainFragment extends Fragment {
     private Button btReply;
     private Activity activity;
     private CommonTask boxMangerGetAllTask;
-    private CommonTask commonTask;
     private List<Box> boxes;
     private SearchView searchView;
 
@@ -89,8 +88,7 @@ public class MainFragment extends Fragment {
                 return false;
             }
 
-
-            //確定後不會抓取資料
+            //確定關鍵字後不會抓取資料
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -110,7 +108,7 @@ public class MainFragment extends Fragment {
                 String jsonIn = boxMangerGetAllTask.execute().get();
                 Type listType = new TypeToken<List<Box>>() {
                 }.getType();
-                boxes = new Gson().fromJson(jsonIn, listType);
+                boxes = new GsonBuilder().setDateFormat("yyyy-MM-dd").create().fromJson(jsonIn, listType);
             } catch (Exception e) {
                 Log.e(TAG, e.toString());
             }
@@ -149,7 +147,8 @@ public class MainFragment extends Fragment {
 
         class MyViewHolder extends RecyclerView.ViewHolder {
             ConstraintLayout expandedLayout;
-            TextView tvNumber, tvQuestion, tvUser, tvUserNumber, tvContent;
+            LinearLayout reMessageLayout;
+            TextView tvNumber, tvQuestion, tvUser, tvUserNumber,tvtime , tvContent, tvReplyContent, tvIsReply;
 
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
@@ -157,7 +156,11 @@ public class MainFragment extends Fragment {
                 tvQuestion = itemView.findViewById(R.id.tvQuestion);
                 tvUser = itemView.findViewById(R.id.tvUser);
                 tvUserNumber = itemView.findViewById(R.id.tvUserNumber);
+                tvtime = itemView.findViewById(R.id.tvTime);
                 tvContent = itemView.findViewById(R.id.tvContent);
+                tvReplyContent = itemView.findViewById(R.id.tvReplyContent);
+                tvIsReply = itemView.findViewById(R.id.tvIsReply);
+                reMessageLayout = itemView.findViewById(R.id.reMessageLayout);
                 expandedLayout = itemView.findViewById(R.id.ExpandedLayout);
                 btReply = itemView.findViewById(R.id.btReply);
 
@@ -170,6 +173,7 @@ public class MainFragment extends Fragment {
                     }
                 });
             }
+
         }
 
         @NonNull
@@ -182,14 +186,19 @@ public class MainFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             final Box box = boxes.get(position);
-            String url = Common.URL_SERVER + "/BoxServlet";
-            int id = box.getId();
-            commonTask = new CommonTask(url, String.valueOf(id));
-            commonTask.execute();
             holder.tvNumber.setText(String.valueOf(box.getId()));
             holder.tvQuestion.setText(box.getTopic());
             holder.tvUserNumber.setText(String.valueOf(box.getMember()));
+            holder.tvtime.setText(box.getDate());
             holder.tvContent.setText(box.getFeed_back());
+            if (box.getReply() != null) {
+                holder.reMessageLayout.setVisibility(View.VISIBLE);
+                holder.tvReplyContent.setText(box.getReply());
+                btReply.setVisibility(View.GONE);
+            } else {
+                holder.reMessageLayout.setVisibility(View.GONE);
+                btReply.setVisibility(View.VISIBLE);
+            }
 
             //按下回覆將main資料帶入reply頁面
             btReply.setOnClickListener(new View.OnClickListener() {
