@@ -52,25 +52,23 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTopic" />
 
     <TextView
-        android:id="@+id/tvMemberName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/tvTitle"
-        app:layout_constraintStart_toStartOf="@+id/tvTitle"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-        tools:text="@string/etMemberName" />
-
-    <TextView
         android:id="@+id/tvTopic"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/tvMemberName"
-        app:layout_constraintStart_toStartOf="@+id/tvMemberName"
-        app:layout_constraintTop_toBottomOf="@+id/tvMemberName"
+        app:layout_constraintStart_toEndOf="@+id/tvMemberTopic"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
         tools:text="@string/etTopic" />
+
+    <TextView
+        android:id="@+id/tvMemberTopic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/etTopic"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

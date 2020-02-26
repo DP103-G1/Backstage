@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -23,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.Common;
 import com.example.g1.R;
 import com.example.task.CommonTask;
-import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
@@ -58,30 +59,38 @@ public class MainFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         rvReact = view.findViewById(R.id.rvReact);
         rvReact.setLayoutManager(new LinearLayoutManager(activity));
-        SearchView searchView = view.findViewById(R.id.searchView);
+        rvReact.setAdapter(new BoxAdapter(activity,boxes));
+        searchView = view.findViewById(R.id.searchView);
 
         boxes = getBoxes();
         showBoxes(boxes);
 
+        //依照輸入變化
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String newText) {
-                if (newText.isEmpty()){
-                    showBoxes(new ArrayList<Box>());//list是interface，要實作list的物件
-                }else{
-                    List<Box> searchBox = new ArrayList<>();
-                    for (Box box : boxes){
-                        if (box.getTopic().toUpperCase().contains(newText.toUpperCase())){
-                            searchBox.add(box);
+            public boolean onQueryTextChange(String newText) {
+                BoxAdapter adapter = (BoxAdapter) rvReact.getAdapter();
+                if (adapter != null) {
+                    if (newText.isEmpty()){
+                       adapter.setBoxes(boxes);
+                    }else{
+                        List<Box> searchBox = new ArrayList<>();
+                        for (Box box : boxes){
+                            if (box.getTopic().toUpperCase().contains(newText.toUpperCase())){
+                                searchBox.add(box);
+                            }
                         }
+                        adapter.setBoxes(searchBox);
                     }
-                    showBoxes(searchBox);
+                    adapter.notifyDataSetChanged();
+                    return true;
                 }
-                return true;
+                return false;
             }
 
+            //確定關鍵字後不會抓取資料
             @Override
-            public boolean onQueryTextChange(String query) {
+            public boolean onQueryTextSubmit(String query) {
                 return false;
             }
         });
@@ -99,7 +108,7 @@ public class MainFragment extends Fragment {
                 String jsonIn = boxMangerGetAllTask.execute().get();
                 Type listType = new TypeToken<List<Box>>() {
                 }.getType();
-                boxes = new Gson().fromJson(jsonIn, listType);
+                boxes = new GsonBuilder().setDateFormat("yyyy-MM-dd").create().fromJson(jsonIn, listType);
             } catch (Exception e) {
                 Log.e(TAG, e.toString());
             }
@@ -138,7 +147,8 @@ public class MainFragment extends Fragment {
 
         class MyViewHolder extends RecyclerView.ViewHolder {
             ConstraintLayout expandedLayout;
-            TextView tvNumber, tvQuestion, tvUser, tvUserNumber, tvContent;
+            LinearLayout reMessageLayout;
+            TextView tvNumber, tvQuestion, tvUser, tvUserNumber,tvtime , tvContent, tvReplyContent, tvIsReply;
 
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
@@ -146,25 +156,13 @@ public class MainFragment extends Fragment {
                 tvQuestion = itemView.findViewById(R.id.tvQuestion);
                 tvUser = itemView.findViewById(R.id.tvUser);
                 tvUserNumber = itemView.findViewById(R.id.tvUserNumber);
+                tvtime = itemView.findViewById(R.id.tvTime);
                 tvContent = itemView.findViewById(R.id.tvContent);
+                tvReplyContent = itemView.findViewById(R.id.tvReplyContent);
+                tvIsReply = itemView.findViewById(R.id.tvIsReply);
+                reMessageLayout = itemView.findViewById(R.id.reMessageLayout);
                 expandedLayout = itemView.findViewById(R.id.ExpandedLayout);
                 btReply = itemView.findViewById(R.id.btReply);
-                btReply.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Bundle bundle = getArguments();
-                        if (bundle != null && bundle.getSerializable("box")!= null){
-                            Box box = (Box)bundle.getSerializable("box");
-                            int memberName = box.getMember();
-                            String topic = box.getTopic();
-                            String url = Common.URL_SERVER +"/BoxServlet";
-                           // tvUser.setText(memberName);
-                            // 寫在listFragment tvQuestion.setText(topic);
-                        }
-
-                        Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_replyFragment);
-                    }
-                });
 
                 tvQuestion.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -175,6 +173,7 @@ public class MainFragment extends Fragment {
                     }
                 });
             }
+
         }
 
         @NonNull
@@ -187,12 +186,29 @@ public class MainFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             final Box box = boxes.get(position);
-            String url = Common.URL_SERVER + "/BoxServlet";
-            int id = box.getId();
             holder.tvNumber.setText(String.valueOf(box.getId()));
             holder.tvQuestion.setText(box.getTopic());
             holder.tvUserNumber.setText(String.valueOf(box.getMember()));
+            holder.tvtime.setText(box.getDate());
             holder.tvContent.setText(box.getFeed_back());
+            if (box.getReply() != null) {
+                holder.reMessageLayout.setVisibility(View.VISIBLE);
+                holder.tvReplyContent.setText(box.getReply());
+                btReply.setVisibility(View.GONE);
+            } else {
+                holder.reMessageLayout.setVisibility(View.GONE);
+                btReply.setVisibility(View.VISIBLE);
+            }
+
+            //按下回覆將main資料帶入reply頁面
+            btReply.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("box",box);
+                    Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_replyFragment,bundle);
+                }
+            });
 
             boolean isExpanded = boxes.get(position).isExpanded();
             holder.expandedLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);

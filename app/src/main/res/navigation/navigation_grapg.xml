@@ -190,7 +190,11 @@
         android:id="@+id/waiterSelectDetailFragment"
         android:name="com.example.waiter.WaiterSelectDetailFragment"
         android:label="fragment_waiter_select_detail"
-        tools:layout="@layout/fragment_waiter_select_detail" />
+        tools:layout="@layout/fragment_waiter_select_detail" >
+        <action
+            android:id="@+id/action_waiterSelectDetailFragment_to_waiterSelectFragment"
+            app:destination="@id/waiterSelectFragment" />
+    </fragment>
     <fragment
         android:id="@+id/employeeFragment"
         android:name="com.example.Employee.EmployeeFragment"
