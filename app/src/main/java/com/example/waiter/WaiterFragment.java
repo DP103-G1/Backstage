@@ -49,7 +49,7 @@ public class WaiterFragment extends Fragment {
         ivOrderMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Navigation.findNavController(v).navigate();
+                Navigation.findNavController(v).navigate(R.id.action_waiterFragment_to_waiterTableFragment);
             }
         });
     }

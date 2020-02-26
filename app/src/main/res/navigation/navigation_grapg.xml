@@ -203,7 +203,7 @@
         tools:layout="@layout/fragment_member" />
     <fragment
         android:id="@+id/waiterTableFragment"
-        android:name="com.example.g1.WaiterTableFragment"
+        android:name="com.example.waiter.WaiterTableFragment"
         android:label="fragment_waiter_table"
         tools:layout="@layout/fragment_waiter_table" />
 </navigation>

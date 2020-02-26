@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="6dp"
     android:padding="6dp"
-    card_view:cardBackgroundColor="#FFBD45"
+    card_view:cardBackgroundColor="@color/cardBackground"
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="6dp">
 
@@ -36,6 +36,7 @@
             android:gravity="center"
             android:layout_marginStart="20dp"
             android:layout_marginTop="32dp"
+            android:textColor="@color/colortext"
             android:text="餐點名稱"
             android:textSize="20dp"
             card_view:layout_constraintStart_toEndOf="@+id/ivMenu"
@@ -48,6 +49,7 @@
             android:layout_marginTop="44dp"
             android:layout_marginEnd="16dp"
             android:gravity="center"
+            android:textColor="@color/colortext"
             android:text="餐點價格"
             android:textSize="20dp"
             card_view:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="173dp"
             android:layout_marginBottom="16dp"
-            android:background="@color/colorAccent"
+            android:textColor="@color/menuputcolor"
             android:text="餐點狀態"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"

@@ -6,6 +6,10 @@
     <color name="btAddcolor">#7BC6DB</color>
     <color name="ShelvesOn">#016B59</color>
     <color name="colorred">#D00000</color>
+    <color name="noPut">#802222</color>
+    <color name="put">#175248</color>
+    <color name="menuputcolor">#B2AFAF</color>
+    <color name="menunoputcolor">#291818</color>
     <color name="colorBackground">#333238</color>
     <color name="colortitle">#222222</color>
     <color name="colortext">#D1BD67</color>
