@@ -47,20 +47,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvQuestion"
                 app:layout_constraintVertical_bias="0.0">
 
-                <Button
-                    android:id="@+id/btReply"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="@string/btReply"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/contentLayout" />
-
                 <LinearLayout
                     android:id="@+id/contentLayout"
                     android:layout_width="0dp"
@@ -71,6 +57,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
+                        android:id="@+id/messageLayout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
@@ -102,6 +89,7 @@
                             android:id="@+id/tvTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:paddingEnd="10dp"
                             tools:text="@string/tvTime" />
 
                     </LinearLayout>
@@ -133,6 +121,20 @@
                             android:textSize="28sp"
                             tools:text="@string/tvReplyContent" />
 
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/buttonLinearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/btSent"
+                            android:layout_width="76dp"
+                            android:layout_height="match_parent"
+                            android:text="@string/btSent" />
                     </LinearLayout>
 
                 </LinearLayout>

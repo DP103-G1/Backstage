@@ -148,6 +148,7 @@ public class MainFragment extends Fragment {
         class MyViewHolder extends RecyclerView.ViewHolder {
             ConstraintLayout expandedLayout;
             LinearLayout reMessageLayout;
+            LinearLayout buttonLinearLayout;
             TextView tvNumber, tvQuestion, tvUser, tvUserNumber,tvtime , tvContent, tvReplyContent, tvIsReply;
 
             public MyViewHolder(@NonNull View itemView) {
@@ -161,8 +162,9 @@ public class MainFragment extends Fragment {
                 tvReplyContent = itemView.findViewById(R.id.tvReplyContent);
                 tvIsReply = itemView.findViewById(R.id.tvIsReply);
                 reMessageLayout = itemView.findViewById(R.id.reMessageLayout);
+                buttonLinearLayout =itemView.findViewById(R.id.buttonLinearLayout);
                 expandedLayout = itemView.findViewById(R.id.ExpandedLayout);
-                btReply = itemView.findViewById(R.id.btReply);
+                btReply = itemView.findViewById(R.id.btSent);
 
                 tvQuestion.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -194,10 +196,10 @@ public class MainFragment extends Fragment {
             if (box.getReply() != null) {
                 holder.reMessageLayout.setVisibility(View.VISIBLE);
                 holder.tvReplyContent.setText(box.getReply());
-                btReply.setVisibility(View.GONE);
+                holder.buttonLinearLayout.setVisibility(View.GONE);
             } else {
                 holder.reMessageLayout.setVisibility(View.GONE);
-                btReply.setVisibility(View.VISIBLE);
+                holder.buttonLinearLayout.setVisibility(View.VISIBLE);
             }
 
             //按下回覆將main資料帶入reply頁面
