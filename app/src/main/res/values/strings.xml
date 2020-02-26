@@ -98,5 +98,6 @@
     <string name="tvMainContent">意見</string>
     <string name="tvReplyContent">回覆</string>
     <string name="tvIsReply">回覆狀態</string>
+    <string name="textNoOrder">沒有訂單</string>
     string
 </resources>

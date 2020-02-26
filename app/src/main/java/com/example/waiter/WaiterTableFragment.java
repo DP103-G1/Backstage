@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -16,7 +17,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.Common;
@@ -28,7 +28,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -58,7 +57,7 @@ public class WaiterTableFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
-        rvTable = view.findViewById(R.id.rvTable);
+        rvTable = view.findViewById(R.id.rvMd);
         rvTable.setLayoutManager(new LinearLayoutManager(activity));
         tables = getTable();
         showTables(tables);
@@ -149,17 +148,19 @@ public class WaiterTableFragment extends Fragment {
             final Table table = tables.get(position);
             String url = Common.URL_SERVER + "/TableServlet";
             int tableId = table.getTableId();
-            int OrdId = table.getORD_ID();
+//            int OrdId = table.getORD_ID();
             tableTask = new ImageTask(url, String.valueOf(tableId));
             tableTask.execute();
             holder.tvTableNo.setText(String.valueOf(table.getTableId()));
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (OrdId > 0){
+//                    if (OrdId > 0){
                         Bundle bundle = new Bundle();
-//                        bundle.putSerializable("order" );
-                    }
+                        bundle.putSerializable("table", table);
+                        Navigation.findNavController(v).navigate(R.id.action_waiterTableFragment_to_waiterMenuDetailFragment, bundle);
+
+//                    }
                 }
             });
         }

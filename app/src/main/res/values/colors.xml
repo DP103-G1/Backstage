@@ -14,4 +14,6 @@
     <color name="colortitle">#222222</color>
     <color name="colortext">#D1BD67</color>
     <color name="cardBackground">#424242</color>
+    <color name="cardText">#D1BD67</color>
+    <color name="normalText">#9B883A</color>
 </resources>

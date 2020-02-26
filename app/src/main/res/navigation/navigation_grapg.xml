@@ -209,5 +209,14 @@
         android:id="@+id/waiterTableFragment"
         android:name="com.example.waiter.WaiterTableFragment"
         android:label="fragment_waiter_table"
-        tools:layout="@layout/fragment_waiter_table" />
+        tools:layout="@layout/fragment_waiter_table" >
+        <action
+            android:id="@+id/action_waiterTableFragment_to_waiterMenuDetailFragment"
+            app:destination="@id/waiterMenuDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/waiterMenuDetailFragment"
+        android:name="com.example.waiter.WaiterMenuDetailFragment"
+        android:label="fragment_waiter_menu_detail"
+        tools:layout="@layout/fragment_waiter_menu_detail" />
 </navigation>
