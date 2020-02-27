@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
@@ -54,7 +53,7 @@ public class ReplyFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         tvTopic = view.findViewById(R.id.tvTopic);
         etReply = view.findViewById(R.id.etReply);
-        btSent = view.findViewById(R.id.btSent);
+        btSent = view.findViewById(R.id.btReply);
 
         final NavController navController = Navigation.findNavController(view);
         Bundle bundle = getArguments();

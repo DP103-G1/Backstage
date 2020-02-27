@@ -36,7 +36,6 @@ import java.util.List;
 public class MainFragment extends Fragment {
     private static final String TAG = "TAG_MainFragment";
     private RecyclerView rvReact;
-    private Button btReply;
     private Activity activity;
     private CommonTask boxMangerGetAllTask;
     private List<Box> boxes;
@@ -150,6 +149,7 @@ public class MainFragment extends Fragment {
             LinearLayout reMessageLayout;
             LinearLayout buttonLinearLayout;
             TextView tvNumber, tvQuestion, tvUser, tvUserNumber,tvtime , tvContent, tvReplyContent, tvIsReply;
+            Button btReply;
 
             public MyViewHolder(@NonNull View itemView) {
                 super(itemView);
@@ -164,7 +164,7 @@ public class MainFragment extends Fragment {
                 reMessageLayout = itemView.findViewById(R.id.reMessageLayout);
                 buttonLinearLayout =itemView.findViewById(R.id.buttonLinearLayout);
                 expandedLayout = itemView.findViewById(R.id.ExpandedLayout);
-                btReply = itemView.findViewById(R.id.btSent);
+                btReply = itemView.findViewById(R.id.btReply);
 
                 tvQuestion.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -202,10 +202,11 @@ public class MainFragment extends Fragment {
                 holder.buttonLinearLayout.setVisibility(View.VISIBLE);
             }
 
-            //按下回覆將main資料帶入reply頁面
-            btReply.setOnClickListener(new View.OnClickListener() {
+            //按下回覆將main資料帶入reply頁面,指明哪個按鈕
+            holder.btReply.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Log.e(TAG,"reply: " + box.getReply());
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("box",box);
                     Navigation.findNavController(v).navigate(R.id.action_mainFragment_to_replyFragment,bundle);
