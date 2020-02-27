@@ -23,6 +23,15 @@ public class MenuDetail {
 		this.FOOD_STATUS = FOOD_STATUS;
 	}
 
+	public MenuDetail(int ORD_ID, String MENU_ID, String FOOD_NAME, int FOOD_AMOUNT, boolean FOOD_ARRIVAL, boolean FOOD_STATUS) {
+		this.ORD_ID = ORD_ID;
+		this.MENU_ID = MENU_ID;
+		this.FOOD_NAME = FOOD_NAME;
+		this.FOOD_AMOUNT = FOOD_AMOUNT;
+		this.FOOD_ARRIVAL = FOOD_ARRIVAL;
+		this.FOOD_STATUS = FOOD_STATUS;
+	}
+
 	public MenuDetail(String MENU_ID, int FOOD_AMOUNT, int TOTAL) {
 		this(0, MENU_ID, FOOD_AMOUNT, false, TOTAL, false);
 	}

@@ -157,7 +157,7 @@ public class WaiterTableFragment extends Fragment {
                 public void onClick(View v) {
 //                    if (OrdId > 0){
                         Bundle bundle = new Bundle();
-                        bundle.putSerializable("table", table);
+                        bundle.putSerializable("table", tableId);
                         Navigation.findNavController(v).navigate(R.id.action_waiterTableFragment_to_waiterMenuDetailFragment, bundle);
 
 //                    }
