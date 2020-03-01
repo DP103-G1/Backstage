@@ -131,10 +131,10 @@
                         android:orientation="vertical">
 
                         <Button
-                            android:id="@+id/btSent"
+                            android:id="@+id/btReply"
                             android:layout_width="76dp"
                             android:layout_height="match_parent"
-                            android:text="@string/btSent" />
+                            android:text="@string/btReply" />
                     </LinearLayout>
 
                 </LinearLayout>
