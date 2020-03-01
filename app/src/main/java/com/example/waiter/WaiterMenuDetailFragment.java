@@ -30,6 +30,7 @@ import com.example.g1.R;
 import com.example.manager.table.Table;
 import com.example.task.CommonTask;
 import com.example.task.ImageTask;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
@@ -137,7 +138,9 @@ public class WaiterMenuDetailFragment extends Fragment {
         class OrderViewHolder extends RecyclerView.ViewHolder {
             TextView tvName, tvAmount, tvkitchStatus;
             Button btStatus;
-            boolean arrival;
+            int ordId, amount, total;
+            String menuId;
+            boolean arrival, status;
 
             OrderViewHolder(@NonNull View itemView) {
                 super(itemView);
@@ -147,13 +150,55 @@ public class WaiterMenuDetailFragment extends Fragment {
                 btStatus = itemView.findViewById(R.id.btStatus);
                 btStatus.setOnClickListener(v -> {
                     if (!arrival) {
-                        
+                        arrival = true;
+                        if (Common.networkConnected(activity)) {
+                            String url = Common.URL_SERVER + "MenuDetailServlet";
+                            MenuDetail menuDetails = new MenuDetail(ordId, menuId, amount, arrival, total, status);
+                            JsonObject jsonObject = new JsonObject();
+                            jsonObject.addProperty("action","update");
+                            jsonObject.addProperty("menuDetail", new Gson().toJson(menuDetails));
+                            int count = 0;
+                            try {
+                                String result = new CommonTask(url, jsonObject.toString()).execute().get();
+                                count = Integer.valueOf(result);
+                            }catch (Exception e) {
+                                Log.e(TAG, e.toString());
+                            }
+                            if (count == 0){
+                                Common.showToast(getActivity(), R.string.textUpdateSuccess);
+                                btStatus.setBackgroundColor(Color.parseColor("#424242"));
+                                btStatus.setText("已送達");
+                            } else {
+                                Common.showToast(getActivity(), R.string.textUpdateFail);
+                            }
+                        }
+                    } else {
+                        Common.showToast(activity, R.string.falseStatus);
                     }
                 });
             }
 
-            public void setStatus(boolean food_arrival) {
+            public void setArrival(boolean food_arrival) {
                 this.arrival = food_arrival;
+            }
+
+            public void setOrdId(int ord_id) {
+                this.ordId = ord_id;
+            }
+
+            public void setMenuId(String menu_id) {
+                this.menuId = menu_id;
+            }
+
+            public void setAmount(int food_amount) {
+                this.amount = food_amount;
+            }
+
+            public void setTotal(int total) {
+                this.total = total;
+            }
+            public void setStatus(boolean food_status) {
+                this.status = food_status;
             }
         }
 
@@ -189,7 +234,12 @@ public class WaiterMenuDetailFragment extends Fragment {
             } else {
                 holder.tvkitchStatus.setText("未出餐");
             }
-            holder.setStatus(menuDetail.isFOOD_ARRIVAL());
+            holder.setOrdId(menuDetail.getORD_ID());
+            holder.setMenuId(menuDetail.getMENU_ID());
+            holder.setAmount(menuDetail.getFOOD_AMOUNT());
+            holder.setArrival(menuDetail.isFOOD_ARRIVAL());
+            holder.setTotal(menuDetail.getTOTAL());
+            holder.setStatus(menuDetail.isFOOD_STATUS());
             if (menuDetail.isFOOD_ARRIVAL()) {
                 holder.btStatus.setText("已送達");
             } else {
