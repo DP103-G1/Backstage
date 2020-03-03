@@ -3,6 +3,7 @@ package com.example.waiter;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -16,6 +17,7 @@ public class MySelectAdapter extends FragmentStatePagerAdapter {
 
     public MySelectAdapter(@NonNull Context context, FragmentManager fm) {
         super(fm);
+        mContext = context;
     }
 
     @NonNull
@@ -25,10 +27,17 @@ public class MySelectAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return new WaiterSelectFragment();
             case 1:
-                return new WaiterTableFragment ();
+                return new WaiterTableFragment();
             default:
                 return null;
         }
+    }
+
+    @Nullable
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return mContext.getResources().getString(TAB_TITLES[position]);
+
     }
 
     @Override
