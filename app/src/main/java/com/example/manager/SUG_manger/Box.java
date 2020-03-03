@@ -1,6 +1,9 @@
 package com.example.manager.SUG_manger;
 
-class Box {
+import java.io.Serializable;
+
+class Box implements Serializable {
+
     private int id;
     private int member;
     private String topic;
@@ -9,9 +12,11 @@ class Box {
     private String date;
     private float satisfied;
     private String feed_back;
+    private String reply;
     private boolean expanded;
 
-    public Box(int id, int member, String topic, String purpose, String info, String date, float satisfied, String feed_back, boolean expanded) {
+
+    public Box(int id, int member, String topic, String purpose, String info, String date, float satisfied, String feed_back, String reply, boolean expanded) {
         this.id = id;
         this.member = member;
         this.topic = topic;
@@ -20,6 +25,7 @@ class Box {
         this.date = date;
         this.satisfied = satisfied;
         this.feed_back = feed_back;
+        this.reply = reply;
         this.expanded = expanded;
     }
 
@@ -87,6 +93,10 @@ class Box {
         this.feed_back = feed_back;
     }
 
+    public String getReply() { return reply; }
+
+    public void setReply(String reply) { this.reply = reply; }
+
     public boolean isExpanded() {
         return expanded;
     }
@@ -94,6 +104,7 @@ class Box {
     public void setExpanded(boolean expanded) {
         this.expanded = expanded;
     }
+
 
     @Override
     public String toString() {
@@ -106,6 +117,7 @@ class Box {
                 ", date='" + date + '\'' +
                 ", satisfied=" + satisfied +
                 ", feed_back='" + feed_back + '\'' +
+                ", reply='" + reply + '\'' +
                 ", expanded=" + expanded +
                 '}';
     }

@@ -83,15 +83,22 @@
     <string name="etTopic">標題：</string>
     <string name="tvCheckM" translatable="false">查看留言</string>
     <string name="tvLeaveM">我要留言</string>
+    <string name="textWaiter">服務生</string>
+    <string name="textKitch">廚房</string>
+    <string name="textManager">經理</string>
+    <string name="tvMemberID">意見編號</string>
+    <string name="tvNo">NO.</string>
+    <string name="textNoTitle">無標題</string>
     <string name="textInputEmail">請輸入E-mail</string>
     <string name="textEmailFormateError">格式錯誤</string>
     <string name="textInputPassword">請輸入密碼</string>
     <string name="textLoginSuccess">登入成功</string>
     <string name="textLoginfail">登入失敗</string>
-    <string name="textManager">經理</string>
-    <string name="textKitch">廚房</string>
-    <string name="textWaiter">服務生</string>
-    <string name="textSelectBooking">訂位查詢</string>
-    <string name="textSelectOrder">訂單查詢</string>
+    <string name="textReplySuccess">回覆成功</string>
+    <string name="tvMainContent">意見</string>
+    <string name="tvReplyContent">回覆</string>
+    <string name="tvIsReply">回覆狀態</string>
+    <string name="textNoOrder">沒有訂單</string>
+    <string name="textNoStatus">廚房尚未出餐</string>
     string
 </resources>

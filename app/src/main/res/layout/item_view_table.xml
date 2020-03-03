@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:orientation="vertical"
-    app:cardBackgroundColor="#FFBD45"
+    app:cardBackgroundColor="@color/colortitle"
     app:cardCornerRadius="10dp"
     app:cardElevation="6dp">
 
@@ -19,11 +19,15 @@
 
         <TextView
             android:id="@+id/tvTableNo"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:foregroundGravity="center"
             android:textAlignment="center"
+            android:textColor="@color/colortext"
             android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="TableNo" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
