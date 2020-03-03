@@ -36,6 +36,15 @@ public class WaiterFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+
+
+
+
+
+
+
         ivBooking = view.findViewById(R.id.ivBooking);
         ivOrderMenu = view.findViewById(R.id.ivOrderMenu);
 

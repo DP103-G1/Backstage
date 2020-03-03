@@ -2,6 +2,7 @@ package com.example.Employee;
 
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -71,11 +72,13 @@ public class EmployeeFragment extends Fragment {
                     bt.setText("確定");
                     et.setFocusableInTouchMode(true);
                     et.setFocusable(true);
+                    bt.setBackgroundColor(Color.WHITE);
                 } else {
                     bt.setText("修改");
                     et.setFocusableInTouchMode(false);
                     et.setFocusable(false);
                     String password = et.getText().toString().trim();
+                    bt.setBackgroundColor(Color.rgb(34,34,34));
                     updatePassword(index, password);
                 }
                 break;
