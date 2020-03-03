@@ -99,5 +99,6 @@
     <string name="tvReplyContent">回覆</string>
     <string name="tvIsReply">回覆狀態</string>
     <string name="textNoOrder">沒有訂單</string>
+    <string name="textNoStatus">廚房尚未出餐</string>
     string
 </resources>

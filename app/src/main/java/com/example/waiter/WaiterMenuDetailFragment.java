@@ -40,14 +40,14 @@ import java.util.concurrent.ExecutionException;
 
 
 public class WaiterMenuDetailFragment extends Fragment {
-    private static  final String TAG = "TAG_WaiterMenuDetailFragment";
+    private static final String TAG = "TAG_WaiterMenuDetailFragment";
     private Activity activity;
     private RecyclerView rvMd;
     private Button btBill;
     private List<MenuDetail> menuDetails;
     private CommonTask OrderGetAllTask;
     private ImageTask OrderTask;
-//    private Table table;
+    //    private Table table;
     private int tableId;
 
     @Override
@@ -59,7 +59,7 @@ public class WaiterMenuDetailFragment extends Fragment {
 
     @NonNull
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,@NonNull ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container,
                              @NonNull Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         return inflater.inflate(R.layout.fragment_waiter_menu_detail, container, false);
@@ -102,7 +102,7 @@ public class WaiterMenuDetailFragment extends Fragment {
             } catch (Exception e) {
                 Log.e(TAG, e.toString());
             }
-        }else {
+        } else {
             Common.showToast(activity, R.string.textNoNetwork);
         }
         return menuDetails;
@@ -122,7 +122,7 @@ public class WaiterMenuDetailFragment extends Fragment {
         }
     }
 
-    private class MenuDetailAdapter extends RecyclerView.Adapter<MenuDetailAdapter.OrderViewHolder>{
+    private class MenuDetailAdapter extends RecyclerView.Adapter<MenuDetailAdapter.OrderViewHolder> {
         private LayoutInflater layoutInflater;
         private List<MenuDetail> menuDetails;
 
@@ -149,31 +149,35 @@ public class WaiterMenuDetailFragment extends Fragment {
                 tvkitchStatus = itemView.findViewById(R.id.tvkitchStatus);
                 btStatus = itemView.findViewById(R.id.btStatus);
                 btStatus.setOnClickListener(v -> {
-                    if (!arrival) {
-                        arrival = true;
-                        if (Common.networkConnected(activity)) {
-                            String url = Common.URL_SERVER + "MenuDetailServlet";
-                            MenuDetail menuDetails = new MenuDetail(ordId, menuId, amount, arrival, total, status);
-                            JsonObject jsonObject = new JsonObject();
-                            jsonObject.addProperty("action","update");
-                            jsonObject.addProperty("menuDetail", new Gson().toJson(menuDetails));
-                            int count = 0;
-                            try {
-                                String result = new CommonTask(url, jsonObject.toString()).execute().get();
-                                count = Integer.valueOf(result);
-                            }catch (Exception e) {
-                                Log.e(TAG, e.toString());
+                    if (status) {
+                        if (!arrival) {
+                            arrival = true;
+                            if (Common.networkConnected(activity)) {
+                                String url = Common.URL_SERVER + "MenuDetailServlet";
+                                MenuDetail menuDetails = new MenuDetail(ordId, menuId, amount, arrival, total, status);
+                                JsonObject jsonObject = new JsonObject();
+                                jsonObject.addProperty("action", "update");
+                                jsonObject.addProperty("menuDetail", new Gson().toJson(menuDetails));
+                                int count = 0;
+                                try {
+                                    String result = new CommonTask(url, jsonObject.toString()).execute().get();
+                                    count = Integer.valueOf(result);
+                                } catch (Exception e) {
+                                    Log.e(TAG, e.toString());
+                                }
+                                if (count == 0) {
+                                    Common.showToast(getActivity(), R.string.textUpdateSuccess);
+                                    btStatus.setBackgroundColor(Color.parseColor("#424242"));
+                                    btStatus.setText("已送達");
+                                } else {
+                                    Common.showToast(getActivity(), R.string.textUpdateFail);
+                                }
                             }
-                            if (count == 0){
-                                Common.showToast(getActivity(), R.string.textUpdateSuccess);
-                                btStatus.setBackgroundColor(Color.parseColor("#424242"));
-                                btStatus.setText("已送達");
-                            } else {
-                                Common.showToast(getActivity(), R.string.textUpdateFail);
-                            }
+                        } else {
+                            Common.showToast(activity, R.string.falseStatus);
                         }
                     } else {
-                        Common.showToast(activity, R.string.falseStatus);
+                        Common.showToast(activity, R.string.textNoStatus);
                     }
                 });
             }
@@ -197,6 +201,7 @@ public class WaiterMenuDetailFragment extends Fragment {
             public void setTotal(int total) {
                 this.total = total;
             }
+
             public void setStatus(boolean food_status) {
                 this.status = food_status;
             }
@@ -251,11 +256,11 @@ public class WaiterMenuDetailFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        if (OrderTask != null){
+        if (OrderTask != null) {
             OrderTask.cancel(true);
             OrderTask = null;
         }
-        if (OrderGetAllTask != null){
+        if (OrderGetAllTask != null) {
             OrderGetAllTask.cancel(true);
             OrderGetAllTask = null;
         }
