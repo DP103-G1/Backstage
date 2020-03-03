@@ -100,5 +100,7 @@
     <string name="tvIsReply">回覆狀態</string>
     <string name="textNoOrder">沒有訂單</string>
     <string name="textNoStatus">廚房尚未出餐</string>
+    <string name="textSelectBooking">訂位查詢</string>
+    <string name="textSelectOrder">訂單查詢</string>
     string
 </resources>

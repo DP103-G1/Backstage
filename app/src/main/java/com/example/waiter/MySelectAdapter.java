@@ -25,7 +25,7 @@ public class MySelectAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return new WaiterSelectFragment();
             case 1:
-                return new ();
+                return new WaiterTableFragment ();
             default:
                 return null;
         }
