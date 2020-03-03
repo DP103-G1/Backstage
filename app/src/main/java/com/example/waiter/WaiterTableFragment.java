@@ -3,6 +3,7 @@ package com.example.waiter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -66,6 +67,7 @@ public class WaiterTableFragment extends Fragment {
             @Override
             public void onRefresh() {
                 swipeRefreshLayout.setRefreshing(true);
+                tables = getTable();
                 showTables(tables);
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -148,10 +150,13 @@ public class WaiterTableFragment extends Fragment {
             final Table table = tables.get(position);
             String url = Common.URL_SERVER + "/TableServlet";
             int tableId = table.getTableId();
-//            int OrdId = table.getORD_ID();
+            int OrdId = table.getORD_ID();
             tableTask = new ImageTask(url, String.valueOf(tableId));
             tableTask.execute();
             holder.tvTableNo.setText(String.valueOf(table.getTableId()));
+            if (OrdId > 0){
+                holder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            }
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

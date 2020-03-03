@@ -41,13 +41,12 @@ import java.util.concurrent.ExecutionException;
 
 public class WaiterMenuDetailFragment extends Fragment {
     private static final String TAG = "TAG_WaiterMenuDetailFragment";
+    private SwipeRefreshLayout swipeRefreshLayout;
     private Activity activity;
     private RecyclerView rvMd;
-    private Button btBill;
     private List<MenuDetail> menuDetails;
     private CommonTask OrderGetAllTask;
     private ImageTask OrderTask;
-    //    private Table table;
     private int tableId;
 
     @Override
@@ -68,9 +67,18 @@ public class WaiterMenuDetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         rvMd = view.findViewById(R.id.rvMd);
-        btBill = view.findViewById(R.id.btBill);
 
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                menuDetails = getMenuDetail();
+                showmenudetail(menuDetails);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
         final NavController navController = Navigation.findNavController(view);
         Bundle bundle = getArguments();
         if (bundle == null || bundle.getSerializable("table") == null) {

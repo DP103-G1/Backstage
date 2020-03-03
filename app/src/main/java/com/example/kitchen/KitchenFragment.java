@@ -13,6 +13,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +37,7 @@ import java.util.List;
 
 public class KitchenFragment extends Fragment {
     private static final String TAG = "TAG_KitchFragment";
+    private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView rvKitch;
     private Activity activity;
     private CommonTask kitchGetAllTask;
@@ -59,7 +61,18 @@ public class KitchenFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         final NavController navController = Navigation.findNavController(view);
         super.onViewCreated(view, savedInstanceState);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         rvKitch = view.findViewById(R.id.rvKitch);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                menuDetails = getMenuDetail();
+                showMenuDetail(menuDetails);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         rvKitch.setLayoutManager(new LinearLayoutManager(activity));
         menuDetails = getMenuDetail();
