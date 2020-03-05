@@ -160,7 +160,7 @@ public class KitchenFragment extends Fragment {
                                 } catch (Exception e) {
                                     Log.e(TAG, e.toString());
                                 }
-                                if (count == 0){
+                                if (count != 0){
                                     Common.showToast(getActivity(), R.string.textUpdateSuccess);
                                     btStatus.setBackgroundColor(Color.parseColor("#424242"));
                                     btStatus.setText("已出餐");

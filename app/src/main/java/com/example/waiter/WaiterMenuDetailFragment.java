@@ -173,10 +173,12 @@ public class WaiterMenuDetailFragment extends Fragment {
                                 } catch (Exception e) {
                                     Log.e(TAG, e.toString());
                                 }
-                                if (count == 0) {
+                                if (count != 0) {
                                     Common.showToast(getActivity(), R.string.textUpdateSuccess);
-                                    btStatus.setBackgroundColor(Color.parseColor("#424242"));
-                                    btStatus.setText("已送達");
+                                    if (arrival) {
+                                        btStatus.setBackgroundColor(Color.parseColor("#424242"));
+                                        btStatus.setText("已送達");
+                                    }
                                 } else {
                                     Common.showToast(getActivity(), R.string.textUpdateFail);
                                 }
@@ -255,8 +257,10 @@ public class WaiterMenuDetailFragment extends Fragment {
             holder.setStatus(menuDetail.isFOOD_STATUS());
             if (menuDetail.isFOOD_ARRIVAL()) {
                 holder.btStatus.setText("已送達");
+                holder.btStatus.setBackgroundColor(Color.parseColor("#424242"));
             } else {
                 holder.btStatus.setText("未送出");
+                holder.btStatus.setBackgroundColor(Color.parseColor("#222222"));
             }
         }
     }
