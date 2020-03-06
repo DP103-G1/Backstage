@@ -83,6 +83,7 @@ public class MenuFragment extends Fragment {
             @Override
             public void onRefresh() {
                 swipeRefreshLayout.setRefreshing(true);
+                menus = getMenu();
                 showMenu(menus);
                 swipeRefreshLayout.setRefreshing(false);
             }

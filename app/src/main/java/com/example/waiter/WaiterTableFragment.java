@@ -3,6 +3,7 @@ package com.example.waiter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -38,7 +39,6 @@ public class WaiterTableFragment extends Fragment {
     private RecyclerView rvTable;
     private List<Table> tables;
     private CommonTask tableGetAllTask;
-    private ImageTask tableTask;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,6 +66,7 @@ public class WaiterTableFragment extends Fragment {
             @Override
             public void onRefresh() {
                 swipeRefreshLayout.setRefreshing(true);
+                tables = getTable();
                 showTables(tables);
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -146,21 +147,22 @@ public class WaiterTableFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull TableHolder holder, int position) {
             final Table table = tables.get(position);
-            String url = Common.URL_SERVER + "/TableServlet";
             int tableId = table.getTableId();
-//            int OrdId = table.getORD_ID();
-            tableTask = new ImageTask(url, String.valueOf(tableId));
-            tableTask.execute();
+            int OrdId = table.getORD_ID();
             holder.tvTableNo.setText(String.valueOf(table.getTableId()));
+            if (OrdId > 0){
+                holder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            }
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    if (OrdId > 0){
+                    if (OrdId > 0){
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("table", tableId);
                         Navigation.findNavController(v).navigate(R.id.waiterMenuDetailFragment, bundle);
-
-//                    }
+                    } else {
+                        Common.showToast(activity, R.string.textNoUser);
+                    }
                 }
             });
         }
@@ -173,10 +175,6 @@ public class WaiterTableFragment extends Fragment {
         if (tableGetAllTask != null){
             tableGetAllTask.cancel(true);
             tableGetAllTask = null;
-        }
-        if (tableTask != null){
-            tableTask.cancel(true);
-            tableTask = null;
         }
     }
 }

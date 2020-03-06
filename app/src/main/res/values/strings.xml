@@ -102,5 +102,6 @@
     <string name="textNoStatus">廚房尚未出餐</string>
     <string name="textSelectBooking">訂位查詢</string>
     <string name="textSelectOrder">訂單查詢</string>
+    <string name="textNoUser">目前這桌沒使用</string>
     string
 </resources>
