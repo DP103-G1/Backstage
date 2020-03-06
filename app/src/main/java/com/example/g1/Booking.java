@@ -3,8 +3,8 @@ package com.example.g1;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Booking implements Serializable {
-	private int bkId;
+public class Booking implements Serializable{
+
 	private int memberId;
 	private int tableId;
 	private String bkTime;
@@ -12,10 +12,12 @@ public class Booking implements Serializable {
 	private String bkChild;
 	private String bkAdult;
 	private String bkPhone;
+	private int bkId;
+	private int bkStatus;
 
-	public Booking(int memberId, int tableId,
-                   String bkTime, Date bkDate, String bkChild, String bkAdult,
-                   String bkPhone) {
+
+
+	public Booking(int memberId, int tableId, String bkTime, Date bkDate, String bkChild, String bkAdult,String bkPhone,int bkStatus) {
 		super();
 		this.memberId = memberId;
 		this.tableId = tableId;
@@ -24,22 +26,34 @@ public class Booking implements Serializable {
 		this.bkChild = bkChild;
 		this.bkAdult = bkAdult;
 		this.bkPhone = bkPhone;
+		this.bkStatus = bkStatus;
 	}
 
+	public Booking(int memberId, int tableId, String bkTime, Date bkDate, String bkChild, String bkAdult, String bkPhone,int bkId,int bkStatus) {
+		super();
+		this.memberId = memberId;
+		this.tableId = tableId;
+		this.bkTime = bkTime;
+		this.bkDate = bkDate;
+		this.bkChild = bkChild;
+		this.bkAdult = bkAdult;
+		this.bkPhone = bkPhone;
+		this.bkId = bkId;
+		this.bkStatus = bkStatus;
 
+	}
 
-
-
-//	public Booking(int tableId, String bkTime, Date bkDate, String bkChild, String bkAdult,
-//                   String bkPhone) {
-//		super();
-//		this.tableId = tableId;
-//		this.bkTime = bkTime;
-//		this.bkDate = bkDate;
-//		this.bkChild = bkChild;
-//		this.bkAdult = bkAdult;
-//		this.bkPhone = bkPhone;
-//	}
+	public Booking( int tableId, String bkTime, Date bkDate, String bkChild, String bkAdult,String bkPhone,int bkId,int bkStatus) {
+		super();
+		this.tableId = tableId;
+		this.bkTime = bkTime;
+		this.bkDate = bkDate;
+		this.bkChild = bkChild;
+		this.bkAdult = bkAdult;
+		this.bkPhone = bkPhone;
+		this.bkId=bkId;
+		this.bkStatus = bkStatus;
+	}
 
 
 
@@ -49,7 +63,13 @@ public class Booking implements Serializable {
 				+ ", bkDate=" + bkDate + ", bkChild=" + bkChild + ", bkAdult=" + bkAdult + ", bkPhone=" + bkPhone + "]";
 	}
 
+	public int getStatus() {
+		return bkStatus;
+	}
 
+	public void setStatus(int status) {
+		this.bkStatus = status;
+	}
 
 	public int getBkId() {
 		return bkId;
