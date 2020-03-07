@@ -153,6 +153,9 @@
         <action
             android:id="@+id/action_waiterFragment_to_waiterSelectFragment"
             app:destination="@id/waiterSelectFragment" />
+        <action
+            android:id="@+id/action_waiterFragment_to_waiterTableFragment"
+            app:destination="@id/waiterTableFragment" />
     </fragment>
     <fragment
         android:id="@+id/kitchenFragment"
@@ -165,14 +168,14 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_loginFragment_to_waiterFragment"
+            app:destination="@id/waiterFragment" />
         <action
             android:id="@+id/action_loginFragment_to_kitchenFragment"
             app:destination="@id/kitchenFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_waiterFragment"
-            app:destination="@id/waiterFragment" />
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/waiterSelectFragment"
@@ -202,4 +205,18 @@
         android:name="com.example.manager.member.MemberFragment"
         android:label="fragment_member"
         tools:layout="@layout/fragment_member" />
+    <fragment
+        android:id="@+id/waiterTableFragment"
+        android:name="com.example.waiter.WaiterTableFragment"
+        android:label="fragment_waiter_table"
+        tools:layout="@layout/fragment_waiter_table" >
+        <action
+            android:id="@+id/action_waiterTableFragment_to_waiterMenuDetailFragment"
+            app:destination="@id/waiterMenuDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/waiterMenuDetailFragment"
+        android:name="com.example.waiter.WaiterMenuDetailFragment"
+        android:label="fragment_waiter_menu_detail"
+        tools:layout="@layout/fragment_waiter_menu_detail" />
 </navigation>

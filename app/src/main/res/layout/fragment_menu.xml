@@ -5,7 +5,7 @@
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuFragment" >
+    tools:context="com.example.manager.menu.MenuFragment" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,9 +40,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:background="@color/btAddcolor"
+        android:background="@color/menuputcolor"
         android:src="@drawable/ic_add"
-        app:backgroundTint="@color/btAddcolor"
+        app:backgroundTint="@color/menuputcolor"
         app:elevation="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

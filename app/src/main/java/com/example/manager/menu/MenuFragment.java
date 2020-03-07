@@ -83,6 +83,7 @@ public class MenuFragment extends Fragment {
             @Override
             public void onRefresh() {
                 swipeRefreshLayout.setRefreshing(true);
+                menus = getMenu();
                 showMenu(menus);
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -215,11 +216,12 @@ public class MenuFragment extends Fragment {
             holder.tvPrice.setText(String.valueOf(menu.getFOOD_PRICE()));
             if(menu.getFOOD_STATUS() == 0){
                 holder.tvStatus.setText("已下架");
-                holder.tvStatus.setBackgroundColor(Color.RED);
+                holder.tvStatus.setTextColor(getResources().getColor(R.color.menunoputcolor));
+                holder.tvStatus.setBackgroundColor(getResources().getColor(R.color.noPut));
             } else if(menu.getFOOD_STATUS() == 1){
                 holder.tvStatus.setText("上架中");
-                holder.tvStatus.setTextColor(Color.WHITE);
-                holder.tvStatus.setBackgroundColor(getResources().getColor(R.color.ShelvesOn));
+                holder.tvStatus.setTextColor(getResources().getColor(R.color.menuputcolor));
+                holder.tvStatus.setBackgroundColor(getResources().getColor(R.color.put));
             }
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override

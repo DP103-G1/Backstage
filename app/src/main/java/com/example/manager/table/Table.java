@@ -7,15 +7,20 @@ public class Table implements Serializable {
 	
 	private int tableId;
 	private String tablePeople;
-	private int tableStatus;
-//	private boolean tableBell;
-	
-	public Table(int tableId, String tablePeople, int tableStatus) {
+	private int ORD_ID;
+
+	public Table(int tableId, String tablePeople) {
 		super();
 		this.tableId = tableId;
 		this.tablePeople = tablePeople;
-		this.tableStatus = tableStatus;
-//		this.tableBell = tableBell;
+	}
+
+	public Table(int tableId, String tablePeople, int ORD_ID) {
+		super();
+		this.tableId = tableId;
+		this.tablePeople = tablePeople;
+		this.ORD_ID = ORD_ID;
+
 	}
 	public void Table(String tablePeople, int tableId) {
 		this.tableId = tableId;
@@ -54,22 +59,13 @@ public class Table implements Serializable {
 		this.tablePeople = tablePeople;
 	}
 
-	public int getTableStatus() {
-		return tableStatus;
+	public int getORD_ID() {
+		return ORD_ID;
 	}
 
-	public void setTableStatus(int tableStatus) {
-		this.tableStatus = tableStatus;
+	public void setORD_ID(int ORD_ID) {
+		this.ORD_ID = ORD_ID;
 	}
-
-//	public boolean isTableBell() {
-//		return tableBell;
-//	}
-
-//	public void setTableBell(boolean tableBell) {
-//		this.tableBell = tableBell;
-//	}
-
 
 
 }

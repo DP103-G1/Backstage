@@ -94,8 +94,6 @@ public class WaiterSelectFragment extends Fragment {
                         if (String.valueOf(searchBooking.getBkId()).contains(newText)) {
                             searchBookings.add(searchBooking);
 
-                        }else {
-                            Common.showToast(activity,R.string.textNoSelectBookingFound);
                         }
                     }
                     showWaiterSelectBooking(searchBookings);
@@ -162,7 +160,7 @@ public class WaiterSelectFragment extends Fragment {
                 public void onClick(View v) {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("booking",booking);
-                    Navigation.findNavController(v).navigate(R.id.action_waiterSelectFragment_to_waiterSelectDetailFragment,bundle);
+                    Navigation.findNavController(v).navigate(R.id.waiterSelectDetailFragment,bundle);
                 }
             });
         }

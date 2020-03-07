@@ -4,15 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".WaiterTableFragment">
-
-    <SearchView
-        android:id="@+id/seachView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colortext"
-        android:theme="@style/MyEditText"
-        android:iconifiedByDefault="false"/>
+    tools:context="com.example.waiter.WaiterTableFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
@@ -20,7 +12,7 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvWaiterSelect"
+            android:id="@+id/rvMd"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

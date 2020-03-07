@@ -1,53 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.waiter.WaiterFragment">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/ivBooking"
-        android:layout_width="143dp"
-        android:layout_height="143dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="244dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/add"
-        tools:src="@tools:sample/avatars" />
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabIndicatorColor="@color/cardText"
+            app:tabSelectedTextColor="@color/cardText">
 
-    <ImageView
-        android:id="@+id/ivOrderMenu"
-        android:layout_width="143dp"
-        android:layout_height="143dp"
-        android:layout_marginTop="244dp"
-        android:layout_marginEnd="56dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/add"
-        tools:src="@tools:sample/avatars" />
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="訂位查詢" />
 
-    <TextView
-        android:id="@+id/tvOrderMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/colortext"
-        android:text="@string/textOrder"
-        app:layout_constraintEnd_toEndOf="@+id/ivOrderMenu"
-        app:layout_constraintStart_toStartOf="@+id/ivOrderMenu"
-        app:layout_constraintTop_toBottomOf="@+id/ivOrderMenu" />
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="點餐查詢" />
 
-    <TextView
-        android:id="@+id/tvBooking"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/colortext"
-        android:text="@string/textBooking"
-        app:layout_constraintEnd_toEndOf="@+id/ivBooking"
-        app:layout_constraintStart_toStartOf="@+id/ivBooking"
-        app:layout_constraintTop_toBottomOf="@+id/ivBooking" />
+        </com.google.android.material.tabs.TabLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+
+    </LinearLayout>
+
+
+    <!--
+    <?xml version="1.0" encoding="utf-8"?>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context="com.example.waiter.WaiterFragment">
+
+        <ImageView
+            android:id="@+id/ivBooking"
+            android:layout_width="143dp"
+            android:layout_height="143dp"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="244dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/add"
+            tools:src="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/ivOrderMenu"
+            android:layout_width="143dp"
+            android:layout_height="143dp"
+            android:layout_marginTop="244dp"
+            android:layout_marginEnd="56dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/add"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tvOrderMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colortext"
+            android:text="@string/textOrder"
+            app:layout_constraintEnd_toEndOf="@+id/ivOrderMenu"
+            app:layout_constraintStart_toStartOf="@+id/ivOrderMenu"
+            app:layout_constraintTop_toBottomOf="@+id/ivOrderMenu" />
+
+        <TextView
+            android:id="@+id/tvBooking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colortext"
+            android:text="@string/textBooking"
+            app:layout_constraintEnd_toEndOf="@+id/ivBooking"
+            app:layout_constraintStart_toStartOf="@+id/ivBooking"
+            app:layout_constraintTop_toBottomOf="@+id/ivBooking" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    -->
