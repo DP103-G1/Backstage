@@ -9,18 +9,25 @@ public class Member implements Serializable {
 	private String password;
 	private String name;
 	private String phone;
-	
+	private int state;
 
-	public Member(int member_Id, String account, String password, String name, String phone) {
+
+	public Member(int member_Id, String account, String password, String name, String phone, int state) {
 		this.member_Id = member_Id;
 		this.account = account;
 		this.password = password;
 		this.name = name;
 		this.phone = phone;
+		this.state = state;
+	}
+
+	public Member(int member_Id, int state) {
+		this.member_Id = member_Id;
+		this.state = state;
 	}
 	
-	public Member(String account, String password, String name, String phone) {
-		this(0, account, password, name, phone);
+	public Member(String account, String password, String name, String phone, int state) {
+		this(0, account, password, name, phone, state);
 	}
 
 	public int getmember_Id() {
@@ -62,5 +69,12 @@ public class Member implements Serializable {
 	public void setphone(String phone) {
 		this.phone = phone;
 	}
-	
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
 }

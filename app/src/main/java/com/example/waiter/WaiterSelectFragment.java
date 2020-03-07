@@ -40,7 +40,6 @@ public class WaiterSelectFragment extends Fragment {
     private RecyclerView rvWaiterSelectBooking;
     private List<Booking> waiterSelectBookings;
     private CommonTask waiterSelectBookingGetAllTask;
-    private ImageTask waiterSelectBookingTask;
 
 
     @Override
@@ -144,10 +143,6 @@ public class WaiterSelectFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull WaiterSelectBookingHolder holder, int position) {
             final Booking booking = waiterSelectBooking.get(position);
-            String url = Common.URL_SERVER + "/BookingServlet";
-            int bkId = booking.getBkId();
-            waiterSelectBookingTask = new ImageTask(url, String.valueOf(bkId));
-            waiterSelectBookingTask.execute();
             holder.tvBkId.setText(String.valueOf(booking.getBkId()));
 
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -207,10 +202,6 @@ public class WaiterSelectFragment extends Fragment {
         if (waiterSelectBookingGetAllTask != null) {
             waiterSelectBookingGetAllTask.cancel(true);
             waiterSelectBookingGetAllTask = null;
-        }
-        if (waiterSelectBookingTask != null) {
-            waiterSelectBookingTask.cancel(true);
-            waiterSelectBookingTask = null;
         }
     }
 }
