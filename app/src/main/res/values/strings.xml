@@ -50,8 +50,8 @@
     <string name="textPhone">電話</string>
     <string name="textBack">返回</string>
     <string name="textNoSelectBookingFound">未找到訂位</string>
-    <string name="trueStatus" type="id">正確</string>
-    <string name="falseStatus" type="id">錯誤</string>
+    <string name="trueStatus" dateTimePickerType="id">正確</string>
+    <string name="falseStatus" dateTimePickerType="id">錯誤</string>
     <string name="textMemberNoFound">未找到會員</string>
     <string name="tvSub">輸入標題</string>
     <string name="tvContent">輸入內容</string>
@@ -98,5 +98,7 @@
     <string name="tvMainContent">意見</string>
     <string name="tvReplyContent">回覆</string>
     <string name="tvIsReply">回覆狀態</string>
+    <string name="textCharTitle">當日營收統計</string>
+    <string name="tvSelect">請選擇營業日期</string>
     string
 </resources>
