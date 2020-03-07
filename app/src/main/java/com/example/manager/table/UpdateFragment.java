@@ -109,10 +109,7 @@ public class UpdateFragment extends Fragment {
     }
 
     private void showTable() {
-        String url = Common.URL_SERVER + "TableServlet";
-        int id = table.getTableId();
         etPeople.setText(table.getTablePeople());
-        etTableNo.setText(table.getTableId());
-
+        etTableNo.setText(String.valueOf(table.getTableId()));
     }
 }
