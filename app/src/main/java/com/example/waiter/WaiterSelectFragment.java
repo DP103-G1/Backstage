@@ -43,7 +43,6 @@ public class WaiterSelectFragment extends Fragment {
     private ImageTask waiterSelectBookingTask;
 
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,26 +104,24 @@ public class WaiterSelectFragment extends Fragment {
     }
 
 
-
-
-    private class WaiterSelectBookingAdapter extends RecyclerView.Adapter<WaiterSelectBookingAdapter.WaiterSelectBookingHolder>{
+    private class WaiterSelectBookingAdapter extends RecyclerView.Adapter<WaiterSelectBookingAdapter.WaiterSelectBookingHolder> {
         private LayoutInflater layoutInflater;
         private List<Booking> waiterSelectBooking;
 
-            WaiterSelectBookingAdapter(Context context,List<Booking> waiterSelectBookin){
+        WaiterSelectBookingAdapter(Context context, List<Booking> waiterSelectBookin) {
             layoutInflater = LayoutInflater.from(context);
             this.waiterSelectBooking = waiterSelectBookin;
         }
 
-        void setWaiterSelectBookin(List<Booking> waiterSelectBookin){
+        void setWaiterSelectBookin(List<Booking> waiterSelectBookin) {
             this.waiterSelectBooking = waiterSelectBookin;
         }
 
 
         class WaiterSelectBookingHolder extends RecyclerView.ViewHolder {
-            TextView tvBkId,tvBkDate;
+            TextView tvBkId, tvBkDate;
 
-           WaiterSelectBookingHolder(@NonNull View view) {
+            WaiterSelectBookingHolder(@NonNull View view) {
                 super(view);
                 tvBkDate = view.findViewById(R.id.tvDate);
                 tvBkId = view.findViewById(R.id.tvBkId);
@@ -140,7 +137,7 @@ public class WaiterSelectFragment extends Fragment {
         @NonNull
         @Override
         public WaiterSelectBookingHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = layoutInflater.inflate(R.layout.item_view_select,parent,false);
+            View view = layoutInflater.inflate(R.layout.item_view_select, parent, false);
             return new WaiterSelectBookingHolder(view);
         }
 
@@ -149,7 +146,7 @@ public class WaiterSelectFragment extends Fragment {
             final Booking booking = waiterSelectBooking.get(position);
             String url = Common.URL_SERVER + "/BookingServlet";
             int bkId = booking.getBkId();
-            waiterSelectBookingTask = new ImageTask(url,String.valueOf(bkId));
+            waiterSelectBookingTask = new ImageTask(url, String.valueOf(bkId));
             waiterSelectBookingTask.execute();
             holder.tvBkId.setText(String.valueOf(booking.getBkId()));
 
@@ -159,8 +156,8 @@ public class WaiterSelectFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("booking",booking);
-                    Navigation.findNavController(v).navigate(R.id.waiterSelectDetailFragment,bundle);
+                    bundle.putSerializable("booking", booking);
+                    Navigation.findNavController(v).navigate(R.id.waiterSelectDetailFragment, bundle);
                 }
             });
         }
@@ -168,38 +165,37 @@ public class WaiterSelectFragment extends Fragment {
     }
 
 
-
     private List<Booking> getWaiterSelectBooking() {
         List<Booking> waiterSelectBooking = null;
-        if (Common.networkConnected(activity)){
+        if (Common.networkConnected(activity)) {
             String url = Common.URL_SERVER + "/BookingServlet";
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("action","getAll");
+            jsonObject.addProperty("action", "getAll");
             String jsonOut = jsonObject.toString();
-            waiterSelectBookingGetAllTask = new CommonTask(url,jsonOut);
+            waiterSelectBookingGetAllTask = new CommonTask(url, jsonOut);
             try {
                 String jsonIn = waiterSelectBookingGetAllTask.execute().get();
-                Type listType = new TypeToken<List<Booking>>(){
+                Type listType = new TypeToken<List<Booking>>() {
 
                 }.getType();
-                waiterSelectBooking = Common.gson.fromJson(jsonIn,listType);
-            }catch (Exception e){
-                Log.e(TAG,e.toString());
+                waiterSelectBooking = Common.gson.fromJson(jsonIn, listType);
+            } catch (Exception e) {
+                Log.e(TAG, e.toString());
             }
-        }else {
-            Common.showToast(activity,R.string.textNoNetwork);
+        } else {
+            Common.showToast(activity, R.string.textNoNetwork);
         }
         return waiterSelectBooking;
     }
 
     private void showWaiterSelectBooking(List<Booking> waiterSelectBooking) {
-        if (waiterSelectBooking == null || waiterSelectBooking.isEmpty()){
-            Common.showToast(activity,R.string.textNoSelectBookingFound);
+        if (waiterSelectBooking == null || waiterSelectBooking.isEmpty()) {
+            Common.showToast(activity, R.string.textNoSelectBookingFound);
         }
         WaiterSelectBookingAdapter waiterSelectBookingAdapter = (WaiterSelectBookingAdapter) rvWaiterSelectBooking.getAdapter();
-        if (waiterSelectBookingAdapter == null){
-            rvWaiterSelectBooking.setAdapter(new WaiterSelectBookingAdapter(activity,waiterSelectBooking));
-        }else {
+        if (waiterSelectBookingAdapter == null) {
+            rvWaiterSelectBooking.setAdapter(new WaiterSelectBookingAdapter(activity, waiterSelectBooking));
+        } else {
             waiterSelectBookingAdapter.setWaiterSelectBookin(waiterSelectBooking);
             waiterSelectBookingAdapter.notifyDataSetChanged();
         }
@@ -208,11 +204,11 @@ public class WaiterSelectFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        if (waiterSelectBookingGetAllTask != null){
+        if (waiterSelectBookingGetAllTask != null) {
             waiterSelectBookingGetAllTask.cancel(true);
             waiterSelectBookingGetAllTask = null;
         }
-        if (waiterSelectBookingTask != null){
+        if (waiterSelectBookingTask != null) {
             waiterSelectBookingTask.cancel(true);
             waiterSelectBookingTask = null;
         }

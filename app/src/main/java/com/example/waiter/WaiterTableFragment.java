@@ -151,18 +151,15 @@ public class WaiterTableFragment extends Fragment {
             int OrdId = table.getORD_ID();
             holder.tvTableNo.setText(String.valueOf(table.getTableId()));
             if (OrdId > 0){
-                holder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                holder.itemView.setBackgroundColor(Color.parseColor("#C36A6B"));
             }
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (OrdId > 0){
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("table", tableId);
-                        Navigation.findNavController(v).navigate(R.id.waiterMenuDetailFragment, bundle);
-                    } else {
-                        Common.showToast(activity, R.string.textNoUser);
-                    }
+            holder.itemView.setOnClickListener(v -> {
+                if (OrdId > 0){
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("table", tableId);
+                    Navigation.findNavController(v).navigate(R.id.waiterMenuDetailFragment, bundle);
+                } else {
+                    Common.showToast(activity, R.string.textNoUser);
                 }
             });
         }

@@ -8,7 +8,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,8 +19,11 @@ import android.widget.TextView;
 import com.example.Common;
 import com.example.g1.Booking;
 import com.example.g1.R;
+import com.example.manager.member.Member;
+import com.example.task.CommonTask;
 import com.example.task.ImageTask;
-
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import java.text.SimpleDateFormat;
 
 
@@ -31,7 +33,7 @@ public class WaiterSelectDetailFragment extends Fragment {
     private TextView tvBkIdGet,tvTableGet,tvTimeGet,
             tvDateGet,tvChildGet,tvAdultGet,tvPhoneGet;
     private Booking waiterSelectBookingDetail;
-    private Button btBack;
+    private Button btBack, btIn;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,6 +65,37 @@ public class WaiterSelectDetailFragment extends Fragment {
             waiterSelectBookingDetail = (Booking)bundle.getSerializable("booking");
             showWaiterSelectBookinDetail();
         }
+        int member_id = waiterSelectBookingDetail.getMemberId();
+//        int state = waiterSelectBookingDetail.getState();
+
+        btIn = view.findViewById(R.id.btIn);
+        btIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                if (Common.networkConnected(activity)) {
+//                    String url = Common.URL_SERVER + "/MemberServlet";
+//                    Booking booking = new Booking(member_id, state);
+//                    JsonObject jsonObject = new JsonObject();
+//                    jsonObject.addProperty("action", "updateState");
+//                    jsonObject.addProperty("member", new Gson().toJson(booking));
+//                    int count = 0;
+//                    try {
+//                        String result = new CommonTask(url, jsonObject.toString()).execute().get();
+//                        count = Integer.valueOf(result);
+//                    } catch (Exception e) {
+//                        Log.e(TAG, e.toString());
+//                    }
+//                    if (count == 0) {
+//                        Common.showToast(getActivity(), R.string.textUpdateFail);
+//                    } else {
+//                        Common.showToast(getActivity(), R.string.textUpdateSuccess);
+//                    }
+//                } else {
+//                    Common.showToast(getActivity(), R.string.textNoNetwork);
+//                }
+            }
+        });
+
 
     }
 
