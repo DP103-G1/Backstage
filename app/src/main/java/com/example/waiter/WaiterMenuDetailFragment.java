@@ -47,13 +47,12 @@ public class WaiterMenuDetailFragment extends Fragment {
     private List<MenuDetail> menuDetails;
     private CommonTask OrderGetAllTask;
     private ImageTask OrderTask;
-    private int tableId;
+    private int bkId;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
-        tableId = (int) (getArguments() != null ? getArguments().getSerializable("table") : null);
     }
 
     @NonNull
@@ -81,12 +80,12 @@ public class WaiterMenuDetailFragment extends Fragment {
         });
         final NavController navController = Navigation.findNavController(view);
         Bundle bundle = getArguments();
-        if (bundle == null || bundle.getSerializable("table") == null) {
+        if (bundle == null || bundle.getInt("bkId") == 0) {
             Common.showToast(activity, R.string.textNoOrder);
             navController.popBackStack();
             return;
         }
-        tableId = (int) bundle.getSerializable("table");
+        bkId = bundle.getInt("bkId");
 
         rvMd.setLayoutManager(new LinearLayoutManager(activity));
         menuDetails = getMenuDetail();
@@ -98,8 +97,8 @@ public class WaiterMenuDetailFragment extends Fragment {
         if (Common.networkConnected(activity)) {
             String url = Common.URL_SERVER + "MenuDetailServlet";
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("action", "getAllByTableId");
-            jsonObject.addProperty("tableId", tableId);
+            jsonObject.addProperty("action", "getAllByBkId");
+            jsonObject.addProperty("bkId", bkId);
             String jsonOut = jsonObject.toString();
             OrderGetAllTask = new CommonTask(url, jsonOut);
             try {
