@@ -4,6 +4,7 @@ package com.example.manager.Cauculator;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -108,11 +109,12 @@ public class MonthIncomeFragment extends Fragment {
         xAxis.setAxisMaximum(32);
         xAxis.setAxisMinimum(0);
         xAxis.setTextSize(13);
-        xAxis.setTextColor(getResources().getColor(R.color.colorText, activity.getTheme()));
+        xAxis.setTextColor(getResources().getColor(R.color.colorText));
+
         YAxis yAxisLeft = barChart.getAxisLeft();
         yAxisLeft.setAxisMinimum(0f);
         yAxisLeft.setTextSize(13);
-        yAxisLeft.setTextColor(getResources().getColor(R.color.colorText, activity.getTheme()));
+        yAxisLeft.setTextColor(getResources().getColor(R.color.colorText));
         yAxisLeft.setAxisMaximum((float) (barEntries.stream()
                 .mapToDouble(v -> v.getY()).max().orElse(0) * 1.2));
         YAxis yAxisRight = barChart.getAxisRight();

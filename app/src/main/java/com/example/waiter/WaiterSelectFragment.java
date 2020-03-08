@@ -70,13 +70,11 @@ public class WaiterSelectFragment extends Fragment {
         rvWaiterSelectBooking.setLayoutManager(new LinearLayoutManager(activity));
         waiterSelectBookings = getWaiterSelectBooking();
         showWaiterSelectBooking(waiterSelectBookings);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeRefreshLayout.setRefreshing(true);
-                showWaiterSelectBooking(waiterSelectBookings);
-                swipeRefreshLayout.setRefreshing(false);
-            }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            swipeRefreshLayout.setRefreshing(true);
+            waiterSelectBookings = getWaiterSelectBooking();
+            showWaiterSelectBooking(waiterSelectBookings);
+            swipeRefreshLayout.setRefreshing(false);
         });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
