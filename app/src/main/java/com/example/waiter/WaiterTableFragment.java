@@ -38,6 +38,7 @@ import java.lang.reflect.Type;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 
@@ -84,10 +85,9 @@ public class WaiterTableFragment extends Fragment {
     }
 
     private void registerSocketReceiver() {
-        IntentFilter serviceFilter = new IntentFilter("service");
-        IntentFilter seatFilter = new IntentFilter("seat");
-        broadcastManager.registerReceiver(receiver, serviceFilter);
-        broadcastManager.registerReceiver(receiver, seatFilter);
+        IntentFilter filter = new IntentFilter("service");
+        filter.addAction("seat");
+        broadcastManager.registerReceiver(receiver, filter);
     }
 
     private BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -99,7 +99,7 @@ public class WaiterTableFragment extends Fragment {
                 Table table = new Gson().fromJson(message, Table.class);
                 tables.remove(table);
                 tables.add(table);
-                Comparator<Table> cmp = Comparator.comparing(Table::getORD_ID).reversed();
+                Comparator<Table> cmp = Comparator.comparing(Table::getTableId);
                 tables = tables.stream().sorted(cmp).collect(Collectors.toList());
                 showTables(tables);
             }
@@ -116,9 +116,7 @@ public class WaiterTableFragment extends Fragment {
             tableGetAllTask = new CommonTask(url, jsonOut);
             try {
                 String jsonIn = tableGetAllTask.execute().get();
-                Type listType = new TypeToken<List<Table>>() {
-
-                }.getType();
+                Type listType = new TypeToken<List<Table>>(){}.getType();
                 tables = Common.gson.fromJson(jsonIn, listType);
             } catch (Exception e) {
                 Log.e(TAG, e.toString());

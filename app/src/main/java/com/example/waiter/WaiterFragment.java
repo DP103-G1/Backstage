@@ -103,7 +103,7 @@ public class WaiterFragment extends Fragment {
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            SocketMessage socketMessage = (SocketMessage) intent.getSerializableExtra("service");
+            SocketMessage socketMessage = (SocketMessage) intent.getSerializableExtra("socketMessage");
             if (socketMessage.getReceiver().equals("waiter") && tabLayout.getSelectedTabPosition() != 1) {
                 tabLayout.getTabAt(1).setIcon(R.drawable.service);
             }

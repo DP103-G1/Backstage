@@ -133,8 +133,9 @@ public class KitchenFragment extends Fragment {
                     (SocketMessage) intent.getSerializableExtra("socketMessage");
             String message = socketMessage.getMessage();
             if (socketMessage.getReceiver().equals("kitchen") && message != null && !message.isEmpty()) {
-                MenuDetail menuDetail = new Gson().fromJson(message, MenuDetail.class);
-                menuDetails.add(menuDetail);
+                Type listType = new TypeToken<List<MenuDetail>>(){}.getType();
+                List<MenuDetail> addMenuDetails = new Gson().fromJson(message, listType);
+                menuDetails.addAll(addMenuDetails);
                 showMenuDetail(menuDetails);
             }
         }
