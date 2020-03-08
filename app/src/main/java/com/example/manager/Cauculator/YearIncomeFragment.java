@@ -25,6 +25,7 @@ import com.example.task.CommonTask;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -113,8 +114,12 @@ public class YearIncomeFragment extends Fragment {
         xAxis.setDrawGridLines(false);
         xAxis.setAxisMaximum(13);
         xAxis.setAxisMinimum(0);
+        xAxis.setTextColor(13);
+        xAxis.setTextColor(getResources().getColor(R.color.colortext));
         YAxis yAxisLeft = barChart.getAxisLeft();
         yAxisLeft.setAxisMinimum(0f);
+        yAxisLeft.setTextSize(13);
+        yAxisLeft.setTextColor(getResources().getColor(R.color.colortext));
         yAxisLeft.setAxisMaximum((float) (barEntries.stream()
                 .mapToDouble(v -> v.getY()).max().orElse(0) * 1.2));
         YAxis yAxisRight = barChart.getAxisRight();
@@ -122,17 +127,22 @@ public class YearIncomeFragment extends Fragment {
 
         BarDataSet barDataSet = new BarDataSet(barEntries, "年度營業額");
         BarData barData = new BarData(barDataSet);
-        barDataSet.setColor(Color.YELLOW);
+        barDataSet.setColor(getResources().getColor(R.color.normalText));
+        barData.setValueTextColor(getResources().getColor(R.color.chartData));
 //        barDataSet.setBarBorderWidth(10f);
-        barData.setValueTextColor(Color.GRAY);
         barData.setValueTextSize(13);
         barData.setValueTypeface(Typeface.DEFAULT);
-        barChart.setBackgroundColor(Color.WHITE);
+        barChart.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         barChart.setDrawGridBackground(false);
         barChart.animateY(1500, Easing.Linear);
         barChart.animateX(700, Easing.Linear);
         barChart.setData(barData);
         barChart.invalidate();
+
+        Legend legend = barChart.getLegend();
+        legend.setTextColor(getResources().getColor(R.color.chartData));
+        legend.setTextSize(14);
+        legend.setTypeface(Typeface.DEFAULT);
     }
 
     private List<BarEntry> getEntries() {
