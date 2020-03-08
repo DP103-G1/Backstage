@@ -25,7 +25,6 @@ import android.widget.TextView;
 import com.example.Common;
 import com.example.g1.R;
 import com.example.task.CommonTask;
-import com.example.task.ImageTask;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -41,7 +40,6 @@ public class KitchenFragment extends Fragment {
     private RecyclerView rvKitch;
     private Activity activity;
     private CommonTask kitchGetAllTask;
-    private ImageTask kitchImageTask;
     private List<MenuDetail> menuDetails;
 
     @Override
@@ -154,10 +152,6 @@ public class KitchenFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull MyviewHolder holder, int position) {
             final MenuDetail menuDetail = menuDetails.get(position);
-            String url = Common.URL_SERVER + "MenuDetailServlet";
-            String id = menuDetail.getMENU_ID();
-            kitchImageTask = new ImageTask(url, id);
-            kitchImageTask.execute();
             holder.tvFoodName.setText(menuDetail.getFOOD_NAME());
             holder.tvTableId.setText(String.valueOf(menuDetail.getTABLE_ID()));
             holder.tvFoodAmount.setText(String.valueOf(menuDetail.getFOOD_AMOUNT()));
@@ -196,11 +190,6 @@ public class KitchenFragment extends Fragment {
         if (kitchGetAllTask != null) {
             kitchGetAllTask.cancel(true);
             kitchGetAllTask = null;
-        }
-
-        if (kitchImageTask != null) {
-            kitchImageTask.cancel(true);
-            kitchImageTask = null;
         }
     }
 }

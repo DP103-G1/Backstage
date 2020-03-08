@@ -69,16 +69,19 @@ public class WaiterSelectFragment extends Fragment {
         rvWaiterSelectBooking.setLayoutManager(new LinearLayoutManager(activity));
         waiterSelectBookings = getWaiterSelectBooking();
         showWaiterSelectBooking(waiterSelectBookings);
-        swipeRefreshLayout.setOnRefreshListener(() -> {
-            swipeRefreshLayout.setRefreshing(true);
-            waiterSelectBookings = getWaiterSelectBooking();
-            showWaiterSelectBooking(waiterSelectBookings);
-            swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                showWaiterSelectBooking(waiterSelectBookings);
+                swipeRefreshLayout.setRefreshing(false);
+            }
         });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+
                 return false;
             }
 
@@ -96,13 +99,15 @@ public class WaiterSelectFragment extends Fragment {
                             || simpleDateFormat.format(v.getBkDate()).contains(newText))
                             .collect(Collectors.toList());
 
-//                    for (Booking searchBooking : waiterSelectBookings) {
-//                        if (String.valueOf(searchBooking.getBkPhone()).contains(newText)) {
-//                            searchBookings.add(searchBooking);
-//                        }
-//                    }
+                    for (Booking searchBooking : waiterSelectBookings) {
+                        if (String.valueOf(searchBooking.getBkId()).contains(newText)) {
+                            searchBookings.add(searchBooking);
+
+                        }
+                    }
                     showWaiterSelectBooking(searchBookings);
                 }
+
                 return true;
             }
         });
@@ -121,6 +126,7 @@ public class WaiterSelectFragment extends Fragment {
             this.waiterSelectBooking = waiterSelectBooking;
         }
 
+
         class WaiterSelectBookingHolder extends RecyclerView.ViewHolder {
             TextView tvName,tvBkDate,tvTime,tvPhone;
 
@@ -132,6 +138,7 @@ public class WaiterSelectFragment extends Fragment {
                 tvPhone = view.findViewById(R.id.tvPhone);
             }
         }
+
 
         @Override
         public int getItemCount() {
@@ -201,13 +208,9 @@ public class WaiterSelectFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        if (waiterSelectBookingGetAllTask != null){
+        if (waiterSelectBookingGetAllTask != null) {
             waiterSelectBookingGetAllTask.cancel(true);
             waiterSelectBookingGetAllTask = null;
-        }
-        if (waiterSelectBookingTask != null){
-            waiterSelectBookingTask.cancel(true);
-            waiterSelectBookingTask = null;
         }
     }
 }

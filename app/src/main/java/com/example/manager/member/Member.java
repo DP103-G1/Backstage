@@ -2,7 +2,7 @@ package com.example.manager.member;
 
 import java.io.Serializable;
 
-public class Member implements Serializable{
+public class Member implements Serializable {
 
 	private int member_Id;
 	private String account;
@@ -11,7 +11,7 @@ public class Member implements Serializable{
 	private String phone;
 	private int state;
 
-	public Member(int member_Id, String account, String password, String name, String phone, int state) {
+	public Member(int member_Id, String account, String password, String name, String phone) {
 		this.member_Id = member_Id;
 		this.account = account;
 		this.password = password;
@@ -71,7 +71,7 @@ public class Member implements Serializable{
 	public void setname(String name) {
 		this.name = name;
 	}
-
+	
 	public String getphone() {
 		return phone;
 	}

@@ -5,8 +5,7 @@ import com.example.manager.member.Member;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Booking implements Serializable{
-
+public class Booking implements Serializable {
 	private Member member;
 	private int tableId;
 	private String bkTime;
@@ -137,4 +136,6 @@ public class Booking implements Serializable{
 	public void setBkPhone(String bkPhone) {
 		this.bkPhone = bkPhone;
 	}
+
+
 }
