@@ -1,6 +1,7 @@
 package com.example.manager.Cauculator;
 
-import com.example.kitchen.MenuDetail;
+
+import com.example.main.MenuDetail;
 
 import java.util.Date;
 import java.util.List;

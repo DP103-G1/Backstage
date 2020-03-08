@@ -20,7 +20,12 @@ import android.widget.TextView;
 import com.example.main.Common;
 import com.example.main.Booking;
 import com.example.main.R;
+import com.example.main.Url;
+import com.example.manager.member.Member;
+import com.example.task.CommonTask;
 import com.example.task.ImageTask;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.text.SimpleDateFormat;
 
@@ -96,7 +101,7 @@ public class WaiterSelectDetailFragment extends Fragment {
 //                        Common.showToast(getActivity(), R.string.textNoNetwork);
 //                    }
                 if (Common.networkConnected(activity)) {
-                    String url = Common.URL_SERVER + "/MembersServlet";
+                    String url = Url.URL_SERVER + "/MembersServlet";
                     Member member = new Member(member_id, finalState);
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action", "updateState");
@@ -124,7 +129,7 @@ public class WaiterSelectDetailFragment extends Fragment {
     }
 
     private void showWaiterSelectBookinDetail() {
-        String url = Common.URL_SERVER + "BookingServlet";
+        String url = Url.URL_SERVER + "BookingServlet";
         int memId = waiterSelectBookingDetail.getBkId();
         tvBkIdGet.setText(String.valueOf(waiterSelectBookingDetail.getBkId()));
         tvTableGet.setText(String.valueOf(waiterSelectBookingDetail.getTableId()));

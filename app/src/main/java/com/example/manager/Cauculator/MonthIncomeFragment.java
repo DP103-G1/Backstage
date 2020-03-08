@@ -15,10 +15,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.main.Common;
 import com.example.main.R;
-import com.example.Common;
 import com.example.DateTimePickerDialog;
 import com.example.DateTimePickerType;
+import com.example.main.Url;
 import com.example.task.CommonTask;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
@@ -107,11 +108,11 @@ public class MonthIncomeFragment extends Fragment {
         xAxis.setAxisMaximum(32);
         xAxis.setAxisMinimum(0);
         xAxis.setTextSize(13);
-        xAxis.setTextColor(getResources().getColor(R.color.colortext));
+        xAxis.setTextColor(getResources().getColor(R.color.colorText, activity.getTheme()));
         YAxis yAxisLeft = barChart.getAxisLeft();
         yAxisLeft.setAxisMinimum(0f);
         yAxisLeft.setTextSize(13);
-        yAxisLeft.setTextColor(getResources().getColor(R.color.colortext));
+        yAxisLeft.setTextColor(getResources().getColor(R.color.colorText, activity.getTheme()));
         yAxisLeft.setAxisMaximum((float) (barEntries.stream()
                 .mapToDouble(v -> v.getY()).max().orElse(0) * 1.2));
         YAxis yAxisRight = barChart.getAxisRight();
@@ -158,7 +159,7 @@ public class MonthIncomeFragment extends Fragment {
     private List<Order> getOrders() {
         List<Order> orders = null;
         if (Common.networkConnected(activity)){
-            String url = Common.URL_SERVER + "/OrderServlet";
+            String url = Url.URL_SERVER + "/OrderServlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action","search");
             jsonObject.addProperty("calendar", calendar.getTimeInMillis());
