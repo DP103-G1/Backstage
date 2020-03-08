@@ -111,9 +111,10 @@ public class WaiterTableMenuDetailFragment extends Fragment {
                     (SocketMessage) intent.getSerializableExtra("socketMessage");
             String message = socketMessage.getMessage();
             if (socketMessage.getReceiver().equals("waiter") && message != null && !message.isEmpty()) {
-                MenuDetail menuDetail = new Gson().fromJson(message, MenuDetail.class);
-                menuDetails.remove(menuDetail);
-                menuDetails.add(menuDetail);
+                Type listType = new TypeToken<List<MenuDetail>>(){}.getType();
+                List<MenuDetail> socketMenuDetails = new Gson().fromJson(message, listType);
+                menuDetails.removeAll(socketMenuDetails);
+                menuDetails.addAll(socketMenuDetails);
                 Comparator<MenuDetail> cmp = Comparator.comparing(MenuDetail::isFOOD_STATUS).reversed();
                 menuDetails = menuDetails.stream().sorted(cmp).collect(Collectors.toList());
                 showmenudetail(menuDetails);

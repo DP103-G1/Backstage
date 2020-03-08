@@ -200,9 +200,11 @@ public class KitchenFragment extends Fragment {
                         Log.e(TAG, e.toString());
                     }
                     if (count != 0){
+                        List<MenuDetail> socketMenuDetails = new ArrayList<>();
+                        socketMenuDetails.add(menuDetail);
                         SocketMessage socketMessage = new SocketMessage("menuDetail",
                                 "member" + menuDetail.getMemberId(),
-                                new Gson().toJson(menuDetail));
+                                new Gson().toJson(socketMenuDetails));
                         Common.eZeatsWebSocketClient.send(new Gson().toJson(socketMessage));
                         socketMessage.setReceiver("waiter");
                         Common.eZeatsWebSocketClient.send(new Gson().toJson(socketMessage));

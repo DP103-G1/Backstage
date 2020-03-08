@@ -36,6 +36,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
@@ -99,9 +100,10 @@ public class WaiterMenuDetailFragment extends Fragment {
                     (SocketMessage) intent.getSerializableExtra("socketMessage");
             String message = socketMessage.getMessage();
             if (socketMessage.getReceiver().equals("waiter") && message != null && !message.isEmpty()) {
-                MenuDetail menuDetail = new Gson().fromJson(message, MenuDetail.class);
-                menuDetails.remove(menuDetail);
-                menuDetails.add(menuDetail);
+                Type listType = new TypeToken<List<MenuDetail>>(){}.getType();
+                List<MenuDetail> addMenuDetails = new Gson().fromJson(message, listType);
+                menuDetails.removeAll(addMenuDetails);
+                menuDetails.addAll(addMenuDetails);
                 Comparator<MenuDetail> cmp = Comparator.comparing(MenuDetail::isFOOD_STATUS).reversed();
                 menuDetails = menuDetails.stream().sorted(cmp).collect(Collectors.toList());
                 showMenuDetail(menuDetails);
@@ -216,9 +218,11 @@ public class WaiterMenuDetailFragment extends Fragment {
                     }
                     if (count != 0){
                         Common.showToast(getActivity(), R.string.textUpdateSuccess);
+                        List<MenuDetail> socketMenuDetails = new ArrayList<>();
+                        socketMenuDetails.add(menuDetail);
                         SocketMessage socketMessage = new SocketMessage("menuDetail",
                                 "member" + menuDetail.getMemberId(),
-                                new Gson().toJson(menuDetail));
+                                new Gson().toJson(socketMenuDetails));
                         Common.eZeatsWebSocketClient.send(new Gson().toJson(socketMessage));
                         menuDetails.remove(position);
                         notifyDataSetChanged();
