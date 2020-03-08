@@ -2,7 +2,6 @@
     <string name="app_name">EZeats 簡單點</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="textNoNetWork">沒有網路</string>
     <string name="textNoTablesFound">沒有桌位</string>
 
     <string name="textDelete">刪除</string>
@@ -61,7 +60,7 @@
     <string name="tvTime">Date</string>
     <string name="btReply">回覆</string>
     <string name="tvReply1">請輸入文字</string>
-    <string name="btSent">寄出</string>
+    <string name="btSent">送出</string>
     <string name="tvTopic">Title</string>
     <string name="tvGuide">導覽</string>
     <string name="btOperate">操作導引</string>
@@ -75,7 +74,7 @@
     <string name="btMonth">月營收統計</string>
     <string name="btYear">年營收統計</string>
     <string name="tvTitle">標題</string>
-    <string name="tvNumber">No.1</string>
+    <string name="tvNumber">1</string>
     <string name="tvUserNumber">內容</string>
     <string name="tvUser">會員編號</string>
     <string name="tvReply">請輸入文字</string>

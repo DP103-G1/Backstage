@@ -96,7 +96,7 @@ public class ReplyFragment extends Fragment {
                         Common.showToast(activity,R.string.textReplySuccess);
                     }
                 }else {
-                    Common.showToast(activity,R.string.textNoNetWork);
+                    Common.showToast(activity,R.string.textNoNetwork);
                 }
                 navController.popBackStack();
             }

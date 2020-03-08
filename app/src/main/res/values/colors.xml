@@ -19,5 +19,7 @@
     <color name="colorText">#fff59d</color>
     <color name="cardBackground">#1F1F1F</color>
     <color name="cardText">#D1BD67</color>
+    <color name="chartColor">#707070</color>
+    <color name="chartData">#CFCCCC</color>
     <color name="normalText">#707070</color>
 </resources>

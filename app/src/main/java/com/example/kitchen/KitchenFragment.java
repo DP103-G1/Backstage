@@ -31,7 +31,6 @@ import com.example.main.R;
 import com.example.main.Url;
 import com.example.socket.SocketMessage;
 import com.example.task.CommonTask;
-import com.example.task.ImageTask;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;

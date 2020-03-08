@@ -41,8 +41,6 @@ public class EmployeeFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = getActivity();
-
-
     }
 
 
@@ -97,9 +95,7 @@ public class EmployeeFragment extends Fragment {
             employeeGetAllTask = new CommonTask(url,jsonOut);
             try {
                 String jsonIn = employeeGetAllTask.execute().get();
-                Type listType = new TypeToken<List<Employee>>(){
-
-                }.getType();
+                Type listType = new TypeToken<List<Employee>>(){}.getType();
                 employees = Common.gson.fromJson(jsonIn,listType);
             }catch (Exception e){
                 Log.e(TAG,e.toString());
@@ -124,9 +120,7 @@ public class EmployeeFragment extends Fragment {
             employeeGetAllTask = new CommonTask(url,jsonOut);
             try {
                 String jsonIn = employeeGetAllTask.execute().get();
-                Type listType = new TypeToken<List<Employee>>(){
-
-                }.getType();
+                Type listType = new TypeToken<List<Employee>>(){}.getType();
                 employees = Common.gson.fromJson(jsonIn,listType);
             }catch (Exception e){
                 Log.e(TAG,e.toString());
