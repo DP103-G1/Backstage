@@ -31,7 +31,6 @@ public class WaiterSelectDetailFragment extends Fragment {
     private TextView tvBkIdGet,tvTableGet,tvTimeGet,
             tvDateGet,tvChildGet,tvAdultGet,tvPhoneGet;
     private Booking waiterSelectBookingDetail;
-    private Button btBack;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,20 +60,20 @@ public class WaiterSelectDetailFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null){
             waiterSelectBookingDetail = (Booking)bundle.getSerializable("booking");
-            showWaiterSelectBookinDetail();
+            showWaiterSelectBookingDetail();
         }
 
     }
 
-    private void showWaiterSelectBookinDetail() {
-        String url = Common.URL_SERVER + "BookingServlet";
-        int memId = waiterSelectBookingDetail .getBkId();
-        Bitmap bitmap = null;
-        try {
-            bitmap = new ImageTask(url,String.valueOf(memId)).execute().get();
-        }catch (Exception e){
-            Log.e(TAG,e.toString());
-        }
+    private void showWaiterSelectBookingDetail() {
+//        String url = Common.URL_SERVER + "BookingServlet";
+//        int memId = waiterSelectBookingDetail .getBkId();
+//        Bitmap bitmap = null;
+//        try {
+//            bitmap = new ImageTask(url,String.valueOf(memId)).execute().get();
+//        }catch (Exception e){
+//            Log.e(TAG,e.toString());
+//        }
 
         tvBkIdGet.setText(String.valueOf(waiterSelectBookingDetail.getBkId()));
         tvTableGet.setText(String.valueOf(waiterSelectBookingDetail.getTableId()));
@@ -84,6 +83,5 @@ public class WaiterSelectDetailFragment extends Fragment {
         tvChildGet.setText(waiterSelectBookingDetail.getBkChild());
         tvAdultGet.setText(waiterSelectBookingDetail.getBkAdult());
         tvPhoneGet.setText(waiterSelectBookingDetail.getBkPhone());
-
     }
 }

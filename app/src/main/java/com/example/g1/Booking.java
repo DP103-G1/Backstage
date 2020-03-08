@@ -1,11 +1,13 @@
 package com.example.g1;
 
+import com.example.manager.member.Member;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class Booking implements Serializable{
 
-	private int memberId;
+	private Member member;
 	private int tableId;
 	private String bkTime;
 	private Date bkDate;
@@ -15,11 +17,11 @@ public class Booking implements Serializable{
 	private int bkId;
 	private int bkStatus;
 
-
-
-	public Booking(int memberId, int tableId, String bkTime, Date bkDate, String bkChild, String bkAdult,String bkPhone,int bkStatus) {
+	public Booking(Member member, int tableId,
+				   String bkTime, Date bkDate, String bkChild, String bkAdult,
+				   String bkPhone, int bkStatus) {
 		super();
-		this.memberId = memberId;
+		this.member = member;
 		this.tableId = tableId;
 		this.bkTime = bkTime;
 		this.bkDate = bkDate;
@@ -29,9 +31,10 @@ public class Booking implements Serializable{
 		this.bkStatus = bkStatus;
 	}
 
-	public Booking(int memberId, int tableId, String bkTime, Date bkDate, String bkChild, String bkAdult, String bkPhone,int bkId,int bkStatus) {
+	public Booking(Member member, int tableId, String bkTime, Date bkDate, String bkChild, String bkAdult, String bkPhone,
+				   int bkId,int bkStatus) {
 		super();
-		this.memberId = memberId;
+		this.member = member;
 		this.tableId = tableId;
 		this.bkTime = bkTime;
 		this.bkDate = bkDate;
@@ -59,7 +62,7 @@ public class Booking implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Booking [bkId=" + bkId + ", memberId=" + memberId + ", tableId=" + tableId + ", bkTime=" + bkTime
+		return "Booking [bkId=" + bkId + ", member=" + member + ", tableId=" + tableId + ", bkTime=" + bkTime
 				+ ", bkDate=" + bkDate + ", bkChild=" + bkChild + ", bkAdult=" + bkAdult + ", bkPhone=" + bkPhone + "]";
 	}
 
@@ -79,12 +82,12 @@ public class Booking implements Serializable{
 		this.bkId = bkId;
 	}
 
-	public int getMemberId() {
-		return memberId;
+	public Member getMember() {
+		return member;
 	}
 
-	public void setMemberId(int memberId) {
-		this.memberId = memberId;
+	public void setMemberId(Member member) {
+		this.member = member;
 	}
 
 	public int getTableId() {
@@ -134,6 +137,4 @@ public class Booking implements Serializable{
 	public void setBkPhone(String bkPhone) {
 		this.bkPhone = bkPhone;
 	}
-
-
 }
