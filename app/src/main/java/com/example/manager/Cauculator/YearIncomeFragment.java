@@ -3,8 +3,6 @@ package com.example.manager.Cauculator;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -31,10 +29,6 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -115,11 +109,11 @@ public class YearIncomeFragment extends Fragment {
         xAxis.setAxisMaximum(13);
         xAxis.setAxisMinimum(0);
         xAxis.setTextColor(13);
-        xAxis.setTextColor(getResources().getColor(R.color.colortext));
+        xAxis.setTextColor(getResources().getColor(R.color.colorText));
         YAxis yAxisLeft = barChart.getAxisLeft();
         yAxisLeft.setAxisMinimum(0f);
         yAxisLeft.setTextSize(13);
-        yAxisLeft.setTextColor(getResources().getColor(R.color.colortext));
+        yAxisLeft.setTextColor(getResources().getColor(R.color.colorText));
         yAxisLeft.setAxisMaximum((float) (barEntries.stream()
                 .mapToDouble(v -> v.getY()).max().orElse(0) * 1.2));
         YAxis yAxisRight = barChart.getAxisRight();

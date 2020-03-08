@@ -215,7 +215,7 @@ public class MenuFragment extends Fragment {
             holder.tvPrice.setText(String.valueOf(menu.getFOOD_PRICE()));
             if(menu.getFOOD_STATUS() == 0){
                 holder.tvStatus.setText("已下架");
-                holder.tvStatus.setTextColor(getResources().getColor(R.color.menuNopPutColor));
+                holder.tvStatus.setTextColor(getResources().getColor(R.color.menuNoPutColor));
                 holder.tvStatus.setBackgroundColor(getResources().getColor(R.color.noPut));
             } else if(menu.getFOOD_STATUS() == 1){
                 holder.tvStatus.setText("上架中");

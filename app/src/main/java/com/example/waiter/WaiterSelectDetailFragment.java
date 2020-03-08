@@ -75,27 +75,7 @@ public class WaiterSelectDetailFragment extends Fragment {
         btIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                    if (Common.networkConnected(activity)) {
-//                        String url = Common.URL_SERVER + "MemberServlet";
-//                        Member member = new Member(member_id, finalState);
-//                        JsonObject jsonObject = new JsonObject();
-//                        jsonObject.addProperty("action", "updateState");
-//                        jsonObject.addProperty("member", new Gson().toJson(member));
-//                        int count = 0;
-//                        try {
-//                            String result = new CommonTask(url, jsonObject.toString()).execute().get();
-//                            count = Integer.valueOf(result);
-//                        } catch (Exception e) {
-//                            Log.e(TAG, e.toString());
-//                        }
-//                        if (count == 0) {
-//                            Common.showToast(getActivity(), R.string.textUpdateFail);
-//                        } else {
-//                            Common.showToast(getActivity(), R.string.textUpdateSuccess);
-//                        }
-//                    } else {
-//                        Common.showToast(getActivity(), R.string.textNoNetwork);
-//                    }
+
                 if (Common.networkConnected(activity)) {
                     String url = Common.URL_SERVER + "/MembersServlet";
                     Member member = new Member(member_id, finalState);
