@@ -2,11 +2,13 @@ package com.example.waiter;
 
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,11 +17,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.Common;
-import com.example.g1.Booking;
-import com.example.g1.R;
+import com.example.main.Common;
+import com.example.main.Booking;
+import com.example.main.R;
+import com.example.main.Url;
 import com.example.manager.member.Member;
 import com.example.task.CommonTask;
+import com.example.task.ImageTask;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -77,7 +81,7 @@ public class WaiterSelectDetailFragment extends Fragment {
             public void onClick(View v) {
 
                 if (Common.networkConnected(activity)) {
-                    String url = Common.URL_SERVER + "/MembersServlet";
+                    String url = Url.URL_SERVER + "/MembersServlet";
                     Member member = new Member(member_id, finalState);
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action", "updateState");
@@ -105,7 +109,7 @@ public class WaiterSelectDetailFragment extends Fragment {
     }
 
     private void showWaiterSelectBookinDetail() {
-        String url = Common.URL_SERVER + "BookingServlet";
+        String url = Url.URL_SERVER + "BookingServlet";
         int memId = waiterSelectBookingDetail.getBkId();
         tvBkIdGet.setText(String.valueOf(waiterSelectBookingDetail.getBkId()));
         tvTableGet.setText(String.valueOf(waiterSelectBookingDetail.getTableId()));

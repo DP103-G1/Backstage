@@ -31,8 +31,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.Common;
-import com.example.g1.R;
+import com.example.main.Common;
+import com.example.main.R;
+import com.example.main.Url;
 import com.example.task.CommonTask;
 import com.example.task.ImageTask;
 import com.google.gson.Gson;
@@ -193,7 +194,7 @@ public class MenuUpdateFragment extends Fragment {
                 int status = isStatus.isChecked() ? 1 : 0;
 
                 if (Common.networkConnected(activity)) {
-                    String url = Common.URL_SERVER + "MenuServlet";
+                    String url = Url.URL_SERVER + "MenuServlet";
                     Menu menu = new Menu(id, name, price, status, Content);
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action", "update");
@@ -230,7 +231,7 @@ public class MenuUpdateFragment extends Fragment {
     }
 
     private void showMenu() {
-        String url = Common.URL_SERVER + "MenuServlet";
+        String url = Url.URL_SERVER + "MenuServlet";
         id = menu.getMENU_ID();
         int imageSize = getResources().getDisplayMetrics().widthPixels / 3;
         Bitmap bitmap = null;

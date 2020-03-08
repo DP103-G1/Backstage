@@ -3,15 +3,11 @@ package com.example.waiter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -23,31 +19,31 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.Common;
-import com.example.g1.MenuDetail;
-import com.example.g1.Order;
-import com.example.g1.R;
-import com.example.manager.table.Table;
+import com.example.main.Common;
+import com.example.main.MenuDetail;
+import com.example.main.R;
+import com.example.main.Url;
 import com.example.task.CommonTask;
 import com.example.task.ImageTask;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 
+/**
+ * A simple {@link Fragment} subclass.
+ */
 public class WaiterMenuDetailFragment extends Fragment {
     private static final String TAG = "TAG_WaiterMenuDetailFragment";
     private SwipeRefreshLayout swipeRefreshLayout;
+    private RecyclerView rvMenuDetail;
     private Activity activity;
-    private RecyclerView rvMd;
+    private CommonTask waiterGetAllTask;
     private List<MenuDetail> menuDetails;
-    private CommonTask OrderGetAllTask;
-    private ImageTask OrderTask;
-    private int bkId;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,10 +51,9 @@ public class WaiterMenuDetailFragment extends Fragment {
         activity = getActivity();
     }
 
-    @NonNull
+    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container,
-                             @NonNull Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         return inflater.inflate(R.layout.fragment_waiter_menu_detail, container, false);
     }
@@ -67,45 +62,35 @@ public class WaiterMenuDetailFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
-        rvMd = view.findViewById(R.id.rvMd);
+        rvMenuDetail = view.findViewById(R.id.rvMenuDetail);
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeRefreshLayout.setRefreshing(true);
-                menuDetails = getMenuDetail();
-                showmenudetail(menuDetails);
-                swipeRefreshLayout.setRefreshing(false);
-            }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            swipeRefreshLayout.setRefreshing(true);
+            menuDetails = getMenuDetail();
+            showMenuDetail(menuDetails);
+            swipeRefreshLayout.setRefreshing(false);
         });
-        final NavController navController = Navigation.findNavController(view);
-        Bundle bundle = getArguments();
-        if (bundle == null || bundle.getInt("bkId") == 0) {
-            Common.showToast(activity, R.string.textNoOrder);
-            navController.popBackStack();
-            return;
-        }
-        bkId = bundle.getInt("bkId");
 
-        rvMd.setLayoutManager(new LinearLayoutManager(activity));
+        rvMenuDetail.setLayoutManager(new LinearLayoutManager(activity));
         menuDetails = getMenuDetail();
-        showmenudetail(menuDetails);
+        showMenuDetail(menuDetails);
     }
 
     private List<MenuDetail> getMenuDetail() {
         List<MenuDetail> menuDetails = null;
         if (Common.networkConnected(activity)) {
-            String url = Common.URL_SERVER + "MenuDetailServlet";
+            String url = Url.URL_SERVER + "MenuDetailServlet";
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("action", "getAllByBkId");
-            jsonObject.addProperty("bkId", bkId);
+            jsonObject.addProperty("action", "getAll");
+            jsonObject.addProperty("type", "waiter");
             String jsonOut = jsonObject.toString();
-            OrderGetAllTask = new CommonTask(url, jsonOut);
+            waiterGetAllTask = new CommonTask(url, jsonOut);
             try {
-                String jsonIn = OrderGetAllTask.execute().get();
+                String jsonIn = waiterGetAllTask.execute().get();
                 Type listType = new TypeToken<List<MenuDetail>>() {
                 }.getType();
-                menuDetails = Common.gson.fromJson(jsonIn, listType);
+                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+                menuDetails = gson.fromJson(jsonIn, listType);
             } catch (Exception e) {
                 Log.e(TAG, e.toString());
             }
@@ -115,21 +100,21 @@ public class WaiterMenuDetailFragment extends Fragment {
         return menuDetails;
     }
 
-    private void showmenudetail(List<MenuDetail> menuDetailrs) {
-        if (menuDetailrs == null || menuDetailrs.isEmpty()) {
-            Common.showToast(activity, R.string.textNoOrder);
+    private void showMenuDetail(List<MenuDetail> menuDetails) {
+        if (menuDetails == null || menuDetails.isEmpty()) {
+            Common.showToast(activity, R.string.textNOMenu);
         }
-        MenuDetailAdapter orderAdapter = (MenuDetailAdapter) rvMd.getAdapter();
+        MenuDetailAdapter menuDetailAdapter = (MenuDetailAdapter) rvMenuDetail.getAdapter();
 
-        if (orderAdapter == null) {
-            rvMd.setAdapter(new MenuDetailAdapter(activity, menuDetails));
+        if (menuDetailAdapter == null) {
+            rvMenuDetail.setAdapter(new MenuDetailAdapter(activity, menuDetails));
         } else {
-            orderAdapter.setOrders(menuDetails);
-            orderAdapter.notifyDataSetChanged();
+            menuDetailAdapter.setMenuDetail(menuDetails);
+            menuDetailAdapter.notifyDataSetChanged();
         }
     }
 
-    private class MenuDetailAdapter extends RecyclerView.Adapter<MenuDetailAdapter.OrderViewHolder> {
+    private class MenuDetailAdapter extends RecyclerView.Adapter<MenuDetailAdapter.MyViewHolder> {
         private LayoutInflater layoutInflater;
         private List<MenuDetail> menuDetails;
 
@@ -138,81 +123,20 @@ public class WaiterMenuDetailFragment extends Fragment {
             this.menuDetails = menuDetails;
         }
 
-        void setOrders(List<MenuDetail> menuDetails) {
+        void setMenuDetail(List<MenuDetail> menuDetails) {
             this.menuDetails = menuDetails;
         }
 
-        class OrderViewHolder extends RecyclerView.ViewHolder {
-            TextView tvName, tvAmount, tvkitchStatus;
+        class MyViewHolder extends RecyclerView.ViewHolder {
+            TextView tvTableId, tvFoodName, tvFoodAmount;
             Button btStatus;
-            int ordId, amount, total;
-            String menuId;
-            boolean arrival, status;
 
-            OrderViewHolder(@NonNull View itemView) {
+            MyViewHolder(@NonNull View itemView) {
                 super(itemView);
-                tvName = itemView.findViewById(R.id.tvName);
-                tvAmount = itemView.findViewById(R.id.tvAmount);
-                tvkitchStatus = itemView.findViewById(R.id.tvkitchStatus);
+                tvTableId = itemView.findViewById(R.id.tvTableId);
+                tvFoodName = itemView.findViewById(R.id.tvFoodName);
+                tvFoodAmount = itemView.findViewById(R.id.tvFoodAmount);
                 btStatus = itemView.findViewById(R.id.btStatus);
-                btStatus.setOnClickListener(v -> {
-                    if (status) {
-                        if (!arrival) {
-                            arrival = true;
-                            if (Common.networkConnected(activity)) {
-                                String url = Common.URL_SERVER + "MenuDetailServlet";
-                                MenuDetail menuDetails = new MenuDetail(ordId, menuId, amount, arrival, total, status);
-                                JsonObject jsonObject = new JsonObject();
-                                jsonObject.addProperty("action", "update");
-                                jsonObject.addProperty("menuDetail", new Gson().toJson(menuDetails));
-                                int count = 0;
-                                try {
-                                    String result = new CommonTask(url, jsonObject.toString()).execute().get();
-                                    count = Integer.valueOf(result);
-                                } catch (Exception e) {
-                                    Log.e(TAG, e.toString());
-                                }
-                                if (count != 0) {
-                                    Common.showToast(getActivity(), R.string.textUpdateSuccess);
-                                    if (arrival) {
-                                        btStatus.setBackgroundColor(Color.parseColor("#424242"));
-                                        btStatus.setText("已送達");
-                                    }
-                                } else {
-                                    Common.showToast(getActivity(), R.string.textUpdateFail);
-                                }
-                            }
-                        } else {
-                            Common.showToast(activity, R.string.falseStatus);
-                        }
-                    } else {
-                        Common.showToast(activity, R.string.textNoStatus);
-                    }
-                });
-            }
-
-            public void setArrival(boolean food_arrival) {
-                this.arrival = food_arrival;
-            }
-
-            public void setOrdId(int ord_id) {
-                this.ordId = ord_id;
-            }
-
-            public void setMenuId(String menu_id) {
-                this.menuId = menu_id;
-            }
-
-            public void setAmount(int food_amount) {
-                this.amount = food_amount;
-            }
-
-            public void setTotal(int total) {
-                this.total = total;
-            }
-
-            public void setStatus(boolean food_status) {
-                this.status = food_status;
             }
         }
 
@@ -223,57 +147,58 @@ public class WaiterMenuDetailFragment extends Fragment {
 
         @NonNull
         @Override
-        public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View itemView = layoutInflater.inflate(R.layout.item_view_waiter_menudetail, parent, false);
-            return new OrderViewHolder(itemView);
+        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View itemView = layoutInflater.inflate(R.layout.item_view_kitch, parent, false);
+            return new MyViewHolder(itemView);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             final MenuDetail menuDetail = menuDetails.get(position);
-            String url = Common.URL_SERVER + "/MenuDetailServlet";
-//            Bitmap bitmap = null;
-//            try {
-//                bitmap = new ImageTask(url, String.valueOf(tableId)).execute().get();
-//            } catch (Exception e){
-//                Log.e(TAG,e.toString());
-//            }
-
-//            OrderTask = new ImageTask(url, String.valueOf(tableId));
-//            OrderTask.execute();
-            holder.tvName.setText(menuDetail.getFOOD_NAME());
-            holder.tvAmount.setText(String.valueOf(menuDetail.getFOOD_AMOUNT()));
+            holder.tvFoodName.setText(menuDetail.getFOOD_NAME());
+            holder.tvTableId.setText(String.valueOf(menuDetail.getTABLE_ID()));
+            holder.tvFoodAmount.setText(String.valueOf(menuDetail.getFOOD_AMOUNT()));
             if (menuDetail.isFOOD_STATUS()) {
-                holder.tvkitchStatus.setText("已出餐");
+                holder.btStatus.setEnabled(true);
+                holder.btStatus.setText(R.string.textSending);
+                holder.btStatus.setTextColor(getResources().getColor(R.color.colorSecondary, activity.getTheme()));
             } else {
-                holder.tvkitchStatus.setText("未出餐");
+                holder.btStatus.setEnabled(false);
+                holder.btStatus.setText(R.string.textMaking);
+                holder.btStatus.setTextColor(getResources().getColor(R.color.normalText, activity.getTheme()));
             }
-            holder.setOrdId(menuDetail.getORD_ID());
-            holder.setMenuId(menuDetail.getMENU_ID());
-            holder.setAmount(menuDetail.getFOOD_AMOUNT());
-            holder.setArrival(menuDetail.isFOOD_ARRIVAL());
-            holder.setTotal(menuDetail.getTOTAL());
-            holder.setStatus(menuDetail.isFOOD_STATUS());
-            if (menuDetail.isFOOD_ARRIVAL()) {
-                holder.btStatus.setText("已送達");
-                holder.btStatus.setBackgroundColor(Color.parseColor("#424242"));
-            } else {
-                holder.btStatus.setText("未送出");
-                holder.btStatus.setBackgroundColor(Color.parseColor("#222222"));
-            }
+            holder.btStatus.setOnClickListener(v -> {
+                menuDetail.setFOOD_ARRIVAL(true);
+                if (Common.networkConnected(activity)) {
+                    String url1 = Url.URL_SERVER + "MenuDetailServlet";
+                    JsonObject jsonObject = new JsonObject();
+                    jsonObject.addProperty("action", "update");
+                    jsonObject.addProperty("menuDetail", new Gson().toJson(menuDetail));
+                    int count = 0;
+                    try {
+                        String result = new CommonTask(url1, jsonObject.toString()).execute().get();
+                        count = Integer.valueOf(result);
+                    } catch (Exception e) {
+                        Log.e(TAG, e.toString());
+                    }
+                    if (count != 0){
+                        Common.showToast(getActivity(), R.string.textUpdateSuccess);
+                        menuDetails.remove(position);
+                        notifyDataSetChanged();
+                    } else {
+                        Common.showToast(getActivity(), R.string.textUpdateFail);
+                    }
+                }
+            });
         }
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (OrderTask != null) {
-            OrderTask.cancel(true);
-            OrderTask = null;
-        }
-        if (OrderGetAllTask != null) {
-            OrderGetAllTask.cancel(true);
-            OrderGetAllTask = null;
+        if (waiterGetAllTask != null) {
+            waiterGetAllTask.cancel(true);
+            waiterGetAllTask = null;
         }
     }
 }

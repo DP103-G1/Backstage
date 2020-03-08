@@ -13,8 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.Common;
-import com.example.g1.R;
+import com.example.main.Common;
+import com.example.main.R;
+import com.example.main.Url;
 
 
 public class DetailFragment extends Fragment {
@@ -48,7 +49,7 @@ public class DetailFragment extends Fragment {
     }
 
     private void showTable() {
-        String url = Common.URL_SERVER + "TableServlet";
+        String url = Url.URL_SERVER + "TableServlet";
         int id = table.getTableId();
         tvaTableNo.setText(String.valueOf(table.getTableId()));
         tvaPeople.setText(table.getTablePeople());

@@ -2,13 +2,16 @@ package com.example.kitchen;
 
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.graphics.Color;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,8 +25,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.Common;
-import com.example.g1.R;
+import com.example.main.Common;
+import com.example.main.MenuDetail;
+import com.example.main.R;
+import com.example.main.Url;
+import com.example.socket.SocketMessage;
 import com.example.task.CommonTask;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -31,6 +37,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -41,6 +48,7 @@ public class KitchenFragment extends Fragment {
     private Activity activity;
     private CommonTask kitchGetAllTask;
     private List<MenuDetail> menuDetails;
+    private LocalBroadcastManager broadcastManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,8 +65,9 @@ public class KitchenFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        final NavController navController = Navigation.findNavController(view);
         super.onViewCreated(view, savedInstanceState);
+        broadcastManager = LocalBroadcastManager.getInstance(activity);
+        registerSocketReceiver();
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         rvKitch = view.findViewById(R.id.rvKitch);
 
@@ -77,9 +86,10 @@ public class KitchenFragment extends Fragment {
     private List<MenuDetail> getMenuDetail() {
         List<MenuDetail> menuDetails = null;
         if (Common.networkConnected(activity)) {
-            String url = Common.URL_SERVER + "MenuDetailServlet";
+            String url = Url.URL_SERVER + "MenuDetailServlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "getAll");
+            jsonObject.addProperty("type", "kitchen");
             String jsonOut = jsonObject.toString();
             kitchGetAllTask = new CommonTask(url, jsonOut);
             try {
@@ -110,6 +120,24 @@ public class KitchenFragment extends Fragment {
             menuDetailAdapter.notifyDataSetChanged();
         }
     }
+
+    private void registerSocketReceiver() {
+        IntentFilter filter = new IntentFilter("menuDetail");
+        broadcastManager.registerReceiver(menuDetailReceiver, filter);
+    }
+
+    private BroadcastReceiver menuDetailReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            SocketMessage socketMessage =
+                    (SocketMessage) intent.getSerializableExtra("socketMessage");
+            if (socketMessage.getReceiver().equals("kitchen") && socketMessage.getMenuDetail().isPresent()) {
+                MenuDetail menuDetail = socketMessage.getMenuDetail().get();
+                menuDetails.add(menuDetail);
+                showMenuDetail(menuDetails);
+            }
+        }
+    };
 
     private class MenuDetailAdapter extends RecyclerView.Adapter<MenuDetailAdapter.MyviewHolder> {
         private LayoutInflater layoutInflater;
@@ -155,29 +183,30 @@ public class KitchenFragment extends Fragment {
             holder.tvFoodName.setText(menuDetail.getFOOD_NAME());
             holder.tvTableId.setText(String.valueOf(menuDetail.getTABLE_ID()));
             holder.tvFoodAmount.setText(String.valueOf(menuDetail.getFOOD_AMOUNT()));
-            holder.btStatus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    menuDetail.setFOOD_STATUS(true);
-                    if (Common.networkConnected(activity)) {
-                        String url = Common.URL_SERVER + "MenuDetailServlet";
-                        JsonObject jsonObject = new JsonObject();
-                        jsonObject.addProperty("action", "update");
-                        jsonObject.addProperty("menuDetail", new Gson().toJson(menuDetail));
-                        int count = 0;
-                        try {
-                            String result = new CommonTask(url, jsonObject.toString()).execute().get();
-                            count = Integer.valueOf(result);
-                        } catch (Exception e) {
-                            Log.e(TAG, e.toString());
-                        }
-                        if (count != 0){
-                            Common.showToast(getActivity(), R.string.textUpdateSuccess);
-                            menuDetails.remove(position);
-                            notifyDataSetChanged();
-                        } else {
-                            Common.showToast(getActivity(), R.string.textUpdateFail);
-                        }
+            holder.btStatus.setOnClickListener(v -> {
+                menuDetail.setFOOD_STATUS(true);
+                if (Common.networkConnected(activity)) {
+                    String url1 = Url.URL_SERVER + "MenuDetailServlet";
+                    JsonObject jsonObject = new JsonObject();
+                    jsonObject.addProperty("action", "update");
+                    jsonObject.addProperty("menuDetail", new Gson().toJson(menuDetail));
+                    int count = 0;
+                    try {
+                        String result = new CommonTask(url1, jsonObject.toString()).execute().get();
+                        count = Integer.valueOf(result);
+                    } catch (Exception e) {
+                        Log.e(TAG, e.toString());
+                    }
+                    if (count != 0){
+                        SocketMessage socketMessage = new SocketMessage("menuDetail", "member" + menuDetail.getMemberId(), menuDetail);
+                        Common.eZeatsWebSocketClient.send(new Gson().toJson(socketMessage));
+                        socketMessage.setReceiver("waiter");
+                        Common.eZeatsWebSocketClient.send(new Gson().toJson(socketMessage));
+                        menuDetails.remove(position);
+                        notifyDataSetChanged();
+                        Common.showToast(getActivity(), R.string.textUpdateSuccess);
+                    } else {
+                        Common.showToast(getActivity(), R.string.textUpdateFail);
                     }
                 }
             });

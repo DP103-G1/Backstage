@@ -2,6 +2,7 @@ package com.example.manager.Cauculator;
 
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,10 +15,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.Common;
+import com.example.main.Common;
+import com.example.main.R;
 import com.example.DateTimePickerDialog;
 import com.example.DateTimePickerType;
-import com.example.g1.R;
+import com.example.main.Url;
 import com.example.task.CommonTask;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
@@ -106,11 +108,11 @@ public class MonthIncomeFragment extends Fragment {
         xAxis.setAxisMaximum(32);
         xAxis.setAxisMinimum(0);
         xAxis.setTextSize(13);
-        xAxis.setTextColor(getResources().getColor(R.color.colorText));
+        xAxis.setTextColor(getResources().getColor(R.color.colortext));
         YAxis yAxisLeft = barChart.getAxisLeft();
         yAxisLeft.setAxisMinimum(0f);
         yAxisLeft.setTextSize(13);
-        yAxisLeft.setTextColor(getResources().getColor(R.color.colorText));
+        yAxisLeft.setTextColor(getResources().getColor(R.color.colortext));
         yAxisLeft.setAxisMaximum((float) (barEntries.stream()
                 .mapToDouble(v -> v.getY()).max().orElse(0) * 1.2));
         YAxis yAxisRight = barChart.getAxisRight();

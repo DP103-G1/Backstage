@@ -19,9 +19,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.Common;
-import com.example.g1.Booking;
-import com.example.g1.R;
+import com.example.main.Common;
+import com.example.main.Booking;
+import com.example.main.R;
+import com.example.main.Url;
 import com.example.task.CommonTask;
 import com.example.task.ImageTask;
 import com.google.gson.JsonObject;
@@ -153,7 +154,7 @@ public class WaiterSelectFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull WaiterSelectBookingHolder holder, int position) {
             final Booking booking = waiterSelectBooking.get(position);
-            String url = Common.URL_SERVER + "/BookingServlet";
+            String url = Url.URL_SERVER + "/BookingServlet";
             int bkId = booking.getBkId();
             holder.tvName.setText(booking.getMember().getname());
             holder.tvPhone.setText(booking.getBkPhone());
@@ -170,7 +171,7 @@ public class WaiterSelectFragment extends Fragment {
     private List<Booking> getWaiterSelectBooking() {
         List<Booking> waiterSelectBooking = null;
         if (Common.networkConnected(activity)){
-            String url = Common.URL_SERVER + "/BookingServlet";
+            String url = Url.URL_SERVER + "/BookingServlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action","getAll");
             String jsonOut = jsonObject.toString();

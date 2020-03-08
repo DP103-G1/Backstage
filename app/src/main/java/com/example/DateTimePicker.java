@@ -1,16 +1,15 @@
 package com.example;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.NumberPicker;
 
-import com.example.g1.R;
+
+import com.example.main.R;
 
 import java.util.Calendar;
 
 public class DateTimePicker extends FrameLayout {
-    private DateTimePickerType dateTimePickerType;
     private NumberPicker yearSpinner;
     private NumberPicker monthSpinner;
     private NumberPicker daySpinner;
@@ -24,7 +23,6 @@ public class DateTimePicker extends FrameLayout {
             date.add(Calendar.YEAR, -1);
         }
         this.oDate = oDate;
-        this.dateTimePickerType = dateTimePickerType;
 
         inflate(context, R.layout.date_time_piker, this);
 
