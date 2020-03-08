@@ -112,7 +112,7 @@ public class MainFragment extends Fragment {
                 Log.e(TAG, e.toString());
             }
         } else {
-            Common.showToast(activity, "R.string.textDisconnected");
+            Common.showToast(activity, "R.string.textNoNetWork");
         }
         return boxes;
     }
