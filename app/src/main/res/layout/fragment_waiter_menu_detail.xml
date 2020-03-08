@@ -23,7 +23,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="餐點名稱"
-            android:textColor="@color/colortext" />
+            android:textColor="@color/colorText" />
 
         <TextView
             android:id="@+id/textView8"
@@ -32,7 +32,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="餐點數量"
-            android:textColor="@color/colortext" />
+            android:textColor="@color/colorText" />
 
         <TextView
             android:id="@+id/textView9"
@@ -41,7 +41,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="廚房出菜"
-            android:textColor="@color/colortext" />
+            android:textColor="@color/colorText" />
 
         <TextView
             android:id="@+id/textView11"
@@ -50,7 +50,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="送達狀態"
-            android:textColor="@color/colortext" />
+            android:textColor="@color/colorText" />
     </LinearLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

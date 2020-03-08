@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:textColor="@color/colortext"
+        android:textColor="@color/colorText"
         android:text="TableNo" />
 
     <EditText
@@ -25,8 +25,8 @@
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="40dp"
         android:ems="10"
-        android:textColor="@color/colortext"
-        android:textColorHint="@color/colortext"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorText"
         android:theme="@style/MyEditText"
         android:inputType="phone" />
 
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:textColor="@color/colortext"
+        android:textColor="@color/colorText"
         android:text="People" />
 
     <EditText
@@ -47,8 +47,8 @@
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="40dp"
         android:ems="10"
-        android:textColor="@color/colortext"
-        android:textColorHint="@color/colortext"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorText"
         android:theme="@style/MyEditText"
         android:inputType="phone" />
 
@@ -63,8 +63,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:textColor="@color/colortext"
-            android:background="@color/colortitle"
+            android:textColor="@color/colorText"
+            android:background="@color/colorTitle"
             android:text="修改" />
 
         <Button
@@ -73,8 +73,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:textColor="@color/colortext"
-            android:background="@color/colortitle"
+            android:textColor="@color/colorText"
+            android:background="@color/colorTitle"
             android:text="取消" />
     </LinearLayout>
 </LinearLayout>

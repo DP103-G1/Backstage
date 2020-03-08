@@ -11,7 +11,7 @@ public class Member implements Serializable {
 	private String phone;
 	private int state;
 
-	public Member(int member_Id, String account, String password, String name, String phone) {
+	public Member(int member_Id, String account, String password, String name, String phone, int state) {
 		this.member_Id = member_Id;
 		this.account = account;
 		this.password = password;
@@ -19,6 +19,12 @@ public class Member implements Serializable {
 		this.phone = phone;
 		this.state = state;
 	}
+
+	public Member(int member_Id, int state) {
+		this.member_Id = member_Id;
+		this.state = state;
+	}
+
 
 	public Member(String account, String password) {
 		this.account = account;
