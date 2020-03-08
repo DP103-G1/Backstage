@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,9 +23,11 @@ import com.example.main.Booking;
 import com.example.main.R;
 import com.example.main.Url;
 import com.example.manager.member.Member;
+import com.example.socket.SocketMessage;
 import com.example.task.CommonTask;
 import com.example.task.ImageTask;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 import java.text.SimpleDateFormat;
@@ -66,7 +69,7 @@ public class WaiterSelectDetailFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             waiterSelectBookingDetail = (Booking) bundle.getSerializable("booking");
-            showWaiterSelectBookinDetail();
+            showWaiterSelectBookingDetail();
         }
         int member_id = waiterSelectBookingDetail.getMember().getmember_Id();
         int state = waiterSelectBookingDetail.getMember().getState();
@@ -76,61 +79,42 @@ public class WaiterSelectDetailFragment extends Fragment {
 
         btIn = view.findViewById(R.id.btIn);
         int finalState = state;
-        btIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                    if (Common.networkConnected(activity)) {
-//                        String url = Common.URL_SERVER + "MemberServlet";
-//                        Member member = new Member(member_id, finalState);
-//                        JsonObject jsonObject = new JsonObject();
-//                        jsonObject.addProperty("action", "updateState");
-//                        jsonObject.addProperty("member", new Gson().toJson(member));
-//                        int count = 0;
-//                        try {
-//                            String result = new CommonTask(url, jsonObject.toString()).execute().get();
-//                            count = Integer.valueOf(result);
-//                        } catch (Exception e) {
-//                            Log.e(TAG, e.toString());
-//                        }
-//                        if (count == 0) {
-//                            Common.showToast(getActivity(), R.string.textUpdateFail);
-//                        } else {
-//                            Common.showToast(getActivity(), R.string.textUpdateSuccess);
-//                        }
-//                    } else {
-//                        Common.showToast(getActivity(), R.string.textNoNetwork);
-//                    }
-                if (Common.networkConnected(activity)) {
-                    String url = Url.URL_SERVER + "/MembersServlet";
-                    Member member = new Member(member_id, finalState);
-                    JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("action", "updateState");
-                    jsonObject.addProperty("member", new Gson().toJson(member));
-                    int count = 0;
-                    try {
-                        String rs = new CommonTask(url, jsonObject.toString()).execute().get();
-                        count = Integer.valueOf(rs);
-                    } catch (Exception e) {
-                        Log.e(TAG, e.toString());
-                    }
-                    if (count == 0) {
-                        Common.showToast(getActivity(), R.string.textUpdateFail);
-                    } else {
-                        Common.showToast(getActivity(), R.string.textUpdateSuccess);
-                    }
-                } else {
-                    Common.showToast(getActivity(), R.string.textNoNetwork);
+        btIn.setOnClickListener(v -> {
+            if (Common.networkConnected(activity)) {
+                String url = Url.URL_SERVER + "/MembersServlet";
+                String bookingUrl = Url.URL_SERVER + "BookingServlet";
+                Member member = new Member(member_id, finalState);
+                JsonObject jsonObject = new JsonObject();
+                jsonObject.addProperty("action", "updateState");
+                jsonObject.addProperty("member", new Gson().toJson(member));
+                JsonObject bookingJsonObject = new JsonObject();
+                waiterSelectBookingDetail.setStatus(2);
+                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+                bookingJsonObject.addProperty("action", "update");
+                bookingJsonObject.addProperty("booking", gson.toJson(waiterSelectBookingDetail));
+                int count = 0;
+                try {
+                    String rs = new CommonTask(url, jsonObject.toString()).execute().get();
+                    String bookingResult = new CommonTask(bookingUrl, bookingJsonObject.toString()).execute().get();
+                    count = Integer.valueOf(rs) + Integer.parseInt(bookingResult);
+                } catch (Exception e) {
+                    Log.e(TAG, e.toString());
                 }
-                return;
+                if (count != 2) {
+                    Common.showToast(getActivity(), R.string.textUpdateFail);
+                } else {
+                    SocketMessage socketMessage = new SocketMessage("seat", "member" + member_id, "");
+                    Common.eZeatsWebSocketClient.send(new Gson().toJson(socketMessage));
+                    Common.showToast(getActivity(), R.string.textUpdateSuccess);
+                    Navigation.findNavController(v).popBackStack();
+                }
+            } else {
+                Common.showToast(getActivity(), R.string.textNoNetwork);
             }
         });
-
-
     }
 
-    private void showWaiterSelectBookinDetail() {
-        String url = Url.URL_SERVER + "BookingServlet";
-        int memId = waiterSelectBookingDetail.getBkId();
+    private void showWaiterSelectBookingDetail() {
         tvBkIdGet.setText(String.valueOf(waiterSelectBookingDetail.getBkId()));
         tvTableGet.setText(String.valueOf(waiterSelectBookingDetail.getTableId()));
         tvTimeGet.setText(waiterSelectBookingDetail.getBkTime());

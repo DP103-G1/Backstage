@@ -3,7 +3,7 @@
     <color name="colorPrimary">#212121</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorPrimaryLight">#484848</color>
-    <color name="colorAccent">#4CAF50</color>
+    <color name="colorAccent">#FF4CAF50</color>
     <color name="colorSecondary">#FFE082</color>
     <color name="colorSecondaryDark">#CAAE53</color>
     <color name="colorSecondaryLight">#FFFFB3</color>
@@ -22,4 +22,5 @@
     <color name="chartColor">#707070</color>
     <color name="chartData">#CFCCCC</color>
     <color name="normalText">#707070</color>
+    <color name="colorClear">#00000000</color>
 </resources>

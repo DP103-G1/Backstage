@@ -77,7 +77,7 @@ public class UpdateFragment extends Fragment {
                 }
                 if (Common.networkConnected(activity)){
                     String url = Url.URL_SERVER + "TableServlet";
-                    table.Table(people,tableId);
+                    Table table = new Table(tableId, people);
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action","tableUpdate");
                     jsonObject.addProperty("table",new Gson().toJson(table));
