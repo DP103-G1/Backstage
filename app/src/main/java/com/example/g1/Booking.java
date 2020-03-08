@@ -6,7 +6,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Booking implements Serializable {
-	private int bkId;
 	private Member member;
 	private int tableId;
 	private String bkTime;
@@ -14,14 +13,13 @@ public class Booking implements Serializable {
 	private String bkChild;
 	private String bkAdult;
 	private String bkPhone;
-	private int status;
-	private int state;
+	private int bkId;
+	private int bkStatus;
 
-	public Booking(int bkId, Member member, int tableId,
-                   String bkTime, Date bkDate, String bkChild, String bkAdult,
-                   String bkPhone, int status) {
+	public Booking(Member member, int tableId,
+				   String bkTime, Date bkDate, String bkChild, String bkAdult,
+				   String bkPhone, int bkStatus) {
 		super();
-		this.bkId = bkId;
 		this.member = member;
 		this.tableId = tableId;
 		this.bkTime = bkTime;
@@ -29,20 +27,51 @@ public class Booking implements Serializable {
 		this.bkChild = bkChild;
 		this.bkAdult = bkAdult;
 		this.bkPhone = bkPhone;
-		this.status = status;
+		this.bkStatus = bkStatus;
+	}
+
+	public Booking(Member member, int tableId, String bkTime, Date bkDate, String bkChild, String bkAdult, String bkPhone,
+				   int bkId,int bkStatus) {
+		super();
+		this.member = member;
+		this.tableId = tableId;
+		this.bkTime = bkTime;
+		this.bkDate = bkDate;
+		this.bkChild = bkChild;
+		this.bkAdult = bkAdult;
+		this.bkPhone = bkPhone;
+		this.bkId = bkId;
+		this.bkStatus = bkStatus;
+
+	}
+
+	public Booking( int tableId, String bkTime, Date bkDate, String bkChild, String bkAdult,String bkPhone,int bkId,int bkStatus) {
+		super();
+		this.tableId = tableId;
+		this.bkTime = bkTime;
+		this.bkDate = bkDate;
+		this.bkChild = bkChild;
+		this.bkAdult = bkAdult;
+		this.bkPhone = bkPhone;
+		this.bkId=bkId;
+		this.bkStatus = bkStatus;
 	}
 
 
 
+	@Override
+	public String toString() {
+		return "Booking [bkId=" + bkId + ", member=" + member + ", tableId=" + tableId + ", bkTime=" + bkTime
+				+ ", bkDate=" + bkDate + ", bkChild=" + bkChild + ", bkAdult=" + bkAdult + ", bkPhone=" + bkPhone + "]";
+	}
 
-//
-//	@Override
-//	public String toString() {
-//		return "Booking [bkId=" + bkId + ", memberId=" + memberId + ", tableId=" + tableId + ", bkTime=" + bkTime
-//				+ ", bkDate=" + bkDate + ", bkChild=" + bkChild + ", bkAdult=" + bkAdult + ", bkPhone=" + bkPhone + "]";
-//	}
+	public int getStatus() {
+		return bkStatus;
+	}
 
-
+	public void setStatus(int status) {
+		this.bkStatus = status;
+	}
 
 	public int getBkId() {
 		return bkId;
@@ -50,6 +79,14 @@ public class Booking implements Serializable {
 
 	public void setBkId(int bkId) {
 		this.bkId = bkId;
+	}
+
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMemberId(Member member) {
+		this.member = member;
 	}
 
 	public int getTableId() {
@@ -101,27 +138,4 @@ public class Booking implements Serializable {
 	}
 
 
-	public int getstatus() {
-		return status;
-	}
-
-	public void setstatus(int status) {
-		status = status;
-	}
-
-	public int getState() {
-		return state;
-	}
-
-	public void setState(int state) {
-		this.state = state;
-	}
-
-	public Member getMember() {
-		return member;
-	}
-
-	public void setMember(Member member) {
-		this.member = member;
-	}
 }

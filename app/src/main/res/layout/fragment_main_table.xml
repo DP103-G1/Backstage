@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:src="@drawable/add"
-        app:backgroundTint="@color/btAddcolor"
+        app:backgroundTint="@color/btAddColor"
         app:elevation="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

@@ -27,11 +27,12 @@ import com.example.task.ImageTask;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Member;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.stream.Collectors;
 
 public class WaiterSelectFragment extends Fragment {
     private static final String TAG = "TAG_WaiterSelectFragment";
@@ -40,6 +41,10 @@ public class WaiterSelectFragment extends Fragment {
     private RecyclerView rvWaiterSelectBooking;
     private List<Booking> waiterSelectBookings;
     private CommonTask waiterSelectBookingGetAllTask;
+    private ImageTask waiterSelectBookingTask;
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+
 
 
     @Override
@@ -87,6 +92,12 @@ public class WaiterSelectFragment extends Fragment {
                     showWaiterSelectBooking(waiterSelectBookings);
                 } else {
                     List<Booking> searchBookings = new ArrayList<>();
+                    searchBookings = waiterSelectBookings.stream()
+                            .filter(v -> v.getMember().getname().contains(newText)
+                            || v.getBkPhone().contains(newText)
+                            || v.getBkTime().contains(newText)
+                            || simpleDateFormat.format(v.getBkDate()).contains(newText))
+                            .collect(Collectors.toList());
 
                     for (Booking searchBooking : waiterSelectBookings) {
                         if (String.valueOf(searchBooking.getBkId()).contains(newText)) {
@@ -102,28 +113,29 @@ public class WaiterSelectFragment extends Fragment {
         });
     }
 
-
-    private class WaiterSelectBookingAdapter extends RecyclerView.Adapter<WaiterSelectBookingAdapter.WaiterSelectBookingHolder> {
+    private class WaiterSelectBookingAdapter extends RecyclerView.Adapter<WaiterSelectBookingAdapter.WaiterSelectBookingHolder>{
         private LayoutInflater layoutInflater;
         private List<Booking> waiterSelectBooking;
 
-        WaiterSelectBookingAdapter(Context context, List<Booking> waiterSelectBookin) {
+            WaiterSelectBookingAdapter(Context context,List<Booking> waiterSelectBooking){
             layoutInflater = LayoutInflater.from(context);
-            this.waiterSelectBooking = waiterSelectBookin;
+            this.waiterSelectBooking = waiterSelectBooking;
         }
 
-        void setWaiterSelectBookin(List<Booking> waiterSelectBookin) {
-            this.waiterSelectBooking = waiterSelectBookin;
+        void setWaiterSelectBooking(List<Booking> waiterSelectBooking){
+            this.waiterSelectBooking = waiterSelectBooking;
         }
 
 
         class WaiterSelectBookingHolder extends RecyclerView.ViewHolder {
-            TextView tvBkId, tvBkDate;
+            TextView tvName,tvBkDate,tvTime,tvPhone;
 
-            WaiterSelectBookingHolder(@NonNull View view) {
+           WaiterSelectBookingHolder(@NonNull View view) {
                 super(view);
                 tvBkDate = view.findViewById(R.id.tvDate);
-                tvBkId = view.findViewById(R.id.tvBkId);
+                tvName = view.findViewById(R.id.tvName);
+                tvTime = view.findViewById(R.id.tvTime);
+                tvPhone = view.findViewById(R.id.tvPhone);
             }
         }
 
@@ -136,62 +148,59 @@ public class WaiterSelectFragment extends Fragment {
         @NonNull
         @Override
         public WaiterSelectBookingHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = layoutInflater.inflate(R.layout.item_view_select, parent, false);
+            View view = layoutInflater.inflate(R.layout.item_view_select,parent,false);
             return new WaiterSelectBookingHolder(view);
         }
 
         @Override
         public void onBindViewHolder(@NonNull WaiterSelectBookingHolder holder, int position) {
             final Booking booking = waiterSelectBooking.get(position);
-            holder.tvBkId.setText(String.valueOf(booking.getBkId()));
-
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String url = Common.URL_SERVER + "/BookingServlet";
+            int bkId = booking.getBkId();
+            holder.tvName.setText(booking.getMember().getname());
+            holder.tvPhone.setText(booking.getBkPhone());
+            holder.tvTime.setText(booking.getBkTime());
             holder.tvBkDate.setText(simpleDateFormat.format(booking.getBkDate()));
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("booking", booking);
-                    Navigation.findNavController(v).navigate(R.id.waiterSelectDetailFragment, bundle);
-                }
+            holder.itemView.setOnClickListener(v -> {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("booking",booking);
+                Navigation.findNavController(v).navigate(R.id.waiterSelectDetailFragment,bundle);
             });
         }
-
     }
-
 
     private List<Booking> getWaiterSelectBooking() {
         List<Booking> waiterSelectBooking = null;
-        if (Common.networkConnected(activity)) {
+        if (Common.networkConnected(activity)){
             String url = Common.URL_SERVER + "/BookingServlet";
             JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("action", "getAll");
+            jsonObject.addProperty("action","getAll");
             String jsonOut = jsonObject.toString();
-            waiterSelectBookingGetAllTask = new CommonTask(url, jsonOut);
+            waiterSelectBookingGetAllTask = new CommonTask(url,jsonOut);
             try {
                 String jsonIn = waiterSelectBookingGetAllTask.execute().get();
-                Type listType = new TypeToken<List<Booking>>() {
+                Type listType = new TypeToken<List<Booking>>(){
 
                 }.getType();
-                waiterSelectBooking = Common.gson.fromJson(jsonIn, listType);
-            } catch (Exception e) {
-                Log.e(TAG, e.toString());
+                waiterSelectBooking = Common.gson.fromJson(jsonIn,listType);
+            }catch (Exception e){
+                Log.e(TAG,e.toString());
             }
-        } else {
-            Common.showToast(activity, R.string.textNoNetwork);
+        }else {
+            Common.showToast(activity,R.string.textNoNetwork);
         }
         return waiterSelectBooking;
     }
 
     private void showWaiterSelectBooking(List<Booking> waiterSelectBooking) {
-        if (waiterSelectBooking == null || waiterSelectBooking.isEmpty()) {
-            Common.showToast(activity, R.string.textNoSelectBookingFound);
+        if (waiterSelectBooking == null || waiterSelectBooking.isEmpty()){
+            Common.showToast(activity,R.string.textNoSelectBookingFound);
         }
         WaiterSelectBookingAdapter waiterSelectBookingAdapter = (WaiterSelectBookingAdapter) rvWaiterSelectBooking.getAdapter();
-        if (waiterSelectBookingAdapter == null) {
-            rvWaiterSelectBooking.setAdapter(new WaiterSelectBookingAdapter(activity, waiterSelectBooking));
-        } else {
-            waiterSelectBookingAdapter.setWaiterSelectBookin(waiterSelectBooking);
+        if (waiterSelectBookingAdapter == null){
+            rvWaiterSelectBooking.setAdapter(new WaiterSelectBookingAdapter(activity,waiterSelectBooking));
+        }else {
+            waiterSelectBookingAdapter.setWaiterSelectBooking(waiterSelectBooking);
             waiterSelectBookingAdapter.notifyDataSetChanged();
         }
     }

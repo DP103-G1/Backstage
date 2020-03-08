@@ -3,7 +3,6 @@ package com.example.manager.menu;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -216,11 +215,11 @@ public class MenuFragment extends Fragment {
             holder.tvPrice.setText(String.valueOf(menu.getFOOD_PRICE()));
             if(menu.getFOOD_STATUS() == 0){
                 holder.tvStatus.setText("已下架");
-                holder.tvStatus.setTextColor(getResources().getColor(R.color.menunoputcolor));
+                holder.tvStatus.setTextColor(getResources().getColor(R.color.menuNopPutColor));
                 holder.tvStatus.setBackgroundColor(getResources().getColor(R.color.noPut));
             } else if(menu.getFOOD_STATUS() == 1){
                 holder.tvStatus.setText("上架中");
-                holder.tvStatus.setTextColor(getResources().getColor(R.color.menuputcolor));
+                holder.tvStatus.setTextColor(getResources().getColor(R.color.menuPutColor));
                 holder.tvStatus.setBackgroundColor(getResources().getColor(R.color.put));
             }
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {

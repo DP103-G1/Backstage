@@ -26,9 +26,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/colortitle"
+                android:background="@color/colorTitle"
                 android:text="員工"
-                android:textColor="@color/colortext" />
+                android:textColor="@color/colorText" />
         </LinearLayout>
 
         <TextView
@@ -46,18 +46,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/colortitle"
+                android:background="@color/colorTitle"
                 android:text="桌位"
-                android:textColor="@color/colortext" />
+                android:textColor="@color/colorText" />
 
             <Button
                 android:id="@+id/btMenu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/colortitle"
+                android:background="@color/colorTitle"
                 android:text="菜單"
-                android:textColor="@color/colortext" />
+                android:textColor="@color/colorText" />
         </LinearLayout>
 
         <TextView
@@ -75,18 +75,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/colortitle"
+                android:background="@color/colorTitle"
                 android:text="意見箱"
-                android:textColor="@color/colortext" />
+                android:textColor="@color/colorText" />
 
             <Button
                 android:id="@+id/btRevenue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/colortitle"
+                android:background="@color/colorTitle"
                 android:text="營收統計"
-                android:textColor="@color/colortext" />
+                android:textColor="@color/colorText" />
         </LinearLayout>
 
     </LinearLayout>
