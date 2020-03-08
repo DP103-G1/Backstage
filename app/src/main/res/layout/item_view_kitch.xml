@@ -63,7 +63,7 @@
             android:layout_marginStart="294dp"
             android:background="#ff000000"
             android:textColor="@color/colortext"
-            android:text="未出餐"
+            android:text="完成"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

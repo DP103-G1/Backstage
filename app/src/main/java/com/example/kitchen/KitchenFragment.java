@@ -25,7 +25,6 @@ import android.widget.TextView;
 import com.example.Common;
 import com.example.g1.R;
 import com.example.task.CommonTask;
-import com.example.task.ImageTask;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -41,7 +40,6 @@ public class KitchenFragment extends Fragment {
     private RecyclerView rvKitch;
     private Activity activity;
     private CommonTask kitchGetAllTask;
-    private ImageTask kitchImageTask;
     private List<MenuDetail> menuDetails;
 
     @Override
@@ -64,14 +62,11 @@ public class KitchenFragment extends Fragment {
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         rvKitch = view.findViewById(R.id.rvKitch);
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeRefreshLayout.setRefreshing(true);
-                menuDetails = getMenuDetail();
-                showMenuDetail(menuDetails);
-                swipeRefreshLayout.setRefreshing(false);
-            }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            swipeRefreshLayout.setRefreshing(true);
+            menuDetails = getMenuDetail();
+            showMenuDetail(menuDetails);
+            swipeRefreshLayout.setRefreshing(false);
         });
 
         rvKitch.setLayoutManager(new LinearLayoutManager(activity));
@@ -132,9 +127,6 @@ public class KitchenFragment extends Fragment {
         class MyviewHolder extends RecyclerView.ViewHolder {
             TextView tvTableId, tvFoodName, tvFoodAmount;
             Button btStatus;
-            boolean status;
-            int ordid, foodamount, total;
-            String menuid;
 
             MyviewHolder(@NonNull View itemView) {
                 super(itemView);
@@ -142,52 +134,6 @@ public class KitchenFragment extends Fragment {
                 tvFoodName = itemView.findViewById(R.id.tvFoodName);
                 tvFoodAmount = itemView.findViewById(R.id.tvFoodAmount);
                 btStatus = itemView.findViewById(R.id.btStatus);
-                btStatus.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (!status) {
-                            status = true;
-                            if (Common.networkConnected(activity)) {
-                                String url = Common.URL_SERVER + "MenuDetailServlet";
-                                MenuDetail menuDetail = new MenuDetail(ordid, menuid, foodamount, total, status);
-                                JsonObject jsonObject = new JsonObject();
-                                jsonObject.addProperty("action", "update");
-                                jsonObject.addProperty("menuDetail", new Gson().toJson(menuDetail));
-                                int count = 0;
-                                try {
-                                    String result = new CommonTask(url, jsonObject.toString()).execute().get();
-                                    count = Integer.valueOf(result);
-                                } catch (Exception e) {
-                                    Log.e(TAG, e.toString());
-                                }
-                                if (count != 0){
-                                    Common.showToast(getActivity(), R.string.textUpdateSuccess);
-                                    btStatus.setBackgroundColor(Color.parseColor("#424242"));
-                                    btStatus.setText("已出餐");
-                                } else {
-                                    Common.showToast(getActivity(), R.string.textUpdateFail);
-                                }
-                            }
-                        } else {
-                            Common.showToast(activity, R.string.falseStatus);
-                        }
-                    }
-                });
-            }
-            public void setOrdId(int ordId){
-                this.ordid = ordId;
-            }
-            public void setMenuId(String menuid){
-                this.menuid = menuid;
-            }
-            public void SetStatus(boolean status) {
-                this.status = status;
-            }
-            public void setAmount(int foodamount) {
-                this.foodamount = foodamount;
-            }
-            public void setTotal(int total) {
-                this.total = total;
             }
         }
 
@@ -206,25 +152,35 @@ public class KitchenFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull MyviewHolder holder, int position) {
             final MenuDetail menuDetail = menuDetails.get(position);
-            String url = Common.URL_SERVER + "MenuDetailServlet";
-            String id = menuDetail.getMENU_ID();
-            kitchImageTask = new ImageTask(url, id);
-            kitchImageTask.execute();
             holder.tvFoodName.setText(menuDetail.getFOOD_NAME());
             holder.tvTableId.setText(String.valueOf(menuDetail.getTABLE_ID()));
             holder.tvFoodAmount.setText(String.valueOf(menuDetail.getFOOD_AMOUNT()));
-            holder.setOrdId(menuDetail.getORD_ID());
-            holder.setMenuId(menuDetail.getMENU_ID());
-            holder.setAmount(menuDetail.getFOOD_AMOUNT());
-            holder.setTotal(menuDetail.getTOTAL());
-            holder.SetStatus(menuDetail.isFOOD_STATUS());
-            if (menuDetail.isFOOD_STATUS()) {
-                holder.btStatus.setText("已出餐");
-                holder.btStatus.setBackgroundColor(Color.parseColor("#424242"));
-            } else {
-                holder.btStatus.setText("未出餐");
-                holder.btStatus.setBackgroundColor(Color.parseColor("#222222"));
-            }
+            holder.btStatus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    menuDetail.setFOOD_STATUS(true);
+                    if (Common.networkConnected(activity)) {
+                        String url = Common.URL_SERVER + "MenuDetailServlet";
+                        JsonObject jsonObject = new JsonObject();
+                        jsonObject.addProperty("action", "update");
+                        jsonObject.addProperty("menuDetail", new Gson().toJson(menuDetail));
+                        int count = 0;
+                        try {
+                            String result = new CommonTask(url, jsonObject.toString()).execute().get();
+                            count = Integer.valueOf(result);
+                        } catch (Exception e) {
+                            Log.e(TAG, e.toString());
+                        }
+                        if (count != 0){
+                            Common.showToast(getActivity(), R.string.textUpdateSuccess);
+                            menuDetails.remove(position);
+                            notifyDataSetChanged();
+                        } else {
+                            Common.showToast(getActivity(), R.string.textUpdateFail);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -234,11 +190,6 @@ public class KitchenFragment extends Fragment {
         if (kitchGetAllTask != null) {
             kitchGetAllTask.cancel(true);
             kitchGetAllTask = null;
-        }
-
-        if (kitchImageTask != null) {
-            kitchImageTask.cancel(true);
-            kitchImageTask = null;
         }
     }
 }

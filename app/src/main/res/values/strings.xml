@@ -2,7 +2,6 @@
     <string name="app_name">EZeats 簡單點</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="textNoNetWork">沒有網路</string>
     <string name="textNoTablesFound">沒有桌位</string>
 
     <string name="textDelete">刪除</string>
