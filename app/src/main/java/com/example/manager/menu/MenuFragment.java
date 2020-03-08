@@ -3,7 +3,6 @@ package com.example.manager.menu;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -24,8 +23,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.Common;
-import com.example.g1.R;
+import com.example.main.Common;
+import com.example.main.R;
+import com.example.main.Url;
 import com.example.task.CommonTask;
 import com.example.task.ImageTask;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -126,7 +126,7 @@ public class MenuFragment extends Fragment {
     private List<Menu> getMenu() {
         List<Menu> menus = null;
         if (Common.networkConnected(activity)) {
-            String url = Common.URL_SERVER + "MenuServlet";
+            String url = Url.URL_SERVER + "MenuServlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "getAll");
             String jsonOut = jsonObject.toString();
@@ -208,7 +208,7 @@ public class MenuFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             final Menu menu = menus.get(position);
-            String url = Common.URL_SERVER + "MenuServlet";
+            String url = Url.URL_SERVER + "MenuServlet";
             String id = menu.getMENU_ID();
             menuImageTask = new ImageTask(url, id, imageSize, holder.imageView);
             menuImageTask.execute();
@@ -216,11 +216,11 @@ public class MenuFragment extends Fragment {
             holder.tvPrice.setText(String.valueOf(menu.getFOOD_PRICE()));
             if(menu.getFOOD_STATUS() == 0){
                 holder.tvStatus.setText("已下架");
-                holder.tvStatus.setTextColor(getResources().getColor(R.color.menunoputcolor));
+                holder.tvStatus.setTextColor(getResources().getColor(R.color.menuNoPutColor));
                 holder.tvStatus.setBackgroundColor(getResources().getColor(R.color.noPut));
             } else if(menu.getFOOD_STATUS() == 1){
                 holder.tvStatus.setText("上架中");
-                holder.tvStatus.setTextColor(getResources().getColor(R.color.menuputcolor));
+                holder.tvStatus.setTextColor(getResources().getColor(R.color.menuPutColor));
                 holder.tvStatus.setBackgroundColor(getResources().getColor(R.color.put));
             }
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {

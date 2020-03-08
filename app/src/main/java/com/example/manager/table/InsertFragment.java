@@ -18,8 +18,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.Common;
-import com.example.g1.R;
+import com.example.main.Common;
+import com.example.main.R;
+import com.example.main.Url;
 import com.example.task.CommonTask;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -67,7 +68,7 @@ public class InsertFragment extends Fragment {
                     Common.showToast(getActivity(),R.string.textPeopleInvalid);
                 }
                 if (Common.networkConnected(activity)){
-                    String url = Common.URL_SERVER + "TableServlet";
+                    String url = Url.URL_SERVER + "TableServlet";
                     Table table = new Table(tableId,people,0);
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action","tableInsert");

@@ -30,8 +30,9 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.example.Common;
-import com.example.g1.R;
+import com.example.main.Common;
+import com.example.main.R;
+import com.example.main.Url;
 import com.example.task.CommonTask;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -186,7 +187,7 @@ public class MenuInsertFragment extends Fragment {
                 String content = etContent.getText().toString().trim();
 
                 if (Common.networkConnected(activity)) {
-                    String url = Common.URL_SERVER + "MenuServlet";
+                    String url = Url.URL_SERVER + "MenuServlet";
                     Menu menu = new Menu(id, name, pricest, status, content);
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action", "add");

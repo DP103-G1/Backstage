@@ -8,7 +8,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -20,18 +19,16 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-import com.example.Common;
-import com.example.g1.Booking;
-import com.example.g1.R;
+import com.example.main.Common;
+import com.example.main.R;
+import com.example.main.Url;
 import com.example.task.CommonTask;
 import com.example.task.ImageTask;
-import com.example.waiter.WaiterSelectFragment;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 
@@ -139,7 +136,7 @@ public class MemberFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull MemberHolder holder, int position) {
             final Member member = memberList.get(position);
-            String url = Common.URL_SERVER + "/MembersServlet";
+            String url = Url.URL_SERVER + "/MembersServlet";
             String memId = String.valueOf(member.getmember_Id());
             memberTask = new ImageTask(url,memId);
             memberTask.execute();
@@ -162,7 +159,7 @@ public class MemberFragment extends Fragment {
     private List<Member> getMembers() {
         List<Member> members = null;
         if (Common.networkConnected(activity)){
-            String url = Common.URL_SERVER + "/MembersServlet";
+            String url = Url.URL_SERVER + "/MembersServlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action","getAll");
             String jsonOut = jsonObject.toString();

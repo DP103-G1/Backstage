@@ -18,8 +18,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.example.Common;
-import com.example.g1.R;
+import com.example.main.Common;
+import com.example.main.R;
+import com.example.main.Url;
 import com.example.task.CommonTask;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -75,7 +76,7 @@ public class UpdateFragment extends Fragment {
                     return;
                 }
                 if (Common.networkConnected(activity)){
-                    String url = Common.URL_SERVER + "TableServlet";
+                    String url = Url.URL_SERVER + "TableServlet";
                     table.Table(people,tableId);
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action","tableUpdate");

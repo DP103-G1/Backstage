@@ -16,12 +16,12 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="訂位查詢" />
+                android:text="@string/textAllMenuDetail" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="點餐查詢" />
+                android:text="@string/textTable" />
 
         </com.google.android.material.tabs.TabLayout>
 

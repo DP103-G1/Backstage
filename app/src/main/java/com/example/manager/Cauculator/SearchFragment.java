@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.example.g1.R;
+import com.example.main.R;
 
 
 public class SearchFragment extends Fragment {

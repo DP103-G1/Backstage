@@ -22,8 +22,9 @@ import android.view.ViewGroup;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.example.Common;
-import com.example.g1.R;
+import com.example.main.Common;
+import com.example.main.R;
+import com.example.main.Url;
 import com.example.task.CommonTask;
 import com.example.task.ImageTask;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -100,7 +101,7 @@ public class MainTableFragment extends Fragment {
     private List<Table> getTables() {
         List<Table> tables = null;
         if (Common.networkConnected(activity)){
-            String url = Common.URL_SERVER + "TableServlet";
+            String url = Url.URL_SERVER + "TableServlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action","getAll");
             String jsonOut = jsonObject.toString();
@@ -159,7 +160,7 @@ public class MainTableFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
                 final Table table = tables.get(position);
-                String url = Common.URL_SERVER + "TableServlet";
+                String url = Url.URL_SERVER + "TableServlet";
                 int id = table.getTableId();
                 tableImageTask = new ImageTask(url, String.valueOf(id));
                 tableImageTask.execute();
@@ -190,7 +191,7 @@ public class MainTableFragment extends Fragment {
                                         break;
                                     case R.id.delete:
                                         if (Common.networkConnected(activity)){
-                                            String url = Common.URL_SERVER +"/TableServlet";
+                                            String url = Url.URL_SERVER +"/TableServlet";
                                             JsonObject jsonObject = new JsonObject();
                                             jsonObject.addProperty("action","tableDelete");
                                             jsonObject.addProperty("tableId",table.getTableId());

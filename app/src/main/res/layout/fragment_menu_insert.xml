@@ -41,18 +41,18 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:background="@color/colortitle"
+                android:background="@color/colorTitle"
                 android:text="@string/textTakePicture"
-                android:textColor="@color/colortext" />
+                android:textColor="@color/colorText" />
 
             <Button
                 android:id="@+id/btPickPicture"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="96dp"
                 android:layout_height="wrap_content"
-                android:background="@color/colortitle"
+                android:background="@color/colorTitle"
                 android:text="@string/textPickPicture"
-                android:textColor="@color/colortext" />
+                android:textColor="@color/colorText" />
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -62,7 +62,7 @@
             android:layout_margin="20dp"
             android:layout_marginStart="2dp"
             android:layout_marginTop="1dp"
-            android:textColorHint="@color/colortext"
+            android:textColorHint="@color/colorText"
             app:hintTextAppearance="@style/TextLabel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,8 +74,8 @@
                 android:layout_height="match_parent"
                 android:hint="@string/textMenuId"
                 android:inputType="text"
-                android:textColor="@color/colortext"
-                android:textColorHint="@color/colortext"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"
                 android:theme="@style/MyEditText"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="258dp" />
@@ -88,7 +88,7 @@
             android:layout_margin="20dp"
             android:layout_marginStart="2dp"
             android:layout_marginTop="5dp"
-            android:textColorHint="@color/colortext"
+            android:textColorHint="@color/colorText"
             app:hintTextAppearance="@style/TextLabel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -100,8 +100,8 @@
                 android:layout_height="40dp"
                 android:hint="@string/textName"
                 android:inputType="text"
-                android:textColor="@color/colortext"
-                android:textColorHint="@color/colortext"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"
                 android:theme="@style/MyEditText" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -112,7 +112,7 @@
             android:layout_margin="20dp"
             android:layout_marginStart="2dp"
             android:layout_marginTop="5dp"
-            android:textColorHint="@color/colortext"
+            android:textColorHint="@color/colorText"
             app:hintTextAppearance="@style/TextLabel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -124,8 +124,8 @@
                 android:layout_height="42dp"
                 android:hint="@string/textPrice"
                 android:inputType="phone"
-                android:textColor="@color/colortext"
-                android:textColorHint="@color/colortext"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"
                 android:theme="@style/MyEditText" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -136,7 +136,7 @@
             android:layout_margin="20dp"
             android:layout_marginStart="2dp"
             android:layout_marginTop="5dp"
-            android:textColorHint="@color/colortext"
+            android:textColorHint="@color/colorText"
             app:hintTextAppearance="@style/TextLabel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -147,8 +147,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/textContent"
-                android:textColor="@color/colortext"
-                android:textColorHint="@color/colortext"
+                android:textColor="@color/colorText"
+                android:textColorHint="@color/colorText"
                 android:theme="@style/MyEditText" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -159,9 +159,9 @@
             android:layout_marginTop="18dp"
             android:layout_marginEnd="27dp"
             android:layout_marginBottom="1dp"
-            android:background="@color/colortitle"
+            android:background="@color/colorTitle"
             android:text="@string/textInsert"
-            android:textColor="@color/colortext"
+            android:textColor="@color/colorText"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btCancel"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
@@ -173,9 +173,9 @@
             android:layout_marginTop="18dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="1dp"
-            android:background="@color/colortitle"
+            android:background="@color/colorTitle"
             android:text="@string/textCancel"
-            android:textColor="@color/colortext"
+            android:textColor="@color/colorText"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
@@ -186,7 +186,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="184dp"
             android:text="上下架"
-            android:textColor="@color/colortext"
+            android:textColor="@color/colorText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

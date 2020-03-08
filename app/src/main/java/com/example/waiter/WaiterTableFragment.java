@@ -20,11 +20,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.Common;
-import com.example.g1.R;
+import com.example.main.Common;
+import com.example.main.R;
+import com.example.main.Url;
 import com.example.manager.table.Table;
 import com.example.task.CommonTask;
-import com.example.task.ImageTask;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
@@ -77,7 +77,7 @@ public class WaiterTableFragment extends Fragment {
     private List<Table> getTable() {
         List<Table> tables = null;
         if (Common.networkConnected(activity)) {
-            String url = Common.URL_SERVER + "/TableServlet";
+            String url = Url.URL_SERVER + "/TableServlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "getAllOrdId");
             String jsonOut = jsonObject.toString();

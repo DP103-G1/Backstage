@@ -8,15 +8,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.g1.R;
+import com.example.main.R;
 
 public class MySelectAdapter extends FragmentStatePagerAdapter {
-    private static final int[] TAB_TITLES = new int[]{R.string.textSelectBooking,R.string.textSelectOrder};
+    private static final int[] TAB_TITLES = new int[]{R.string.textAllMenuDetail, R.string.textTable};
 
     private Context mContext;
 
     public MySelectAdapter(@NonNull Context context, FragmentManager fm) {
-        super(fm);
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         mContext = context;
     }
 
@@ -25,7 +25,7 @@ public class MySelectAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return new WaiterSelectFragment();
+                return new WaiterMenuDetailFragment();
             case 1:
                 return new WaiterTableFragment();
             default:

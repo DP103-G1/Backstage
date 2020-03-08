@@ -8,7 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,9 +17,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.Common;
-import com.example.g1.Booking;
-import com.example.g1.R;
+import com.example.main.Common;
+import com.example.main.Booking;
+import com.example.main.R;
+import com.example.main.Url;
 import com.example.task.ImageTask;
 
 import java.text.SimpleDateFormat;
@@ -67,7 +68,7 @@ public class WaiterSelectDetailFragment extends Fragment {
     }
 
     private void showWaiterSelectBookinDetail() {
-        String url = Common.URL_SERVER + "BookingServlet";
+        String url = Url.URL_SERVER + "BookingServlet";
         int memId = waiterSelectBookingDetail .getBkId();
         Bitmap bitmap = null;
         try {

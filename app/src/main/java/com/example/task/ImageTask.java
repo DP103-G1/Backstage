@@ -6,7 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.example.g1.R;
+import com.example.main.R;
 import com.google.gson.JsonObject;
 
 import java.io.BufferedInputStream;
