@@ -113,8 +113,6 @@ public class LoginFragment extends Fragment {
                     }
                 }else {
                     Common.showToast(activity,R.string.textLoginfail);
-
-
                 }
             }catch (Exception e){
                 Log.e(TAG,e.toString());
