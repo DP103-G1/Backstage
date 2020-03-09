@@ -3,8 +3,7 @@
     <color name="colorPrimary">#212121</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorPrimaryLight">#484848</color>
-    <color name="colorAccent">#4CAF50</color>
-    <color name="btAddColor">#7BC6DB</color>
+    <color name="colorAccent">#FF4CAF50</color>
     <color name="colorSecondary">#FFE082</color>
     <color name="colorSecondaryDark">#CAAE53</color>
     <color name="colorSecondaryLight">#FFFFB3</color>
@@ -17,14 +16,12 @@
     <color name="menuNoPutColor">#291818</color>
     <color name="colorBackground">#333238</color>
     <color name="colorTitle">#222222</color>
-    <color name="colorText">#D1BD67</color>
-    <color name="cardBackground">#424242</color>
-    <color name="colorTitle">#222222</color>
     <color name="colorText">#fff59d</color>
     <color name="cardBackground">#1F1F1F</color>
     <color name="cardText">#D1BD67</color>
     <color name="normalText">#9B883A</color>
     <color name="chartColor">#707070</color>
     <color name="chartData">#CFCCCC</color>
+    <color name="colorClear">#00000000</color>
     <color name="normalText1">#707070</color>
 </resources>

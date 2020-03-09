@@ -2,13 +2,17 @@ package com.example.waiter;
 
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,6 +30,7 @@ import com.example.main.Common;
 import com.example.main.MenuDetail;
 import com.example.main.R;
 import com.example.main.Url;
+import com.example.socket.SocketMessage;
 import com.example.task.CommonTask;
 import com.example.task.ImageTask;
 import com.google.gson.Gson;
@@ -33,7 +38,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class WaiterTableMenuDetailFragment extends Fragment {
@@ -45,6 +52,7 @@ public class WaiterTableMenuDetailFragment extends Fragment {
     private CommonTask OrderGetAllTask;
     private ImageTask OrderTask;
     private int bkId;
+    private LocalBroadcastManager broadcastManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,6 +71,8 @@ public class WaiterTableMenuDetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        broadcastManager = LocalBroadcastManager.getInstance(activity);
+        registerSocketReceiver();
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         rvMd = view.findViewById(R.id.rvMd);
 
@@ -88,6 +98,29 @@ public class WaiterTableMenuDetailFragment extends Fragment {
         menuDetails = getMenuDetail();
         showmenudetail(menuDetails);
     }
+
+    private void registerSocketReceiver() {
+        IntentFilter filter = new IntentFilter("menuDetail");
+        broadcastManager.registerReceiver(receiver, filter);
+    }
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            SocketMessage socketMessage =
+                    (SocketMessage) intent.getSerializableExtra("socketMessage");
+            String message = socketMessage.getMessage();
+            if (socketMessage.getReceiver().equals("waiter") && message != null && !message.isEmpty()) {
+                Type listType = new TypeToken<List<MenuDetail>>(){}.getType();
+                List<MenuDetail> socketMenuDetails = new Gson().fromJson(message, listType);
+                menuDetails.removeAll(socketMenuDetails);
+                menuDetails.addAll(socketMenuDetails);
+                Comparator<MenuDetail> cmp = Comparator.comparing(MenuDetail::isFOOD_STATUS).reversed();
+                menuDetails = menuDetails.stream().sorted(cmp).collect(Collectors.toList());
+                showmenudetail(menuDetails);
+            }
+        }
+    };
 
     private List<MenuDetail> getMenuDetail() {
         List<MenuDetail> menuDetails = null;
@@ -196,6 +229,10 @@ public class WaiterTableMenuDetailFragment extends Fragment {
                         Log.e(TAG, e.toString());
                     }
                     if (count != 0) {
+                        SocketMessage socketMessage = new SocketMessage("menuDetail",
+                                "member" + menuDetail.getMemberId(),
+                                new Gson().toJson(menuDetail));
+                        Common.eZeatsWebSocketClient.send(new Gson().toJson(socketMessage));
                         Common.showToast(getActivity(), R.string.textUpdateSuccess);
                         holder.btStatus.setEnabled(false);
                         holder.btStatus.setText(R.string.textComplete);

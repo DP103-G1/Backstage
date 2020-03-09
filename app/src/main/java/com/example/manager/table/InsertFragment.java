@@ -69,7 +69,7 @@ public class InsertFragment extends Fragment {
                 }
                 if (Common.networkConnected(activity)){
                     String url = Url.URL_SERVER + "TableServlet";
-                    Table table = new Table(tableId,people,0);
+                    Table table = new Table(tableId, people, 0);
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action","tableInsert");
                     jsonObject.addProperty("table",new Gson().toJson(table));

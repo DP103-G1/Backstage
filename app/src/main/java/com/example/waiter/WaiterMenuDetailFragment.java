@@ -2,12 +2,16 @@ package com.example.waiter;
 
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -23,6 +27,7 @@ import com.example.main.Common;
 import com.example.main.MenuDetail;
 import com.example.main.R;
 import com.example.main.Url;
+import com.example.socket.SocketMessage;
 import com.example.task.CommonTask;
 import com.example.task.ImageTask;
 import com.google.gson.Gson;
@@ -31,7 +36,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 
 /**
@@ -44,6 +53,7 @@ public class WaiterMenuDetailFragment extends Fragment {
     private Activity activity;
     private CommonTask waiterGetAllTask;
     private List<MenuDetail> menuDetails;
+    private LocalBroadcastManager broadcastManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +71,8 @@ public class WaiterMenuDetailFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        broadcastManager = LocalBroadcastManager.getInstance(activity);
+        registerSocketReceiver();
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         rvMenuDetail = view.findViewById(R.id.rvMenuDetail);
 
@@ -75,6 +87,29 @@ public class WaiterMenuDetailFragment extends Fragment {
         menuDetails = getMenuDetail();
         showMenuDetail(menuDetails);
     }
+
+    private void registerSocketReceiver() {
+        IntentFilter filter = new IntentFilter("menuDetail");
+        broadcastManager.registerReceiver(socketReceiver, filter);
+    }
+
+    private BroadcastReceiver socketReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            SocketMessage socketMessage =
+                    (SocketMessage) intent.getSerializableExtra("socketMessage");
+            String message = socketMessage.getMessage();
+            if (socketMessage.getReceiver().equals("waiter") && message != null && !message.isEmpty()) {
+                Type listType = new TypeToken<List<MenuDetail>>(){}.getType();
+                List<MenuDetail> addMenuDetails = new Gson().fromJson(message, listType);
+                menuDetails.removeAll(addMenuDetails);
+                menuDetails.addAll(addMenuDetails);
+                Comparator<MenuDetail> cmp = Comparator.comparing(MenuDetail::isFOOD_STATUS).reversed();
+                menuDetails = menuDetails.stream().sorted(cmp).collect(Collectors.toList());
+                showMenuDetail(menuDetails);
+            }
+        }
+    };
 
     private List<MenuDetail> getMenuDetail() {
         List<MenuDetail> menuDetails = null;
@@ -183,6 +218,12 @@ public class WaiterMenuDetailFragment extends Fragment {
                     }
                     if (count != 0){
                         Common.showToast(getActivity(), R.string.textUpdateSuccess);
+                        List<MenuDetail> socketMenuDetails = new ArrayList<>();
+                        socketMenuDetails.add(menuDetail);
+                        SocketMessage socketMessage = new SocketMessage("menuDetail",
+                                "member" + menuDetail.getMemberId(),
+                                new Gson().toJson(socketMenuDetails));
+                        Common.eZeatsWebSocketClient.send(new Gson().toJson(socketMessage));
                         menuDetails.remove(position);
                         notifyDataSetChanged();
                     } else {
@@ -196,6 +237,7 @@ public class WaiterMenuDetailFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
+        broadcastManager.unregisterReceiver(socketReceiver);
         if (waiterGetAllTask != null) {
             waiterGetAllTask.cancel(true);
             waiterGetAllTask = null;

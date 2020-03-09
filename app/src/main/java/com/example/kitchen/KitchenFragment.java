@@ -131,9 +131,11 @@ public class KitchenFragment extends Fragment {
         public void onReceive(Context context, Intent intent) {
             SocketMessage socketMessage =
                     (SocketMessage) intent.getSerializableExtra("socketMessage");
-            if (socketMessage.getReceiver().equals("kitchen") && socketMessage.getMenuDetail().isPresent()) {
-                MenuDetail menuDetail = socketMessage.getMenuDetail().get();
-                menuDetails.add(menuDetail);
+            String message = socketMessage.getMessage();
+            if (socketMessage.getReceiver().equals("kitchen") && message != null && !message.isEmpty()) {
+                Type listType = new TypeToken<List<MenuDetail>>(){}.getType();
+                List<MenuDetail> addMenuDetails = new Gson().fromJson(message, listType);
+                menuDetails.addAll(addMenuDetails);
                 showMenuDetail(menuDetails);
             }
         }
@@ -198,7 +200,11 @@ public class KitchenFragment extends Fragment {
                         Log.e(TAG, e.toString());
                     }
                     if (count != 0){
-                        SocketMessage socketMessage = new SocketMessage("menuDetail", "member" + menuDetail.getMemberId(), menuDetail);
+                        List<MenuDetail> socketMenuDetails = new ArrayList<>();
+                        socketMenuDetails.add(menuDetail);
+                        SocketMessage socketMessage = new SocketMessage("menuDetail",
+                                "member" + menuDetail.getMemberId(),
+                                new Gson().toJson(socketMenuDetails));
                         Common.eZeatsWebSocketClient.send(new Gson().toJson(socketMessage));
                         socketMessage.setReceiver("waiter");
                         Common.eZeatsWebSocketClient.send(new Gson().toJson(socketMessage));
