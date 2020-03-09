@@ -85,7 +85,7 @@
                                 android:gravity="center|top"
                                 android:paddingStart="5dp"
                                 android:paddingBottom="3dp"
-                                android:textColor="@color/colorAccent"
+                                android:textColor="@color/colorText"
                                 android:textSize="18sp"
                                 tools:text="@string/tvUserNumber" />
 
@@ -101,7 +101,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingEnd="12dp"
-                                android:textColor="@color/colorText"
+                                android:textColor="@android:color/darker_gray"
                                 android:textSize="16sp"
                                 tools:text="@string/tvTime" />
 
@@ -153,7 +153,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="end"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="10dp">
 
                             <Button
                                 android:id="@+id/btReply"
@@ -163,7 +165,8 @@
                                 android:background="@color/normalText"
 
                                 android:text="@string/btReply"
-                                android:textColor="@color/chartButtonText" />
+                                android:textColor="@color/chartButtonText"
+                                android:textSize="18sp" />
                         </LinearLayout>
 
                     </LinearLayout>
