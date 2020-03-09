@@ -11,9 +11,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:textColor="@color/colorText"
         android:background="@color/colorTitle"
         android:text="@string/textUpdate"
+        android:textColor="@color/colorSecondary"
         app:layout_constraintEnd_toEndOf="@+id/btUpdate1"
         app:layout_constraintStart_toStartOf="@+id/btUpdate1"
         app:layout_constraintTop_toBottomOf="@+id/btUpdate1" />
@@ -52,7 +52,7 @@
         android:layout_marginEnd="10dp"
         android:background="@color/colorTitle"
         android:text="@string/textUpdate"
-        android:textColor="@color/colorText"
+        android:textColor="@color/colorSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/etManagerPassWord"
         app:layout_constraintTop_toTopOf="parent" />
@@ -116,9 +116,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
-        android:textColor="@color/colorText"
         android:background="@color/colorTitle"
         android:text="@string/textUpdate"
+        android:textColor="@color/colorSecondary"
         app:layout_constraintEnd_toEndOf="@+id/btUpdate2"
         app:layout_constraintStart_toStartOf="@+id/btUpdate2"
         app:layout_constraintTop_toBottomOf="@+id/btUpdate2" />
