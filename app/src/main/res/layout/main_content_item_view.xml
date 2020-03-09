@@ -12,15 +12,18 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary">
 
             <TextView
                 android:id="@+id/tvNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="49dp"
-                android:layout_marginStart="11dp"
-                android:padding="16dp"
+                android:gravity="center"
+                android:padding="5dp"
                 android:text="@string/tvNumber"
+                android:textColor="@color/colorSecondary"
+                android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/tvNo"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,127 +31,154 @@
                 android:id="@+id/tvQuestion"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:padding="16dp"
+                android:padding="10dp"
                 android:text="@string/tvTitle"
-                android:textSize="18sp"
+                android:textColor="@color/colorSecondary"
+                android:textSize="23sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/tvNumber"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@id/tvNumber" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ExpandedLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvQuestion"
-                app:layout_constraintVertical_bias="0.0">
-
-                <LinearLayout
-                    android:id="@+id/contentLayout"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ExpandedLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toBottomOf="@+id/tvQuestion"
+                    app:layout_constraintVertical_bias="0.0">
 
                     <LinearLayout
-                        android:id="@+id/messageLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/tvUser"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorAccent"
-                            android:textSize="13dp"
-                            tools:text="@string/tvUser" />
-
-                        <TextView
-                            android:id="@+id/tvUserNumber"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:textColor="@color/colorAccent"
-                            android:textSize="16sp"
-                            tools:text="@string/tvUserNumber" />
-
-                        <TextView
-                            android:id="@+id/textView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
-
-                        <TextView
-                            android:id="@+id/tvTime"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingEnd="10dp"
-                            tools:text="@string/tvTime" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/tvContent"
-                        android:layout_width="match_parent"
+                        android:id="@+id/contentLayout"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textSize="28sp"
-                        tools:text="@string/tvMainContent" />
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                    <LinearLayout
-                        android:id="@+id/reMessageLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tvIsReply"
+                        <LinearLayout
+                            android:id="@+id/messageLayout"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/tvIsReply"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:id="@+id/tvReplyContent"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="28sp"
-                            tools:text="@string/tvReplyContent" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/buttonLinearLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="end"
-                        android:orientation="vertical">
-
-                        <Button
-                            android:id="@+id/btReply"
-                            android:layout_width="76dp"
                             android:layout_height="match_parent"
-                            android:text="@string/btReply" />
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvUser"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="5dp"
+                                android:paddingBottom="5dp"
+                                android:text="@string/tvUser"
+                                android:textColor="@color/colorSecondary"
+                                android:textSize="18dp" />
+
+                            <TextView
+                                android:id="@+id/tvUserNumber"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center|top"
+                                android:paddingStart="5dp"
+                                android:paddingBottom="3dp"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="18sp"
+                                tools:text="@string/tvUserNumber" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="@color/colorSecondary" />
+
+                            <TextView
+                                android:id="@+id/tvTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingEnd="12dp"
+                                android:textColor="@color/colorText"
+                                android:textSize="16sp"
+                                tools:text="@string/tvTime" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvContent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="5dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:textColor="@color/chartData"
+                            android:textSize="23sp"
+                            tools:text="@string/tvMainContent" />
+
+                        <LinearLayout
+                            android:id="@+id/reMessageLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvIsReply"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="5dp"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
+                                android:text="@string/tvIsReply"
+                                android:textColor="@color/colorSecondary"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:id="@+id/tvReplyContent"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="5dp"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
+                                android:textColor="@color/chartData"
+                                android:textSize="23sp"
+                                tools:text="@string/tvReplyContent" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/buttonLinearLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:orientation="vertical">
+
+                            <Button
+                                android:id="@+id/btReply"
+                                android:layout_width="76dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="12sp"
+                                android:background="@color/normalText"
+
+                                android:text="@string/btReply"
+                                android:textColor="@color/chartButtonText" />
+                        </LinearLayout>
+
                     </LinearLayout>
 
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/tvNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:text="@string/tvNo"
+                android:textColor="@color/colorSecondary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

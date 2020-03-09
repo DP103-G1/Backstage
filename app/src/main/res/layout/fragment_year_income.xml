@@ -14,7 +14,7 @@
         android:layout_marginEnd="10dp"
         android:background="@color/normalText"
         android:text="Button"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/chartButtonText"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
