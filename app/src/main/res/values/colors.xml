@@ -16,11 +16,13 @@
     <color name="menuNoPutColor">#291818</color>
     <color name="colorBackground">#333238</color>
     <color name="colorTitle">#222222</color>
-    <color name="colorText">#fff59d</color>
+    <color name="colorText">#FFF59D</color>
     <color name="cardBackground">#1F1F1F</color>
     <color name="cardText">#D1BD67</color>
     <color name="normalText">#9B883A</color>
     <color name="chartColor">#707070</color>
-    <color name="chartData">#CFCCCC</color>
+    <color name="chartData">#F2EDEB</color>
+    <color name="chartButtonText">#1A1A19</color>
+    <color name="colorClear">#00000000</color>
     <color name="normalText1">#707070</color>
 </resources>

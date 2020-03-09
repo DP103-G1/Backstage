@@ -1,20 +1,16 @@
 package com.example.socket;
 
-import com.example.main.MenuDetail;
-
 import java.io.Serializable;
-import java.util.Optional;
-
 
 public class SocketMessage implements Serializable {
 	private String type;//{"menuDetail", "seat", "service"}
 	private String receiver;
-	private MenuDetail menuDetail;
+	private String message;
 
-	public SocketMessage(String type, String receiver, MenuDetail menuDetail) {
+	public SocketMessage(String type, String receiver, String message) {
 		this.type = type;
 		this.receiver = receiver;
-		this.menuDetail = menuDetail;
+		this.message = message;
 	}
 
 	public SocketMessage(String type, String receiver) {
@@ -37,11 +33,11 @@ public class SocketMessage implements Serializable {
 		this.receiver = receiver;
 	}
 
-	public Optional<MenuDetail> getMenuDetail() {
-		return Optional.ofNullable(menuDetail);
+	public String getMessage() {
+		return message;
 	}
 	
-	public void setMenuDetail(MenuDetail menuDetail) {
-		this.menuDetail = menuDetail;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 }

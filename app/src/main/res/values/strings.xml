@@ -76,7 +76,7 @@
     <string name="tvTitle">標題</string>
     <string name="tvNumber">1</string>
     <string name="tvUserNumber">內容</string>
-    <string name="tvUser">會員編號</string>
+    <string name="tvUser">會員編號:</string>
     <string name="tvReply">請輸入文字</string>
     <string name="etMemberName">姓名：</string>
     <string name="etTopic">標題：</string>

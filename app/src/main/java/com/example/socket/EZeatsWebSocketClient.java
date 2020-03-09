@@ -55,9 +55,7 @@ public class EZeatsWebSocketClient extends WebSocketClient {
         SocketMessage socketMessage = new Gson().fromJson(message, SocketMessage.class);
         String type = socketMessage.getType();
         Intent intent = new Intent(type);
-        if (type.equals("menuDetail")) {
-            intent.putExtra("socketMessage", socketMessage);
-        }
+        intent.putExtra("socketMessage", socketMessage);
         broadcastManager.sendBroadcast(intent);
     }
 }
