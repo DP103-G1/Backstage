@@ -13,8 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:textColor="@color/colorText"
-        android:text="TableNo" />
+        android:text="@string/textTable"
+        android:textColor="@color/colorText" />
 
     <EditText
         android:id="@+id/etTableNo"
@@ -35,8 +35,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:textColor="@color/colorText"
-        android:text="People" />
+        android:text="@string/textPeople"
+        android:textColor="@color/colorText" />
 
     <EditText
         android:id="@+id/etPeople"
@@ -63,9 +63,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:textColor="@color/colorText"
             android:background="@color/colorTitle"
-            android:text="修改" />
+            android:text="修改"
+            android:textColor="@color/colorSecondary" />
 
         <Button
             android:id="@+id/btCancel"
@@ -73,8 +73,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_weight="1"
-            android:textColor="@color/colorText"
             android:background="@color/colorTitle"
-            android:text="取消" />
+            android:text="取消"
+            android:textColor="@color/colorSecondary" />
     </LinearLayout>
 </LinearLayout>

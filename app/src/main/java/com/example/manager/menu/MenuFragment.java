@@ -177,7 +177,7 @@ public class MenuFragment extends Fragment {
 
         class MyViewHolder extends RecyclerView.ViewHolder {
             ImageView imageView;
-            TextView tvMenuId, tvName, tvPrice, tvContent, tvStatus;
+            TextView tvMenuId, tvName, tvPrice, tvContent, tvStatus, tvStatusColor, tvNoStatusColor;
 
 
             MyViewHolder(View itemView) {
@@ -188,6 +188,8 @@ public class MenuFragment extends Fragment {
                 tvPrice = itemView.findViewById(R.id.tvPrice);
                 tvContent = itemView.findViewById(R.id.tvContent);
                 tvStatus = itemView.findViewById(R.id.tvStatus);
+                tvStatusColor = itemView.findViewById(R.id.tvStatusColor);
+                tvNoStatusColor = itemView.findViewById(R.id.tvStatusNoColor);
 
             }
 
@@ -216,12 +218,12 @@ public class MenuFragment extends Fragment {
             holder.tvPrice.setText(String.valueOf(menu.getFOOD_PRICE()));
             if(menu.getFOOD_STATUS() == 0){
                 holder.tvStatus.setText("已下架");
-                holder.tvStatus.setTextColor(getResources().getColor(R.color.menuNoPutColor));
-                holder.tvStatus.setBackgroundColor(getResources().getColor(R.color.noPut));
+                holder.tvStatus.setTextColor(getResources().getColor(R.color.menuPutColor));
+                holder.tvStatusColor.setVisibility(View.GONE);
             } else if(menu.getFOOD_STATUS() == 1){
                 holder.tvStatus.setText("上架中");
                 holder.tvStatus.setTextColor(getResources().getColor(R.color.menuPutColor));
-                holder.tvStatus.setBackgroundColor(getResources().getColor(R.color.put));
+                holder.tvNoStatusColor.setVisibility(View.GONE);
             }
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override

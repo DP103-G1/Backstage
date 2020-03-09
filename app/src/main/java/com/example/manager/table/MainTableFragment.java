@@ -189,30 +189,30 @@ public class MainTableFragment extends Fragment {
                                         bundle.putSerializable("table",table);
                                         Navigation.findNavController(v).navigate(R.id.action_mainTableFragment_to_updateFragment,bundle);
                                         break;
-                                    case R.id.delete:
-                                        if (Common.networkConnected(activity)){
-                                            String url = Url.URL_SERVER +"/TableServlet";
-                                            JsonObject jsonObject = new JsonObject();
-                                            jsonObject.addProperty("action","tableDelete");
-                                            jsonObject.addProperty("tableId",table.getTableId());
-                                            int count = 0;
-                                            try {
-                                                tableDeleteTask = new CommonTask(url,jsonObject.toString());
-                                                String result = tableDeleteTask.execute().get();
-                                                count = Integer.valueOf(result);
-                                            }catch (Exception e){
-                                                Log.e(TAG,e.toString());
-                                            }
-                                            if (count == 0){
-                                                Common.showToast(activity,R.string.textDeleteFail);
-                                            }else {
-                                                tables.remove(table);
-                                                TableAdapter.this.notifyDataSetChanged();
-                                                Common.showToast(activity,R.string.textDeleteSuccess);
-                                            }
-                                        }else {
-                                            Common.showToast(activity,R.string.textNoNetwork);
-                                        }
+//                                    case R.id.delete:
+//                                        if (Common.networkConnected(activity)){
+//                                            String url = Url.URL_SERVER +"/TableServlet";
+//                                            JsonObject jsonObject = new JsonObject();
+//                                            jsonObject.addProperty("action","tableDelete");
+//                                            jsonObject.addProperty("tableId",table.getTableId());
+//                                            int count = 0;
+//                                            try {
+//                                                tableDeleteTask = new CommonTask(url,jsonObject.toString());
+//                                                String result = tableDeleteTask.execute().get();
+//                                                count = Integer.valueOf(result);
+//                                            }catch (Exception e){
+//                                                Log.e(TAG,e.toString());
+//                                            }
+//                                            if (count == 0){
+//                                                Common.showToast(activity,R.string.textDeleteFail);
+//                                            }else {
+//                                                tables.remove(table);
+//                                                TableAdapter.this.notifyDataSetChanged();
+//                                                Common.showToast(activity,R.string.textDeleteSuccess);
+//                                            }
+//                                        }else {
+//                                            Common.showToast(activity,R.string.textNoNetwork);
+//                                        }
                                 }
                                 return true;
                             }

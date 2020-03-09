@@ -24,7 +24,7 @@ public class MenuDetail {
 		this.TOTAL = TOTAL;
 		this.FOOD_STATUS = FOOD_STATUS;
 	}
-	
+
 	public MenuDetail(int ORD_ID, String MENU_ID, String FOOD_NAME, int FOOD_AMOUNT, boolean FOOD_ARRIVAL, int TOTAL, boolean FOOD_STATUS) {
 		this.ORD_ID = ORD_ID;
 		this.MENU_ID = MENU_ID;
@@ -34,7 +34,7 @@ public class MenuDetail {
 		this.TOTAL = TOTAL;
 		this.FOOD_STATUS = FOOD_STATUS;
 	}
-	
+
 	public MenuDetail(int ORD_ID, String MENU_ID, int FOOD_AMOUNT, int TOTAL, boolean FOOD_STATUS) {
 		this.ORD_ID = ORD_ID;
 		this.MENU_ID = MENU_ID;
@@ -42,11 +42,11 @@ public class MenuDetail {
 		this.TOTAL = TOTAL;
 		this.FOOD_STATUS = FOOD_STATUS;
 	}
-	
+
 	public MenuDetail(String MENU_ID, int FOOD_AMOUNT, int TOTAL) {
 		this(0, MENU_ID, FOOD_AMOUNT, false, TOTAL, false);
 	}
-	
+
 	public MenuDetail(int ORD_ID, String MENU_ID, int TABLE_ID, String FOOD_NAME, int FOOD_AMOUNT, boolean FOOD_ARRIVAL, int TOTAL, boolean FOOD_STATUS) {
 		this.ORD_ID = ORD_ID;
 		this.MENU_ID = MENU_ID;
@@ -57,7 +57,7 @@ public class MenuDetail {
 		this.TOTAL = TOTAL;
 		this.FOOD_STATUS = FOOD_STATUS;
 	}
-	
+
 	public MenuDetail(int ORD_ID, String MENU_ID, int TABLE_ID, String FOOD_NAME, int FOOD_AMOUNT, boolean FOOD_ARRIVAL, int TOTAL, boolean FOOD_STATUS, int memberId) {
 		this.ORD_ID = ORD_ID;
 		this.MENU_ID = MENU_ID;
@@ -69,7 +69,7 @@ public class MenuDetail {
 		this.FOOD_STATUS = FOOD_STATUS;
 		this.memberId = memberId;
 	}
-	
+
 	public MenuDetail(int ORD_ID, String MENU_ID, int TABLE_ID, String FOOD_NAME, int FOOD_AMOUNT, boolean FOOD_ARRIVAL, int TOTAL, int ORD_TOTAL, boolean FOOD_STATUS, boolean ORD_BILL) {
 		this.ORD_ID = ORD_ID;
 		this.MENU_ID = MENU_ID;
