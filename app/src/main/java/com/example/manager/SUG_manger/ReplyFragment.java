@@ -17,8 +17,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import com.example.Common;
-import com.example.g1.R;
+import com.example.main.Common;
+import com.example.main.R;
+import com.example.main.Url;
 import com.example.task.CommonTask;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -71,7 +72,7 @@ public class ReplyFragment extends Fragment {
                 String reply = etReply.getText().toString().trim();
 
                 if (Common.networkConnected(activity)){
-                    String url = Common.URL_SERVER + "/BoxServlet";
+                    String url = Url.URL_SERVER + "/BoxServlet";
                     box.setReply(reply);//get reply轉jason
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action","boxUpdate");
@@ -105,7 +106,7 @@ public class ReplyFragment extends Fragment {
     }
 
     private  void  showBox(){
-        String url = Common.URL_SERVER + "/BoxServlet";
+        String url = Url.URL_SERVER + "/BoxServlet";
         etReply.setText(box.getReply());
         tvTopic.setText(box.getTopic());
 

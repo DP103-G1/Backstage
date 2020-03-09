@@ -21,8 +21,9 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.Common;
-import com.example.g1.R;
+import com.example.main.Common;
+import com.example.main.R;
+import com.example.main.Url;
 import com.example.task.CommonTask;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -98,7 +99,7 @@ public class MainFragment extends Fragment {
     private List<Box> getBoxes() {
         List<Box> boxes = null;
         if (Common.networkConnected(activity)) {
-            String url = Common.URL_SERVER + "/BoxServlet";
+            String url = Url.URL_SERVER + "/BoxServlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "getAll");
             String jsonOut = jsonObject.toString();

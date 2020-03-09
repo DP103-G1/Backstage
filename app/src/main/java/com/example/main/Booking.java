@@ -1,4 +1,4 @@
-package com.example.g1;
+package com.example.main;
 
 import com.example.manager.member.Member;
 

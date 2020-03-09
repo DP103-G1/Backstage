@@ -18,8 +18,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.Common;
-import com.example.g1.R;
+import com.example.main.Common;
+import com.example.main.R;
+import com.example.main.Url;
 import com.example.task.ImageTask;
 
 
@@ -66,7 +67,7 @@ public class DateFragment extends Fragment {
     }
 
     private void showMenu() {
-        String url = Common.URL_SERVER + "MenuServlet";
+        String url = Url.URL_SERVER + "MenuServlet";
         String id = menu.getMENU_ID();
         int imageSize = getResources().getDisplayMetrics().widthPixels / 3;
         Bitmap bitmap = null;

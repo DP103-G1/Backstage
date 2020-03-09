@@ -14,8 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import com.example.Common;
-import com.example.g1.R;
+import com.example.main.Common;
+import com.example.main.R;
+import com.example.main.Url;
 import com.example.task.CommonTask;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -87,7 +88,7 @@ public class EmployeeFragment extends Fragment {
     private List<Employee> getEmployees(){
        List<Employee> employees = null;
         if (Common.networkConnected(activity)){
-            String url = Common.URL_SERVER + "/EmployeeServlet";
+            String url = Url.URL_SERVER + "/EmployeeServlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action","getAll");
             String jsonOut = jsonObject.toString();
@@ -110,7 +111,7 @@ public class EmployeeFragment extends Fragment {
     private Employee updatePassword(int id, String password){
         Employee employees = null;
         if (Common.networkConnected(activity)){
-            String url = Common.URL_SERVER + "/EmployeeServlet";
+            String url = Url.URL_SERVER + "/EmployeeServlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action","updatePassword");
             jsonObject.addProperty("employee_Id",id);
