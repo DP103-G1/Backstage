@@ -110,5 +110,5 @@
     <string name="textMaking">製作中</string>
     <string name="textSending">出餐中</string>
     <string name="textComplete">已送達</string>
-    string
+    <string name="textNoChart">沒有資料</string>
 </resources>
