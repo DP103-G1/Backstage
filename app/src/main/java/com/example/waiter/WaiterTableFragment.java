@@ -101,6 +101,7 @@ public class WaiterTableFragment extends Fragment {
                 tables.add(table);
                 Comparator<Table> cmp = Comparator.comparing(Table::getTableId);
                 tables = tables.stream().sorted(cmp).collect(Collectors.toList());
+                Log.d(TAG, new Gson().toJson(tables));
                 showTables(tables);
             }
         }
