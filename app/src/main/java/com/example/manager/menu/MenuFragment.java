@@ -224,6 +224,9 @@ public class MenuFragment extends Fragment {
                 holder.tvStatus.setText("上架中");
                 holder.tvStatus.setTextColor(getResources().getColor(R.color.menuPutColor));
                 holder.tvNoStatusColor.setVisibility(View.GONE);
+            } else {
+                holder.tvStatusColor.setVisibility(View.GONE);
+                holder.tvNoStatusColor.setVisibility(View.GONE);
             }
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
