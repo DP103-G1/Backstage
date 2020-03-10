@@ -44,7 +44,11 @@ public class Table implements Serializable {
 	
 	@Override
 	public boolean equals(Object obj) {
-		return this.tableId == tableId;
+		if (obj == null || !(obj instanceof Table)) {
+			return false;
+		}
+		Table table = (Table) obj;
+		return table.getTableId() == this.getTableId();
 	}
 	
 	@Override

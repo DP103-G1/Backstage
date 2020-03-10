@@ -54,6 +54,7 @@ public class WaiterMenuDetailFragment extends Fragment {
     private CommonTask waiterGetAllTask;
     private List<MenuDetail> menuDetails;
     private LocalBroadcastManager broadcastManager;
+    private Comparator<MenuDetail> cmp = Comparator.comparing(MenuDetail::isFOOD_STATUS).reversed();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -104,7 +105,6 @@ public class WaiterMenuDetailFragment extends Fragment {
                 List<MenuDetail> addMenuDetails = new Gson().fromJson(message, listType);
                 menuDetails.removeAll(addMenuDetails);
                 menuDetails.addAll(addMenuDetails);
-                Comparator<MenuDetail> cmp = Comparator.comparing(MenuDetail::isFOOD_STATUS).reversed();
                 menuDetails = menuDetails.stream().sorted(cmp).collect(Collectors.toList());
                 showMenuDetail(menuDetails);
             }
@@ -126,6 +126,7 @@ public class WaiterMenuDetailFragment extends Fragment {
                 }.getType();
                 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
                 menuDetails = gson.fromJson(jsonIn, listType);
+                menuDetails = menuDetails.stream().sorted(cmp).collect(Collectors.toList());
             } catch (Exception e) {
                 Log.e(TAG, e.toString());
             }

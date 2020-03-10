@@ -101,6 +101,7 @@ public class WaiterTableFragment extends Fragment {
                 tables.add(table);
                 Comparator<Table> cmp = Comparator.comparing(Table::getTableId);
                 tables = tables.stream().sorted(cmp).collect(Collectors.toList());
+                Log.d(TAG, new Gson().toJson(tables));
                 showTables(tables);
             }
         }
@@ -182,7 +183,9 @@ public class WaiterTableFragment extends Fragment {
             if (table.isStatus()) {
                 holder.itemView.setBackgroundColor(Color.parseColor("#FF0000"));
             } else if (bkId > 0){
-                holder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                holder.itemView.setBackgroundColor(Color.parseColor("#879E33"));
+            } else {
+                holder.itemView.setBackgroundColor(getResources().getColor(R.color.cardBackground, activity.getTheme()));
             }
             holder.itemView.setOnClickListener(v -> {
                 if (table.isStatus()) {
