@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 import androidx.annotation.NonNull;
@@ -30,9 +31,9 @@ public class UpdateFragment extends Fragment {
 
     private final static String TAG = "TAG_UpdateFragment";
     private FragmentActivity activity;
-    private EditText etPeople,etTableNo;
+    private EditText etPeople;
     private Table table;
-
+    private TextView etTableNo;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -168,15 +168,6 @@ public class MainTableFragment extends Fragment {
                 tableImageTask.execute();
                 holder.tvTableNo.setText("第"+String.valueOf(table.getTableId())+"桌");
                 holder.tvPeople.setText(table.getTablePeople()+"人");
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("table", table);
-                        Navigation.findNavController(v)
-                                .navigate(R.id.action_mainTableFragment_to_detailFragment, bundle);
-                    }
-                });
 
                 holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
