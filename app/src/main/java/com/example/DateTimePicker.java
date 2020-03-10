@@ -1,12 +1,14 @@
 package com.example;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.NumberPicker;
 
 
 import com.example.main.R;
 
+import java.lang.reflect.Type;
 import java.util.Calendar;
 
 public class DateTimePicker extends FrameLayout {
@@ -15,13 +17,15 @@ public class DateTimePicker extends FrameLayout {
     private NumberPicker daySpinner;
     private Calendar date, oDate;
     private OnDateTimeChangedListener onDateTimeChangedListener;
+    private DateTimePickerType dateTimePickerType;
 
     public DateTimePicker(Context context, Calendar oDate, DateTimePickerType dateTimePickerType) {
         super(context);
         this.date = Calendar.getInstance();
-        if (dateTimePickerType.equals(DateTimePickerType.YEAR)) {
-            date.add(Calendar.YEAR, -1);
-        }
+        this.dateTimePickerType = dateTimePickerType;
+//        if (dateTimePickerType.equals(DateTimePickerType.YEAR)) {
+//            date.add(Calendar.YEAR, -1);
+//        }
         this.oDate = oDate;
 
         inflate(context, R.layout.date_time_piker, this);
@@ -50,9 +54,11 @@ public class DateTimePicker extends FrameLayout {
     }
 
     private NumberPicker.OnValueChangeListener onYearChangedLintener = (picker, oldVal, newVal) -> {
-        oDate = Calendar.getInstance();
         oDate.set(Calendar.YEAR, yearSpinner.getValue());
-        initDay();
+        Log.d("year", oDate.toString());
+        if (dateTimePickerType == DateTimePickerType.DAY) {
+            initDay();
+        }
         onDateTimeChanged();
     };
 
@@ -66,12 +72,14 @@ public class DateTimePicker extends FrameLayout {
             oDate.set(Calendar.DAY_OF_MONTH, maxDay);
         }
         oDate.set(Calendar.MONTH, monthSpinner.getValue());
+        Log.d("month", oDate.toString());
         initDay();
         onDateTimeChanged();
     };
 
     private NumberPicker.OnValueChangeListener onDayChangedLintener = (picker, oldVal, newVal) -> {
         oDate.set(Calendar.DAY_OF_MONTH, daySpinner.getValue());
+        Log.d("day", oDate.toString());
         onDateTimeChanged();
     };
 

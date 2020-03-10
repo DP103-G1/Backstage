@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -58,7 +59,7 @@ public class YearIncomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         activity = getActivity();
         calendar.add(Calendar.YEAR,-1);
-        calendar.add(Calendar.MONTH,0);
+        calendar.set(Calendar.MONTH,0);
         calendar.set(Calendar.DAY_OF_MONTH, 1);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
@@ -91,6 +92,7 @@ public class YearIncomeFragment extends Fragment {
                     @Override
                     public void onDateTimeSet(AlertDialog dialog, Long date) {
                         calendar.setTimeInMillis(date);
+                        Log.d(TAG, calendar.toString());
                         btTest.setText(format.format(calendar.getTime()));
                         orders = getOrders();
                         calAndShow();
@@ -107,41 +109,62 @@ public class YearIncomeFragment extends Fragment {
     }
 
     private void calAndShow() {
-        List<BarEntry> barEntries = getEntries();
-        XAxis xAxis = barChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setDrawGridLines(false);
-        xAxis.setAxisMaximum(13);
-        xAxis.setAxisMinimum(0);
-        xAxis.setTextColor(13);
-        xAxis.setTextColor(getResources().getColor(R.color.colorText, activity.getTheme()));
-        YAxis yAxisLeft = barChart.getAxisLeft();
-        yAxisLeft.setAxisMinimum(0f);
-        yAxisLeft.setTextSize(13);
-        yAxisLeft.setTextColor(getResources().getColor(R.color.colorText, activity.getTheme()));
-        yAxisLeft.setAxisMaximum((float) (barEntries.stream()
-                .mapToDouble(v -> v.getY()).max().orElse(0) * 1.2));
-        YAxis yAxisRight = barChart.getAxisRight();
-        yAxisRight.setEnabled(false);
+        if (orders.size() != 0){
+            barChart.setVisibility(View.VISIBLE);
+            List<BarEntry> barEntries = getEntries();
+            XAxis xAxis = barChart.getXAxis();
+            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+            xAxis.setDrawGridLines(false);
+            xAxis.setAxisMaximum(13);
+            xAxis.setAxisMinimum(0);
+            xAxis.setTextColor(13);
+            xAxis.setTextColor(getResources().getColor(R.color.colorText, activity.getTheme()));
+            YAxis yAxisLeft = barChart.getAxisLeft();
+            yAxisLeft.setAxisMinimum(0f);
+            yAxisLeft.setTextSize(13);
+            yAxisLeft.setTextColor(getResources().getColor(R.color.colorText, activity.getTheme()));
+            yAxisLeft.setAxisMaximum((float) (barEntries.stream()
+                    .mapToDouble(v -> v.getY()).max().orElse(0) * 1.2));
+            YAxis yAxisRight = barChart.getAxisRight();
+            yAxisRight.setEnabled(false);
 
-        BarDataSet barDataSet = new BarDataSet(barEntries, "年度營業額");
-        BarData barData = new BarData(barDataSet);
-        barDataSet.setColor(getResources().getColor(R.color.normalText));
-        barData.setValueTextColor(getResources().getColor(R.color.chartData));
+            BarDataSet barDataSet = new BarDataSet(barEntries, "年度營業額");
+            BarData barData = new BarData(barDataSet);
+            barDataSet.setColor(getResources().getColor(R.color.normalText));
+            barData.setValueTextColor(getResources().getColor(R.color.chartData));
 //        barDataSet.setBarBorderWidth(10f);
-        barData.setValueTextSize(13);
-        barData.setValueTypeface(Typeface.DEFAULT);
-        barChart.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        barChart.setDrawGridBackground(false);
-        barChart.animateY(1500, Easing.Linear);
-        barChart.animateX(700, Easing.Linear);
-        barChart.setData(barData);
-        barChart.invalidate();
+            barData.setValueTextSize(13);
+            barData.setValueTypeface(Typeface.DEFAULT);
+            barChart.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            barChart.setDrawGridBackground(false);
+            barChart.animateY(1500, Easing.Linear);
+            barChart.animateX(700, Easing.Linear);
+            barChart.setData(barData);
+            barChart.invalidate();
 
-        Legend legend = barChart.getLegend();
-        legend.setTextColor(getResources().getColor(R.color.chartData));
-        legend.setTextSize(14);
-        legend.setTypeface(Typeface.DEFAULT);
+            barChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+                @Override
+                public void onValueSelected(Entry e, Highlight h) {
+                    Log.d(TAG, "entry: " + e.toString() + "highlight: " + h.toString());
+                    String text = (int) e.getX() + "月" + "\n" + "NT＄" + (int) e.getY();
+                    Toast.makeText(activity, text, Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onNothingSelected() {
+
+                }
+            });
+
+            Legend legend = barChart.getLegend();
+            legend.setTextColor(getResources().getColor(R.color.chartData));
+            legend.setTextSize(14);
+            legend.setTypeface(Typeface.DEFAULT);
+        }else {
+            barChart.setVisibility(View.GONE);
+            Common.showToast(activity, R.string.textNoChart);
+        }
+
     }
 
     private List<BarEntry> getEntries() {
