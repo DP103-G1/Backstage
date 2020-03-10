@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
@@ -64,7 +65,7 @@ public class MainTableFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         rvTable = view.findViewById(R.id.rvMd);
-        rvTable.setLayoutManager(new LinearLayoutManager(activity));
+        rvTable.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
         tables = getTables();
         showTables(tables);
 
@@ -135,11 +136,12 @@ public class MainTableFragment extends Fragment {
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder {
-            TextView tvTableNo;
+            TextView tvTableNo,tvPeople;
 
              MyViewHolder(@NonNull View itemView) {
                 super(itemView);
                 tvTableNo = itemView.findViewById(R.id.tvTableNo);
+                tvPeople = itemView.findViewById(R.id.tvPeople);
             }
         }
 
@@ -153,18 +155,19 @@ public class MainTableFragment extends Fragment {
         @NonNull
         @Override
         public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View itemView = layoutInflater.inflate(R.layout.item_view_table,parent,false);
+            View itemView = layoutInflater.inflate(R.layout.item_view_tablestyle,parent,false);
             return new MyViewHolder(itemView);
         }
 
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
                 final Table table = tables.get(position);
-                String url = Url.URL_SERVER + "TableServlet";
+                String url = Url.URL_SERVER + "/TableServlet";
                 int id = table.getTableId();
                 tableImageTask = new ImageTask(url, String.valueOf(id));
                 tableImageTask.execute();
-                holder.tvTableNo.setText(String.valueOf(table.getTableId()));
+                holder.tvTableNo.setText("第"+String.valueOf(table.getTableId())+"桌");
+                holder.tvPeople.setText(table.getTablePeople()+"人");
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

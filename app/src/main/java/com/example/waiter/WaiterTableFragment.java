@@ -16,6 +16,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
@@ -71,7 +72,7 @@ public class WaiterTableFragment extends Fragment {
         registerSocketReceiver();
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         rvTable = view.findViewById(R.id.rvMd);
-        rvTable.setLayoutManager(new LinearLayoutManager(activity));
+        rvTable.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
         tables = getTable();
         showTables(tables);
 
