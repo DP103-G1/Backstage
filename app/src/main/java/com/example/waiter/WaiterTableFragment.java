@@ -182,7 +182,7 @@ public class WaiterTableFragment extends Fragment {
             int bkId = table.getORD_ID();
             holder.tvTableNo.setText(String.valueOf(table.getTableId()));
             if (table.isStatus()) {
-                holder.itemView.setBackgroundColor(Color.parseColor("#FF0000"));
+                holder.itemView.setBackgroundColor(Color.parseColor("#880000"));
             } else if (bkId > 0){
                 holder.itemView.setBackgroundColor(Color.parseColor("#879E33"));
             } else {
@@ -205,7 +205,7 @@ public class WaiterTableFragment extends Fragment {
                     if (count != 0) {
                         SocketMessage socketMessage = new SocketMessage("service", "member" + count, "");
                         Common.eZeatsWebSocketClient.send(new Gson().toJson(socketMessage));
-                        holder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                        holder.itemView.setBackgroundColor(Color.parseColor("#879E33"));
                         Common.showToast(activity, R.string.textUpdateSuccess);
                     } else {
                         Common.showToast(activity, R.string.textUpdateFail);

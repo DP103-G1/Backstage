@@ -51,6 +51,7 @@ public class MenuInsertFragment extends Fragment {
     private ImageView ivMenu;
     private EditText etId, etName, etPrice, etContent;
     private Switch swStatus;
+    private Button btIn;
     private byte[] image;
     private static final int REQ_TAKE_PICTURE = 0;
     private static final int REQ_PICK_PICTURE = 1;
@@ -81,55 +82,34 @@ public class MenuInsertFragment extends Fragment {
         etPrice = view.findViewById(R.id.etPrice);
         etContent = view.findViewById(R.id.etContent);
         swStatus = view.findViewById(R.id.swStatus);
+        btIn = view.findViewById(R.id.btIn);
 
-        swStatus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean isChecked = swStatus.isChecked();
-                if (isChecked) {
-                    new AlertDialog.Builder(getActivity())
-                            .setTitle("確定!!")
-                            .setMessage("確定將此產品上架？")
-                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    swStatus.setChecked(false);
-                                }
-                            })
-                            .setNegativeButton("確定", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    swStatus.setChecked(true);
-                                }
-                            }).setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                @Override
-                                public void onCancel(DialogInterface dialog) {
-                                    swStatus.setChecked(false);
-                                }
-                            }).show();
-                } else {
-                    new AlertDialog.Builder(getActivity())
-                            .setTitle("確定!!")
-                            .setMessage("確定將此產品下架？")
-                            .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    swStatus.setChecked(true);
-                                }
-                            })
-                            .setNegativeButton("確定", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    swStatus.setChecked(false);
-                                }
-                            }).setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                @Override
-                                public void onCancel(DialogInterface dialog) {
-                                    swStatus.setChecked(true);
-                                }
-                            }).show();
-                }
+        swStatus.setOnClickListener(v -> {
+            boolean isChecked = swStatus.isChecked();
+            if (isChecked) {
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("確定!!")
+                        .setMessage("確定將此產品上架？")
+                        .setNegativeButton("取消", (dialog, which) -> swStatus.setChecked(false))
+                        .setNegativeButton("確定", (dialog, which) -> swStatus.setChecked(true)).setOnCancelListener(dialog ->
+                        swStatus.setChecked(false)).show();
+            } else {
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("確定!!")
+                        .setMessage("確定將此產品下架？")
+                        .setNegativeButton("取消", (dialog, which) -> swStatus.setChecked(true))
+                        .setNegativeButton("確定", (dialog, which) -> swStatus.setChecked(false)).setOnCancelListener(dialog ->
+                        swStatus.setChecked(true)).show();
             }
+        });
+
+        btIn.setOnClickListener(v -> {
+            etId.setText("A08");
+            etName.setText("威靈頓牛排");
+            etPrice.setText("600");
+            etContent.setText("上好的菲力牛排，大火煎上色。"
+                    + "包上一層有鵝肝醬的蘑菇泥，再包一層火腿後 "
+                    + "用酥皮包裹並刷勻蛋黃液，入烤箱焗熟");
         });
 
 

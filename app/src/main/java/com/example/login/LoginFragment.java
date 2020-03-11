@@ -31,6 +31,7 @@ public class LoginFragment extends Fragment {
         private static final String TAG = "TAG_LoginFragment";
         private Activity activity;
         private NavController navController;
+        private Button btWai, btKit, btMan;
         private EditText edAcc,edPass;
         private CommonTask loginTask;
         private String textAcc,textPass;
@@ -57,6 +58,9 @@ public class LoginFragment extends Fragment {
         bottomNavigationView.setVisibility(View.GONE);
         edAcc = view.findViewById(R.id.edAcc);
         edPass = view.findViewById(R.id.edPass);
+        btWai = view.findViewById(R.id.btWai);
+        btKit = view.findViewById(R.id.btKit);
+        btMan = view.findViewById(R.id.btMan);
 
         edAcc.setOnFocusChangeListener((v, hasFocus) -> {
         if (!hasFocus){
@@ -76,6 +80,21 @@ public class LoginFragment extends Fragment {
                     edPass.setError(getString(R.string.textInputPassword));
                 }
             }
+        });
+
+        btWai.setOnClickListener(v -> {
+            edAcc.setText("waiter");
+            edPass.setText("789");
+        });
+
+        btKit.setOnClickListener(v -> {
+            edAcc.setText("kitchen");
+            edPass.setText("456");
+        });
+
+        btMan.setOnClickListener(v -> {
+            edAcc.setText("manager");
+            edPass.setText("123");
         });
 
         Button btLogin = view.findViewById(R.id.btLogin);

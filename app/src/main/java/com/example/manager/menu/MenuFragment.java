@@ -79,14 +79,11 @@ public class MenuFragment extends Fragment {
         showMenu(menus);
 
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeRefreshLayout.setRefreshing(true);
-                menus = getMenu();
-                showMenu(menus);
-                swipeRefreshLayout.setRefreshing(false);
-            }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            swipeRefreshLayout.setRefreshing(true);
+            menus = getMenu();
+            showMenu(menus);
+            swipeRefreshLayout.setRefreshing(false);
         });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -114,13 +111,8 @@ public class MenuFragment extends Fragment {
         });
 
         FloatingActionButton btAdd = view.findViewById(R.id.btAdd);
-        btAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view)
-                        .navigate(R.id.action_menuFragment_to_menuInsertFragment);
-            }
-        });
+        btAdd.setOnClickListener(view1 -> Navigation.findNavController(view1)
+                .navigate(R.id.action_menuFragment_to_menuInsertFragment));
     }
 
     private List<Menu> getMenu() {
@@ -210,6 +202,7 @@ public class MenuFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             final Menu menu = menus.get(position);
+            holder.itemView.refreshDrawableState();
             String url = Url.URL_SERVER + "MenuServlet";
             String id = menu.getMENU_ID();
             menuImageTask = new ImageTask(url, id, imageSize, holder.imageView);
@@ -228,35 +221,26 @@ public class MenuFragment extends Fragment {
                 holder.tvStatusColor.setVisibility(View.GONE);
                 holder.tvNoStatusColor.setVisibility(View.GONE);
             }
-            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("menu", menu);
-                    Navigation.findNavController(v)
-                            .navigate(R.id.action_menuFragment_to_dateFragment, bundle);
-                    return true;
-                }
+            holder.itemView.setOnLongClickListener(v -> {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("menu", menu);
+                Navigation.findNavController(v)
+                        .navigate(R.id.action_menuFragment_to_dateFragment, bundle);
+                return true;
             });
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View v) {
-                    PopupMenu foodmenu = new PopupMenu(activity, v, Gravity.END);
-                    foodmenu.inflate(R.menu.foodmenu);
-                    foodmenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(MenuItem item) {
-                            if(item.getItemId() == R.id.update) {
-                                Bundle bundle = new Bundle();
-                                bundle.putSerializable("menu", menu);
-                                Navigation.findNavController(v)
-                                        .navigate(R.id.action_menuFragment_to_menuUpdateFragment, bundle);
-                            }
-                            return true;
-                        }
-                    });
-                    foodmenu.show();
-                }
+            holder.itemView.setOnClickListener(v -> {
+                PopupMenu foodmenu = new PopupMenu(activity, v, Gravity.END);
+                foodmenu.inflate(R.menu.foodmenu);
+                foodmenu.setOnMenuItemClickListener(item -> {
+                    if(item.getItemId() == R.id.update) {
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("menu", menu);
+                        Navigation.findNavController(v)
+                                .navigate(R.id.action_menuFragment_to_menuUpdateFragment, bundle);
+                    }
+                    return true;
+                });
+                foodmenu.show();
             });
         }
 

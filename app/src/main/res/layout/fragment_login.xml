@@ -72,4 +72,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edPass" />
 
+    <Button
+        android:id="@+id/btWai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="109dp"
+        android:layout_marginBottom="23dp"
+        android:background="@color/colorBackground"
+        app:layout_constraintBottom_toTopOf="@+id/tvAcc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btKit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="53dp"
+        android:layout_marginBottom="22dp"
+        android:background="@color/colorBackground"
+        app:layout_constraintBottom_toTopOf="@+id/edAcc"
+        app:layout_constraintStart_toEndOf="@+id/btWai" />
+
+    <Button
+        android:id="@+id/btMan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="107dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/colorBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btKit"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

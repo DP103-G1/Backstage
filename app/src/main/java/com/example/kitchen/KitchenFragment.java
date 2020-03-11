@@ -182,6 +182,7 @@ public class KitchenFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull MyviewHolder holder, int position) {
             final MenuDetail menuDetail = menuDetails.get(position);
+            holder.itemView.refreshDrawableState();
             holder.tvFoodName.setText(menuDetail.getFOOD_NAME());
             holder.tvTableId.setText(String.valueOf(menuDetail.getTABLE_ID()));
             holder.tvFoodAmount.setText(String.valueOf(menuDetail.getFOOD_AMOUNT()));
