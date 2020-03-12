@@ -104,12 +104,10 @@ public class MenuInsertFragment extends Fragment {
         });
 
         btIn.setOnClickListener(v -> {
-            etId.setText("A08");
+            etId.setText("A13");
             etName.setText("威靈頓牛排");
             etPrice.setText("600");
-            etContent.setText("上好的菲力牛排，大火煎上色。"
-                    + "包上一層有鵝肝醬的蘑菇泥，再包一層火腿後 "
-                    + "用酥皮包裹並刷勻蛋黃液，入烤箱焗熟");
+            etContent.setText("上好的菲力牛排，大火煎上色。");
         });
 
 
