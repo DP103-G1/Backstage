@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.main.Common;
 import com.example.main.R;
@@ -41,6 +42,7 @@ public class MainFragment extends Fragment {
     private CommonTask boxMangerGetAllTask;
     private List<Box> boxes;
     private SearchView searchView;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,12 +60,24 @@ public class MainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvReact = view.findViewById(R.id.rvReact);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         rvReact.setLayoutManager(new LinearLayoutManager(activity));
         rvReact.setAdapter(new BoxAdapter(activity,boxes));
         searchView = view.findViewById(R.id.searchView);
-
         boxes = getBoxes();
         showBoxes(boxes);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                boxes = getBoxes();
+                showBoxes(boxes);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+//        boxes = getBoxes();
+//        showBoxes(boxes);
 
         //依照輸入變化
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

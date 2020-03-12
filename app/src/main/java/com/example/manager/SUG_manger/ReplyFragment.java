@@ -33,7 +33,7 @@ public class ReplyFragment extends Fragment {
     private Box box;
     private TextView tvTopic;
     private EditText etReply;
-    private Button btSent;
+    private Button btReply,btQick;
     private CommonTask commonTask;
     private List<Box>boxes;
 
@@ -47,6 +47,7 @@ public class ReplyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_reply, container, false);
+
     }
 
     @Override
@@ -54,7 +55,8 @@ public class ReplyFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         tvTopic = view.findViewById(R.id.tvTopic);
         etReply = view.findViewById(R.id.etReply);
-        btSent = view.findViewById(R.id.btReply);
+        btReply = view.findViewById(R.id.btReply);
+        btQick = view.findViewById(R.id.btQick);
 
         final NavController navController = Navigation.findNavController(view);
         Bundle bundle = getArguments();
@@ -66,7 +68,7 @@ public class ReplyFragment extends Fragment {
         box = (Box)bundle.getSerializable("box");
         showBox();//bundle整個box資訊抓進reply頁面
 
-        btSent.setOnClickListener(new View.OnClickListener() {
+        btReply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String reply = etReply.getText().toString().trim();
@@ -102,6 +104,12 @@ public class ReplyFragment extends Fragment {
             }
         });
 
+        btQick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etReply.setText("謝謝留言，本餐廳會儘速處理。");
+            }
+        });
 
     }
 
